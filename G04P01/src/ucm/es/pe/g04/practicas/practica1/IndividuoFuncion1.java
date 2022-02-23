@@ -2,6 +2,8 @@ package ucm.es.pe.g04.practicas.practica1;
 
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
+import java.util.Random;
+
 public class IndividuoFuncion1 extends Individuo<Boolean> {
 
     public IndividuoFuncion1(double precision){
@@ -36,10 +38,10 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
         int ini = 0;
         String dec = "";
         for (int i = 0; i < n; i++) ini += this.tamGenes[i];
-        for (int i = ini; i < ini + this.tamGenes[n]; i++) dec += this.cromosoma[i].toString();
+        for (int i = ini; i < ini + this.tamGenes[n]; i++) dec += cromosoma[i] ? '1' : '0';
         int val = Integer.parseInt(dec, 2);
 
-        return min[n] + val * (max[n] - min[n]) / (Math.pow(this.tamGenes[n], 2) - 1);
+        return min[n] + val * (max[n] - min[n]) / (Math.pow(2, this.tamGenes[n]) - 1);
     }
 }
 

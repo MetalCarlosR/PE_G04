@@ -2,7 +2,8 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 import java.util.Random;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T>{
+    public double puntuacion;
     protected T[] cromosoma;
     protected int[] tamGenes;
 
@@ -10,7 +11,7 @@ public abstract class Individuo<T> {
     protected double[] max;
     protected double precision;
 
-    protected Random rand;
+    protected Random rand = new Random();
 
     public int tamGen(double min, double max) {
         return (int) (Math.log10(((max - min) / precision) + 1) / Math.log10(2));
