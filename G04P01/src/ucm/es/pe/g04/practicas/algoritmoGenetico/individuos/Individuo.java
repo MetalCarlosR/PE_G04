@@ -2,9 +2,9 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 import java.util.Random;
 
-public abstract class Individuo<T>{
+public abstract class Individuo<T> {
     public double puntuacion;
-    protected T[] cromosoma;
+    public T[] cromosoma;
     protected int[] tamGenes;
 
     protected double[] min;
@@ -22,4 +22,6 @@ public abstract class Individuo<T>{
     public abstract double getFitness();
 
     public abstract double getFenotipo(int n);
+
+    public abstract void mutar(int i);
 }

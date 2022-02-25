@@ -1,4 +1,4 @@
-package ucm.es.pe.g04.practicas.practica1;
+package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
@@ -42,6 +42,11 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
         int val = Integer.parseInt(dec, 2);
 
         return min[n] + val * (max[n] - min[n]) / (Math.pow(2, this.tamGenes[n]) - 1);
+    }
+
+    @Override
+    public void mutar(int i) {
+        this.cromosoma[i] = !this.cromosoma[i];
     }
 }
 
