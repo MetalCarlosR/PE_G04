@@ -5,8 +5,10 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceMonopunto;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoFuncion1;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.Seleccion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
+import ucm.es.pe.g04.practicas.gui.Graficas;
 
 public class AlgoritmoGenetico {
 
@@ -14,9 +16,9 @@ public class AlgoritmoGenetico {
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;
-    private int maxGeneraciones = 100;
+    private int maxGeneraciones = 1000;
     private double probCruce = 0.05;
-    private double probMutacion = 0.005;
+    private double probMutacion = 0.001;
     private int tamTorneo;
     private Individuo mejorAbsoluto;
     private Individuo mejorGeneracion;
@@ -25,6 +27,7 @@ public class AlgoritmoGenetico {
     private Seleccion seleccion;
     private Cruce cruce;
     private Mutacion mutacion;
+    private Graficas grafica;
 
     public void run() {
         iniciarPoblacion();
@@ -35,6 +38,8 @@ public class AlgoritmoGenetico {
         //TODO hacer generico
         seleccion = new SeleccionRuleta();
         cruce = new CruceMonopunto();
+        mutacion = new MutacionBasica();
+        grafica = new Graficas();
 
         evaluar();
         while(generacionActual < this.maxGeneraciones) {
@@ -49,7 +54,7 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-//            generaGrafica();
+            grafica.generarGrafica(mejorAbsoluto.getFitness(),mejorGeneracion.getFitness(),fitnessMedio);
 
         //Siguiente generacion
             generacionActual++;
@@ -70,8 +75,13 @@ public class AlgoritmoGenetico {
         fitnessMedio = acc / tamPoblacion;
         if(mejorGeneracion.getFitness() >  mejorAbsoluto.getFitness())
             mejorAbsoluto = mejorGeneracion;
+        double aux = 0, auxAcc = 0;
         for(int i = 0;i <tamPoblacion; i++){
-            poblacion[i].puntuacion = fitness[i]/acc;
+            aux = fitness[i]/acc;
+            auxAcc += aux;
+            poblacion[i].puntuacion = aux;
+            poblacion[i].puntuacionAcc = auxAcc;
+
         }
     }
 

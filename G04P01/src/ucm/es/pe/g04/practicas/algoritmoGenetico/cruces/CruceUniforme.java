@@ -7,8 +7,8 @@ import java.util.Random;
 public class CruceUniforme extends Cruce{
     @Override
     protected void cruzar(Individuo individuo1, Individuo individuo2) {
-        var aux1 = individuo1.cromosoma;
-        var aux2 = individuo2.cromosoma;
+        var aux1 = individuo1.cromosoma.clone();
+        var aux2 = individuo2.cromosoma.clone();
         Random r = new Random();
 
         for (int i = 0; i < individuo1.cromosoma.length ; i++) {

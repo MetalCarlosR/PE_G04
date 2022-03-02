@@ -2,8 +2,9 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 import java.util.Random;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T> implements Cloneable {
     public double puntuacion;
+    public double puntuacionAcc;
     public T[] cromosoma;
     protected int[] tamGenes;
 
@@ -24,4 +25,14 @@ public abstract class Individuo<T> {
     public abstract double getFenotipo(int n);
 
     public abstract void mutar(int i);
-}
+
+    public Object clone() {
+        try {
+            return (Individuo<T>) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+
+
+    }

@@ -8,8 +8,8 @@ public class CruceMonopunto extends Cruce {
 
     @Override
     protected void cruzar(Individuo individuo1, Individuo individuo2) {
-        var aux1 = individuo1.cromosoma;
-        var aux2 = individuo2.cromosoma;
+        var aux1 = individuo1.cromosoma.clone();
+        var aux2 = individuo2.cromosoma.clone();
 
         Random r = new Random();
         int punto = r.nextInt(individuo1.cromosoma.length);

@@ -17,7 +17,7 @@ public class SeleccionRuleta extends Seleccion {
             prob = r.nextDouble();
             int j = 0;
             while ((prob > poblacion[j].puntuacion) && (j  < tamPoblacion)) {prob -= poblacion[j].puntuacion; j++;}
-            sel_super[i] = poblacion[j];
+            sel_super[i] = (Individuo) poblacion[j].clone();
         }
         return sel_super;
     }
