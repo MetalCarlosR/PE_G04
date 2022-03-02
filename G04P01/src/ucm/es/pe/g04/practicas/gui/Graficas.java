@@ -25,14 +25,14 @@ public class Graficas {
         _mejorAbsoluto.add(mejorAbsoluto);
         _mejorGeneracion.add(mejorGeneracion);
         _media.add(media);
-        //_generaciones.add(_generacion++);
+        _generaciones.add((double)_generacion++);
 
 
         Plot2DPanel plot = new Plot2DPanel();
 // define the legend position
         plot.addLegend("SOUTH");
 // add a line plot to the PlotPanel
-//        plot.addLinePlot("EVOLUCIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
+        plot.addLinePlot("EVOLUCIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
 // put the PlotPanel in a JFrame like a JPanel
         _frame.setContentPane(plot);
     }

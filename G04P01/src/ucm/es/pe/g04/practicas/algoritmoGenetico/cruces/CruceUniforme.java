@@ -10,7 +10,6 @@ public class CruceUniforme extends Cruce{
         var aux1 = individuo1.cromosoma.clone();
         var aux2 = individuo2.cromosoma.clone();
         Random r = new Random();
-
         for (int i = 0; i < individuo1.cromosoma.length ; i++) {
             if(r.nextDouble() > 0.5){
                 individuo1.cromosoma[i] = aux2[i];

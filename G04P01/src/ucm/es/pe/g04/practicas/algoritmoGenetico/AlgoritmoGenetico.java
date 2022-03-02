@@ -12,16 +12,16 @@ import ucm.es.pe.g04.practicas.gui.Graficas;
 
 public class AlgoritmoGenetico {
 
-    private int tamPoblacion = 100;
+    private int tamPoblacion = 500;
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;
-    private int maxGeneraciones = 1000;
-    private double probCruce = 0.05;
+    private int maxGeneraciones = 200;
+    private double probCruce = 0.005;
     private double probMutacion = 0.001;
     private int tamTorneo;
-    private Individuo mejorAbsoluto;
-    private Individuo mejorGeneracion;
+    private double mejorAbsoluto;
+    private int mejorGeneracion;
     private int posMejorGeneracion;
     private float precision = 0.01f;
     private Seleccion seleccion;
@@ -33,7 +33,7 @@ public class AlgoritmoGenetico {
         iniciarPoblacion();
 
         int generacionActual = 0;
-        mejorAbsoluto = poblacion[0];
+        mejorAbsoluto = poblacion[0].getFitness();
 
         //TODO hacer generico
         seleccion = new SeleccionRuleta();
@@ -54,7 +54,7 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-            grafica.generarGrafica(mejorAbsoluto.getFitness(),mejorGeneracion.getFitness(),fitnessMedio);
+            grafica.generarGrafica(mejorAbsoluto, fitness[mejorGeneracion],fitnessMedio);
 
         //Siguiente generacion
             generacionActual++;
@@ -64,17 +64,17 @@ public class AlgoritmoGenetico {
 
     private void evaluar() {
         double acc = 0;
-        mejorGeneracion = poblacion[0];
+        mejorGeneracion = 0;
         for (int i = 0; i < tamPoblacion; i++){
             double aux = poblacion[i].getFitness();
             fitness[i] = aux;
             acc += aux;
-            if(aux > mejorGeneracion.getFitness())
-                mejorGeneracion = poblacion[i];
+            if(aux > fitness[mejorGeneracion])
+                mejorGeneracion = i;
         }
         fitnessMedio = acc / tamPoblacion;
-        if(mejorGeneracion.getFitness() >  mejorAbsoluto.getFitness())
-            mejorAbsoluto = mejorGeneracion;
+        if(fitness[mejorGeneracion] >  mejorAbsoluto)
+            mejorAbsoluto = fitness[mejorGeneracion];
         double aux = 0, auxAcc = 0;
         for(int i = 0;i <tamPoblacion; i++){
             aux = fitness[i]/acc;
