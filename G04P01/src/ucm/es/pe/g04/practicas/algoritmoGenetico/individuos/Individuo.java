@@ -4,8 +4,8 @@ import java.util.Random;
 
 public abstract class Individuo<T> implements Cloneable {
     public double puntuacion;
-    public double puntuacionAcc;
     public T[] cromosoma;
+    public double puntuacionAcc;
     protected int[] tamGenes;
 
     protected double[] min;

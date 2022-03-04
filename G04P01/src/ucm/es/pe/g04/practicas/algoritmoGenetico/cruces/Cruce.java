@@ -8,23 +8,28 @@ import java.util.Random;
 
 public abstract class Cruce {
 
-    public Individuo[] reproduccion(Individuo[] poblacion, double probCruce){
+    Random r;
+
+    public Cruce(){
+        r = new Random();
+    }
+
+    public void reproduccion(Individuo[] poblacion, double probCruce){
         int tamPoblacion = poblacion.length;
-        List<Individuo> sel_cruce = new ArrayList<Individuo>();
-        Random r = new Random();
+        List<Integer> sel_cruce = new ArrayList<>();
+        r = new Random();
         int num_sel_cruce = 0;
         for (int i = 0; i < tamPoblacion; i++) {
             if (r.nextDouble() < probCruce) {
-                sel_cruce.add(poblacion[i]);
+                sel_cruce.add(i);
                 num_sel_cruce++;
             }
         }
         if (num_sel_cruce % 2 == 1) num_sel_cruce--;
 
         for (int i = 0; i < num_sel_cruce; i+= 2){
-            cruzar(sel_cruce.get(i), sel_cruce.get(i + 1));
+            cruzar(poblacion[sel_cruce.get(i)], poblacion[sel_cruce.get(i+1)]);
         }
-        return poblacion;
     }
 
     protected abstract void cruzar(Individuo individuo1, Individuo individuo2);

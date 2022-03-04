@@ -15,25 +15,30 @@ public class Graficas {
 
     JFrame _frame;
 
-    public Graficas(){
+    public Graficas() {
         _frame = new JFrame("a plot panel");
         _frame.setSize(600, 600);
         _frame.setVisible(true);
+        _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void generarGrafica(double mejorAbsoluto, double mejorGeneracion, double media){
+    public void generarGrafica(double mejorAbsoluto, double mejorGeneracion, double media) {
         _mejorAbsoluto.add(mejorAbsoluto);
         _mejorGeneracion.add(mejorGeneracion);
         _media.add(media);
-        _generaciones.add((double)_generacion++);
+        _generaciones.add((double) _generacion++);
 
 
         Plot2DPanel plot = new Plot2DPanel();
 // define the legend position
         plot.addLegend("SOUTH");
 // add a line plot to the PlotPanel
-        plot.addLinePlot("EVOLUCIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
+        plot.addLinePlot("MEJOR ABSOLUTO", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorAbsoluto.stream().mapToDouble(d -> d).toArray());
+        plot.addLinePlot("MEJOR GENERACIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
+        plot.addLinePlot("MEDIA", _generaciones.stream().mapToDouble(d -> d).toArray(), _media.stream().mapToDouble(d -> d).toArray());
 // put the PlotPanel in a JFrame like a JPanel
         _frame.setContentPane(plot);
     }
+
+
 }
