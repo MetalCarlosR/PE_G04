@@ -7,15 +7,15 @@ public class SeleccionRuleta extends Seleccion {
     @Override
     public Individuo[] seleccionar(Individuo[] poblacion) {
         int tamPoblacion = poblacion.length;
-        Individuo sel_super[] = new Individuo[tamPoblacion];//seleccionados para sobrevivir
+        Individuo selPoblacion[] = new Individuo[tamPoblacion];//seleccionados para sobrevivir
         double prob; // probabilidad de seleccion
         for(int i = 0; i < tamPoblacion; i++)
         {
             prob = r.nextDouble();
             int j = 0;
             while ((prob > poblacion[j].puntuacionAcc) && (j  < tamPoblacion - 1)) {j++;}
-            sel_super[i] = (Individuo) poblacion[j].clone();
+            selPoblacion[i] = (Individuo) poblacion[j].clone();
         }
-        return sel_super;
+        return selPoblacion;
     }
 }

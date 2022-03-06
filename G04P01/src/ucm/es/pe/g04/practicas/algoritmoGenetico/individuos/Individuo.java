@@ -2,7 +2,7 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 import java.util.Random;
 
-public abstract class Individuo<T> implements Cloneable {
+public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T>> {
     public double puntuacion;
     public T[] cromosoma;
     public double puntuacionAcc;
@@ -28,11 +28,16 @@ public abstract class Individuo<T> implements Cloneable {
 
     public Object clone() {
         try {
-            return (Individuo<T>) super.clone();
+            Individuo<T> newClone = (Individuo<T>)super.clone();
+            newClone.cromosoma = this.cromosoma.clone();
+            return newClone;
         } catch (CloneNotSupportedException e) {
             return null;
         }
     }
 
-
+    @Override
+    public int compareTo(Individuo<T> o) {
+        return Double.compare(puntuacion, o.puntuacion);
     }
+}

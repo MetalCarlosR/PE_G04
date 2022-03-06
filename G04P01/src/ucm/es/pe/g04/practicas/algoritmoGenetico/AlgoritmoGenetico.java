@@ -24,7 +24,8 @@ public class AlgoritmoGenetico {
     private int maxGeneraciones = 100;
     private double probCruce = 0.6;
     private double probMutacion = 0.05;
-    private int tamTorneo;
+    private int tamTorneo = 2;
+    private float truncamiento = 0.5f;
     private double mejorAbsoluto;
     private int mejorGeneracion;
     private int posMejorGeneracion;
@@ -44,7 +45,7 @@ public class AlgoritmoGenetico {
         mejorAbsoluto = poblacion[0].getFitness();
 
         //TODO hacer generico
-        seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,0);
+        seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
         cruce = FactoriaCruce.getAlgoritmoCruce(cruceFact);
         mutacion = FactoriaMutacion.getAlgoritmoMutacion(mutacionFact);
         grafica = new Graficas();
