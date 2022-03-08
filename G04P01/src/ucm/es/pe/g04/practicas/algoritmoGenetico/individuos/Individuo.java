@@ -18,6 +18,8 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
         return (int) (Math.log10(((max - min) / precision) + 1) / Math.log10(2));
     }
 
+    public abstract void init(float precision);
+
     public abstract double getValor();
 
     public abstract double getFitness();

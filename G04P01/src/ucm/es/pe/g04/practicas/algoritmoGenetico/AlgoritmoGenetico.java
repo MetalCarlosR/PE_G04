@@ -1,6 +1,7 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico;
 
 import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaCruce;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaIndividuos;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaMutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaSeleccion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.Cruce;
@@ -15,6 +16,8 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionEstocasticaU
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
 import ucm.es.pe.g04.practicas.gui.Graficas;
 
+import java.util.Arrays;
+
 public class AlgoritmoGenetico {
 
     private int tamPoblacion = 100;
@@ -27,9 +30,11 @@ public class AlgoritmoGenetico {
     private int tamTorneo = 2;
     private float truncamiento = 0.5f;
     private double mejorAbsoluto;
-    private int mejorGeneracion;
+    private double mejorGeneracion;
     private int posMejorGeneracion;
     private float precision = 0.001f;
+    private boolean maximizar = true;
+    private String seleccionPob = "Funcion1";
     private String seleccionFact = "Ruleta";
     private String cruceFact = "Monopunto";
     private String mutacionFact = "Basica";
@@ -63,7 +68,7 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-            grafica.generarGrafica(mejorAbsoluto, fitness[mejorGeneracion],fitnessMedio);
+            grafica.generarGrafica(mejorAbsoluto, mejorGeneracion,fitnessMedio);
 
         //Siguiente generacion
             generacionActual++;
@@ -75,18 +80,26 @@ public class AlgoritmoGenetico {
 
     private void evaluar() {
         double acc = 0;
-        mejorGeneracion = 0;
+        mejorGeneracion = poblacion[0].getFitness();
         for (int i = 0; i < tamPoblacion; i++){
             double aux = poblacion[i].getFitness();
             fitness[i] = aux;
             acc += aux;
-            if(aux > fitness[mejorGeneracion])
-                mejorGeneracion = i;
+            if(aux > mejorGeneracion && maximizar || aux < mejorGeneracion && !maximizar)
+                mejorGeneracion = fitness[i];
         }
         fitnessMedio = acc / tamPoblacion;
-        if(fitness[mejorGeneracion] >  mejorAbsoluto)
-            mejorAbsoluto = fitness[mejorGeneracion];
+        if(mejorGeneracion > mejorAbsoluto && maximizar || mejorGeneracion < mejorAbsoluto && !maximizar)
+            mejorAbsoluto = mejorGeneracion;
         double aux = 0, auxAcc = 0;
+        if(!maximizar){
+            double max = Arrays.stream(fitness).max().getAsDouble();
+            acc = 0;
+            for (int i = 0; i < tamPoblacion; i++) {
+                fitness[i] = max - fitness[i];
+                acc += fitness[i];
+            }
+        }
         for(int i = 0;i <tamPoblacion; i++){
             aux = fitness[i]/acc;
             auxAcc += aux;
@@ -96,10 +109,7 @@ public class AlgoritmoGenetico {
     }
 
     private void iniciarPoblacion() {
-        poblacion = new Individuo[tamPoblacion];
+        poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);
         fitness = new double[tamPoblacion];
-        for (int i = 0; i < tamPoblacion; i++){
-            poblacion[i] = new IndividuoFuncion1(precision);
-        }
     }
 }

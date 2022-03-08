@@ -6,7 +6,8 @@ import java.util.Random;
 
 public class IndividuoFuncion1 extends Individuo<Boolean> {
 
-    public IndividuoFuncion1(double precision){
+    @Override
+    public void init(float precision) {
         this.precision = precision;
         this.tamGenes = new int[2];
         this.min = new double[2];
