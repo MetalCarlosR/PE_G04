@@ -6,7 +6,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
 
 public class FactoriaIndividuos {
-    public static Individuo[] getPoblacionInicial(String funcion, int tamPoblacion, float precision){
+    public static Individuo[] getPoblacionInicial(String funcion, int tamPoblacion, double precision){
         Individuo original;
 
         switch (funcion){

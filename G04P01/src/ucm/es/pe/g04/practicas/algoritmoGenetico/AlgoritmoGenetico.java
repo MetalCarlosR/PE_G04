@@ -20,6 +20,89 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class AlgoritmoGenetico {
+    public AlgoritmoGenetico(Graficas g){
+        grafica = g;
+    }
+
+    public int getTamPoblacion() {
+        return tamPoblacion;
+    }
+
+    public void setTamPoblacion(int tamPoblacion) {
+        this.tamPoblacion = tamPoblacion;
+    }
+
+    public int getMaxGeneraciones() {
+        return maxGeneraciones;
+    }
+
+    public void setMaxGeneraciones(int maxGeneraciones) {
+        this.maxGeneraciones = maxGeneraciones;
+    }
+
+    public double getProbCruce() {
+        return probCruce;
+    }
+
+    public void setProbCruce(double probCruce) {
+        this.probCruce = probCruce;
+    }
+
+    public double getProbMutacion() {
+        return probMutacion;
+    }
+
+    public void setProbMutacion(double probMutacion) {
+        this.probMutacion = probMutacion;
+    }
+
+    public int getTamTorneo() {
+        return tamTorneo;
+    }
+
+    public void setTamTorneo(int tamTorneo) {
+        this.tamTorneo = tamTorneo;
+    }
+
+    public double getTruncamiento() {
+        return truncamiento;
+    }
+
+    public void setTruncamiento(double truncamiento) {
+        this.truncamiento = truncamiento;
+    }
+
+    public double getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
+    public String getSeleccionFact() {
+        return seleccionFact;
+    }
+
+    public void setSeleccionFact(String seleccionFact) {
+        this.seleccionFact = seleccionFact;
+    }
+
+    public String getCruceFact() {
+        return cruceFact;
+    }
+
+    public void setCruceFact(String cruceFact) {
+        this.cruceFact = cruceFact;
+    }
+
+    public String getMutacionFact() {
+        return mutacionFact;
+    }
+
+    public void setMutacionFact(String mutacionFact) {
+        this.mutacionFact = mutacionFact;
+    }
 
     private int tamPoblacion = 100;
     private Individuo[] poblacion;
@@ -29,12 +112,12 @@ public class AlgoritmoGenetico {
     private double probCruce = 0.6;
     private double probMutacion = 0.05;
     private int tamTorneo = 2;
-    private float truncamiento = 0.5f;
+    private double truncamiento = 0.5;
     private Individuo mejorAbsoluto;
     private int mejorGeneracion;
     private float elitismo = 0.1f;
     private Individuo[] pobElite;
-    private float precision = 0.001f;
+    private double precision = 0.001;
     private boolean maximizar = true;
     private String seleccionPob = "Funcion1";
     private String seleccionFact = "Ruleta";
@@ -57,7 +140,6 @@ public class AlgoritmoGenetico {
         seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
         cruce = FactoriaCruce.getAlgoritmoCruce(cruceFact);
         mutacion = FactoriaMutacion.getAlgoritmoMutacion(mutacionFact);
-        grafica = new Graficas();
 
         evaluar();
         while(generacionActual < this.maxGeneraciones) {

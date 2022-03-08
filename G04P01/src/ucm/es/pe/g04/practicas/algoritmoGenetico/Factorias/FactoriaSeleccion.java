@@ -6,7 +6,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionTruncamiento;
 
 public class FactoriaSeleccion {
-    public static Seleccion getAlgoritmoSeleccion(String algoritmo, int participantes, float truncamiento){
+    public static Seleccion getAlgoritmoSeleccion(String algoritmo, int participantes, double truncamiento){
         switch (algoritmo){
             case "Ruleta":
                 return new SeleccionRuleta();

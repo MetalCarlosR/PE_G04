@@ -8,9 +8,9 @@ import java.util.Comparator;
 
 public class SeleccionTruncamiento extends Seleccion{
 
-    float _truncamiento;
+    double _truncamiento;
 
-    public SeleccionTruncamiento(float truncamiento){
+    public SeleccionTruncamiento(double truncamiento){
         _truncamiento = truncamiento;
     }
 
