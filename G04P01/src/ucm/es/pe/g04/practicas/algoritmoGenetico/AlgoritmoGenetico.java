@@ -17,6 +17,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
 import ucm.es.pe.g04.practicas.gui.Graficas;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class AlgoritmoGenetico {
 
@@ -29,9 +30,10 @@ public class AlgoritmoGenetico {
     private double probMutacion = 0.05;
     private int tamTorneo = 2;
     private float truncamiento = 0.5f;
-    private double mejorAbsoluto;
-    private double mejorGeneracion;
-    private int posMejorGeneracion;
+    private Individuo mejorAbsoluto;
+    private int mejorGeneracion;
+    private float elitismo = 0.1f;
+    private Individuo[] pobElite;
     private float precision = 0.001f;
     private boolean maximizar = true;
     private String seleccionPob = "Funcion1";
@@ -47,7 +49,9 @@ public class AlgoritmoGenetico {
         iniciarPoblacion();
 
         int generacionActual = 0;
-        mejorAbsoluto = poblacion[0].getFitness();
+        int numElite = (int) (tamPoblacion * elitismo);
+        pobElite = new Individuo[numElite];
+        mejorAbsoluto = (Individuo) poblacion[0].clone();
 
         //TODO hacer generico
         seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
@@ -57,6 +61,9 @@ public class AlgoritmoGenetico {
 
         evaluar();
         while(generacionActual < this.maxGeneraciones) {
+            //Elitismo
+            guardarElite(numElite);
+
             //Seleccion
             poblacion = seleccion.seleccionar(poblacion);
 
@@ -66,32 +73,35 @@ public class AlgoritmoGenetico {
             //Mutacion
             mutacion.mutar(poblacion, probMutacion);
 
+            devolverElite();
+
             evaluar();
 
-            grafica.generarGrafica(mejorAbsoluto, mejorGeneracion,fitnessMedio);
+            grafica.generarGrafica(mejorAbsoluto.getFitness(), fitness[mejorGeneracion] ,fitnessMedio);
 
         //Siguiente generacion
             generacionActual++;
         }
 
-        System.out.println("Mejor:" + mejorAbsoluto);
+        System.out.println("Mejor:" + mejorAbsoluto.stringResult());
     }
 
 
     private void evaluar() {
         double acc = 0;
-        mejorGeneracion = poblacion[0].getFitness();
+        mejorGeneracion = 0;
+        int mejG = 0;
         for (int i = 0; i < tamPoblacion; i++){
             double aux = poblacion[i].getFitness();
             fitness[i] = aux;
             acc += aux;
-            if(aux > mejorGeneracion && maximizar || aux < mejorGeneracion && !maximizar)
-                mejorGeneracion = fitness[i];
+            if(aux > fitness[mejorGeneracion] && maximizar || aux < fitness[mejorGeneracion] && !maximizar)
+                mejorGeneracion =i;
         }
         fitnessMedio = acc / tamPoblacion;
-        if(mejorGeneracion > mejorAbsoluto && maximizar || mejorGeneracion < mejorAbsoluto && !maximizar)
-            mejorAbsoluto = mejorGeneracion;
-        double aux = 0, auxAcc = 0;
+        if(fitness[mejorGeneracion] > mejorAbsoluto.getFitness() && maximizar || fitness[mejorGeneracion] < mejorAbsoluto.getFitness() && !maximizar)
+            mejorAbsoluto = (Individuo) poblacion[mejorGeneracion].clone();
+        double aux = 0;
         if(!maximizar){
             double max = Arrays.stream(fitness).max().getAsDouble();
             acc = 0;
@@ -101,15 +111,32 @@ public class AlgoritmoGenetico {
             }
         }
         for(int i = 0;i <tamPoblacion; i++){
-            aux = fitness[i]/acc;
-            auxAcc += aux;
-            poblacion[i].puntuacion = aux;
-            poblacion[i].puntuacionAcc = auxAcc;
+            poblacion[i].puntuacion = fitness[i]/acc;
         }
     }
 
     private void iniciarPoblacion() {
         poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);
         fitness = new double[tamPoblacion];
+    }
+
+    private void guardarElite(int numElite){
+        if(numElite == 0)
+            return;
+        Arrays.sort(poblacion, Comparator.reverseOrder());
+
+        for (int i = 0; i < numElite; i++) {
+            pobElite[i] = (Individuo) poblacion[i].clone();
+        }
+    }
+
+    private void devolverElite(){
+        if(pobElite.length == 0)
+            return;
+
+        int tamPoblacion = poblacion.length - 1;
+        for (int i = 0; i < pobElite.length; i++) {
+            poblacion[tamPoblacion - i] = pobElite[i];
+        }
     }
 }

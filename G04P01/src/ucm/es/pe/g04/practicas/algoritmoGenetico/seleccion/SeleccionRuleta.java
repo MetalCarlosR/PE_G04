@@ -13,7 +13,7 @@ public class SeleccionRuleta extends Seleccion {
         {
             prob = r.nextDouble();
             int j = 0;
-            while ((prob > poblacion[j].puntuacionAcc) && (j  < tamPoblacion - 1)) {j++;}
+            while ((prob > poblacion[j].puntuacion) && (j  < tamPoblacion - 1)) { prob -= poblacion[j].puntuacion; j++;}
             selPoblacion[i] = (Individuo) poblacion[j].clone();
         }
         return selPoblacion;

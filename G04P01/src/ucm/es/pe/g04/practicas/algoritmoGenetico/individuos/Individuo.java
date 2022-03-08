@@ -5,7 +5,6 @@ import java.util.Random;
 public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T>> {
     public double puntuacion;
     public T[] cromosoma;
-    public double puntuacionAcc;
     protected int[] tamGenes;
 
     protected double[] min;
@@ -27,6 +26,8 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
     public abstract double getFenotipo(int n);
 
     public abstract void mutar(int i);
+
+    public abstract String stringResult();
 
     public Object clone() {
         try {

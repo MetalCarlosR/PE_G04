@@ -14,7 +14,8 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
         for(int i = 0; i < tamPoblacion; i++)
         {
             int j = 0;
-            while ((point > poblacion[j].puntuacionAcc) && (j  < tamPoblacion)) {j++;}
+            double auxPoint = point;
+            while ((auxPoint > poblacion[j].puntuacion) && (j  < tamPoblacion)) {auxPoint -= poblacion[j].puntuacion; j++;}
             sel_super[i] = (Individuo) poblacion[j].clone();
             point += offset;
         }

@@ -49,5 +49,10 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
     public void mutar(int i) {
         this.cromosoma[i] = !this.cromosoma[i];
     }
+
+    @Override
+    public String stringResult() {
+        return "F: " + getFitness() + " x1: " + getFenotipo(0) + " x2: " + getFenotipo(1);
+    }
 }
 
