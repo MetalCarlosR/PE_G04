@@ -126,8 +126,8 @@ public class AlgoritmoGenetico {
     private double elitismo = 0.05;
     private Individuo[] pobElite;
     private double precision = 0.001;
-    private boolean maximizar = true;
-    private String seleccionPob = "Funcion1";
+    private boolean maximizar = false;
+    private String seleccionPob = "Funcion2";
     private String seleccionFact = "Ruleta";
     private String cruceFact = "Monopunto";
     private String mutacionFact = "Basica";
