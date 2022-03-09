@@ -169,7 +169,7 @@ public class AlgoritmoGenetico {
 
             grafica.generarGrafica(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
-        //Siguiente generacion
+            //Siguiente generacion
             generacionActual++;
         }
 
@@ -180,7 +180,6 @@ public class AlgoritmoGenetico {
     private void evaluar() {
         double acc = 0;
         mejorGeneracion = poblacion[0];
-        int mejG = 0;
         for (int i = 0; i < tamPoblacion; i++){
             double aux = poblacion[i].getFitness();
             fitness[i] = aux;
@@ -188,10 +187,12 @@ public class AlgoritmoGenetico {
             if(aux > mejorGeneracion.getFitness() && maximizar || aux < mejorGeneracion.getFitness() && !maximizar)
                 mejorGeneracion = poblacion[i];
         }
+        mejorGeneracion = (Individuo) mejorGeneracion.clone();
         fitnessMedio = acc / tamPoblacion;
         if(mejorGeneracion.getFitness() > mejorAbsoluto.getFitness() && maximizar || mejorGeneracion.getFitness() < mejorAbsoluto.getFitness() && !maximizar)
             mejorAbsoluto = (Individuo) mejorGeneracion.clone();
-        double aux = 0;
+
+
         if(!maximizar){
             double max = Arrays.stream(fitness).max().getAsDouble();
             acc = 0;
@@ -200,10 +201,24 @@ public class AlgoritmoGenetico {
                 acc += fitness[i];
             }
         }
+        else {
+            double a = fitnessMedio/(fitnessMedio - Arrays.stream(fitness).min().getAsDouble());
+            double b = (1 - a) * fitnessMedio;
+            double aux;
+            acc = 0;
+
+            for (int i = 0; i < tamPoblacion; i++) {
+                aux = a * fitness[i] + b;
+                fitness[i] = aux;
+                acc +=  aux;
+            }
+        }
+
         for(int i = 0;i <tamPoblacion; i++){
             poblacion[i].puntuacion = fitness[i]/acc;
         }
     }
+
 
     private void iniciarPoblacion() {
         poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);

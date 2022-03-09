@@ -27,7 +27,7 @@ public class IndividuoFuncion2 extends Individuo<Boolean> {
     public double getValor() {
         double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
         double izq = 0, dcha = 0;
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             izq += i * Math.cos(x1 * (i+1) + i);
             dcha += i * Math.cos(x2 * (i+1) + i);
         }
