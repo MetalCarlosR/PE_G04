@@ -43,6 +43,6 @@ public class SeleccionTorneoDet extends Seleccion{
     }
 
     public String toString() {
-        return "Seleccion torneo determinista";
+        return "Torneo determinista";
     }
 }

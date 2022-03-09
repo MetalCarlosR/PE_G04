@@ -59,5 +59,9 @@ public class IndividuoFuncion4 extends Individuo<Boolean> {
         }
         return s;
     }
+
+    public String toString() {
+        return "Funcion 4";
+    }
 }
 

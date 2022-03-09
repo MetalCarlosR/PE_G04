@@ -47,6 +47,6 @@ public class SeleccionTruncamiento extends Seleccion{
     }
 
     public String toString() {
-        return "Seleccion truncamiento";
+        return "Truncamiento";
     }
 }

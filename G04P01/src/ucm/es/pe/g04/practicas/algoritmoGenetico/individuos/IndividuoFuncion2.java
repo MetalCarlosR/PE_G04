@@ -60,5 +60,9 @@ public class IndividuoFuncion2 extends Individuo<Boolean> {
     public String stringResult() {
         return "F: " + getFitness() + " x1: " + getFenotipo(0) + " x2: " + getFenotipo(1);
     }
+
+    public String toString() {
+        return "Funcion 2";
+    }
 }
 

@@ -15,6 +15,6 @@ public class MutacionBasica extends Mutacion {
     }
 
     public String toString() {
-        return "Mutacion basica";
+        return "Básica";
     }
 }

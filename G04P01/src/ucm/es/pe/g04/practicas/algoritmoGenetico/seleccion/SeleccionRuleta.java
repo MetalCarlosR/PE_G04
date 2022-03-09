@@ -20,6 +20,6 @@ public class SeleccionRuleta extends Seleccion {
     }
 
     public String toString() {
-        return "Seleccion ruleta";
+        return "Ruleta";
     }
 }

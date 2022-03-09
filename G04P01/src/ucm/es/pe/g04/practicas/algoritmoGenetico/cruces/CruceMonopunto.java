@@ -22,6 +22,6 @@ public class CruceMonopunto extends Cruce {
     }
 
     public String toString() {
-        return "Cruce Monopunto";
+        return "Monopunto";
     }
 }

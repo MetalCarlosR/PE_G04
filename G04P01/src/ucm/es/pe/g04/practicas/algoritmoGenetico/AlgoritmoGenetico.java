@@ -1,20 +1,9 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico;
 
-import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaCruce;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaIndividuos;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaMutacion;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias.FactoriaSeleccion;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.Cruce;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceMonopunto;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceUniforme;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoFuncion1;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.Seleccion;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionEstocasticaUniversal;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionTorneoDet;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.*;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.*;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.*;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.*;
 import ucm.es.pe.g04.practicas.gui.Graficas;
 
 import java.util.Arrays;
@@ -22,9 +11,11 @@ import java.util.Comparator;
 
 public class AlgoritmoGenetico {
     public AlgoritmoGenetico(){
+        //Opciones predeterminadas
         seleccion = new SeleccionRuleta();
         cruce = new CruceMonopunto();
         mutacion = new MutacionBasica();
+        original = new IndividuoFuncion1();
     }
 
     public int getTamPoblacion() {
@@ -130,11 +121,26 @@ public class AlgoritmoGenetico {
     private double elitismo = 0.05;
     private Individuo[] pobElite;
     private double precision = 0.001;
+
+    public boolean isMaximizar() {
+        return maximizar;
+    }
+
+    public void setMaximizar(boolean maximizar) {
+        this.maximizar = maximizar;
+    }
+
     private boolean maximizar = false;
-    private String seleccionPob = "Funcion2";
-    private String seleccionFact = "Ruleta";
-    private String cruceFact = "Monopunto";
-    private String mutacionFact = "Basica";
+
+    public Individuo getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(Individuo original) {
+        this.original = original;
+    }
+
+    private Individuo original;
 
 
     private Seleccion seleccion;
@@ -149,11 +155,6 @@ public class AlgoritmoGenetico {
         int numElite = (int) (tamPoblacion * elitismo);
         pobElite = new Individuo[numElite];
         mejorAbsoluto = (Individuo) poblacion[0].clone();
-
-        //TODO hacer generico
-        //seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
-        //cruce = FactoriaCruce.getAlgoritmoCruce(cruceFact);
-        //mutacion = FactoriaMutacion.getAlgoritmoMutacion(mutacionFact);
 
         grafica = new Graficas();
 
@@ -229,7 +230,17 @@ public class AlgoritmoGenetico {
 
 
     private void iniciarPoblacion() {
-        poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);
+        poblacion = new Individuo[tamPoblacion];
+
+        original.init(precision);
+        poblacion[0] = original;
+
+
+        for (int i = 1; i < tamPoblacion; i++) {
+            poblacion[i] = (Individuo) original.clone();
+            poblacion[i].init(precision);
+        }
+        //poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);
         fitness = new double[tamPoblacion];
     }
 

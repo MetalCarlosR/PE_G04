@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.Cruce;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceMonopunto;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceUniforme;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.*;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.*;
@@ -71,8 +72,11 @@ public class PanelPrincipal extends JFrame {
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos()};
         Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
         Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme()};
-        String[] cruce = new String[] {"Monopunto", "Uniforme"};
+        Individuo[] individuos = new Individuo[] {new IndividuoFuncion1(), new IndividuoFuncion2(), new IndividuoFuncion3(), new IndividuoFuncion4(), new IndividuoFuncion4Real()};
 
+        Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
+
+        Boolean[] maximizar = new Boolean[] {true, false};
         ConfigPanel<AlgoritmoGenetico> config = new ConfigPanel<AlgoritmoGenetico>();
 
         // se pueden añadir las opciones de forma independiente, o "de seguido"; el resultado es el mismo.
@@ -88,7 +92,7 @@ public class PanelPrincipal extends JFrame {
                         1, 1000))							     // min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
                 .addOption(new DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
                         "% cruce", 					 // etiqueta
-                        "probabilidad de que dos individuos se crucen",           // tooltip
+                        "probabilidad de que cruce de cada individuo",           // tooltip
                         "probCruce",                     // campo
                         0, 100,							     // min y max, aplicando factor, si hay; vale usar Double.*_INFINITY)
                         100))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
@@ -109,7 +113,17 @@ public class PanelPrincipal extends JFrame {
                         "elitismo",                     // campo
                         0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new StrategyOption<AlgoritmoGenetico>(
-                        "seleccion",
+                        "Individuo",
+                        "tipo de individuo",
+                        "original",
+                        individuos))
+                .addOption(new ChoiceOption<AlgoritmoGenetico>(
+                        "Maximizar",
+                        "busca maximo o minimo",
+                        "maximizar",
+                        maximizar))
+                .addOption(new StrategyOption<AlgoritmoGenetico>(
+                        "Seleccion",
                         "tipo de seleccion",
                         "seleccion",
                         selecciones))
@@ -125,7 +139,7 @@ public class PanelPrincipal extends JFrame {
                             0, Integer.MAX_VALUE))
                     .endInner()
                 .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
-                        "truncamietno",
+                        "truncamiento",
                         "opciones de truncamiento",
                         "seleccion",
                         SeleccionTruncamiento.class))
@@ -136,13 +150,47 @@ public class PanelPrincipal extends JFrame {
                         0, 100,
                         100))
                     .endInner()
+                .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                        "restos",
+                        "opciones de restos",
+                        "seleccion",
+                        SeleccionRestos.class))
+                .addInner(new StrategyOption<Seleccion>(
+                        "Tipo de seleccion adicional",
+                        "tipo de seleccion para rellenar los huecos",
+                        "seleccionExtra",
+                        seleccionesExtra))
+                        .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                                "torneo determinista",
+                                "opciones del torneo",
+                                "seleccionExtra",
+                                SeleccionTorneoDet.class))
+                        .addInner(new IntegerOption<Seleccion>(
+                                "numero de participantes",
+                                "cantidad de participantes por torneo",
+                                "participantes",
+                                0, Integer.MAX_VALUE))
+                        .endInner()
+                        .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                                "truncamiento",
+                                "opciones de truncamiento",
+                                "seleccionExtra",
+                                SeleccionTruncamiento.class))
+                        .addInner(new DoubleOption<Seleccion>(
+                                "porcentaje de truncamiento",
+                                "porcentaje de individuos a elegir",
+                                "_truncamiento",
+                                0, 100,
+                                100))
+                        .endInner()
+                    .endInner()
                 .addOption(new StrategyOption<AlgoritmoGenetico>(
-                        "cruce",
+                        "Cruce",
                         "tipo de cruce",
                         "cruce",
                         cruces))
                 .addOption(new StrategyOption<AlgoritmoGenetico>(
-                        "mutacion",
+                        "Mutacion",
                         "tipo de mutacion",
                         "mutacion",
                         mutaciones))
