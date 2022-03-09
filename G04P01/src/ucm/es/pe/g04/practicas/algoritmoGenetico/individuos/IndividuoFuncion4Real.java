@@ -1,6 +1,17 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 public class IndividuoFuncion4Real  extends Individuo<Double>{
+
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
+    }
+
+    int n = 2;
+
     //TODO: Que no sea copia de IndividuoFuncion1
     @Override
     public void init(double precision) {

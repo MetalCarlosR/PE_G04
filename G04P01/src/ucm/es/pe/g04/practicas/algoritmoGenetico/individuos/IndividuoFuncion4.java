@@ -6,6 +6,14 @@ import java.util.Random;
 
 public class IndividuoFuncion4 extends Individuo<Boolean> {
 
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
+    }
+
     int n = 2;
 
     @Override

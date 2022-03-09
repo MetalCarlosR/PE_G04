@@ -117,6 +117,28 @@ public class PanelPrincipal extends JFrame {
                         "tipo de individuo",
                         "original",
                         individuos))
+                    .beginInner(new InnerOption<AlgoritmoGenetico, Individuo>(
+                            "Función 4",
+                            "opciones de la función 4",
+                            "original",
+                            IndividuoFuncion4.class))
+                    .addInner(new IntegerOption<Seleccion>(
+                            "n",
+                            "número de variables x",
+                            "n",
+                            0, Integer.MAX_VALUE))
+                    .endInner()
+                .beginInner(new InnerOption<AlgoritmoGenetico, Individuo>(
+                        "Función 4",
+                        "opciones de la función 4",
+                        "original",
+                        IndividuoFuncion4Real.class))
+                .addInner(new IntegerOption<Seleccion>(
+                        "n",
+                        "número de variables x",
+                        "n",
+                        0, Integer.MAX_VALUE))
+                .endInner()
                 .addOption(new ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",
                         "busca maximo o minimo",
