@@ -80,6 +80,14 @@ public class AlgoritmoGenetico {
         this.precision = precision;
     }
 
+    public double getElitismo() {
+        return elitismo;
+    }
+
+    public void setElitismo(double elitismo) {
+        this.elitismo = elitismo;
+    }
+
     public String getSeleccionFact() {
         return seleccionFact;
     }
@@ -114,8 +122,8 @@ public class AlgoritmoGenetico {
     private int tamTorneo = 2;
     private double truncamiento = 0.5;
     private Individuo mejorAbsoluto;
-    private int mejorGeneracion;
-    private float elitismo = 0.1f;
+    private Individuo mejorGeneracion;
+    private double elitismo = 0.05;
     private Individuo[] pobElite;
     private double precision = 0.001;
     private boolean maximizar = true;
@@ -159,7 +167,7 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-            grafica.generarGrafica(mejorAbsoluto.getFitness(), fitness[mejorGeneracion] ,fitnessMedio);
+            grafica.generarGrafica(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
         //Siguiente generacion
             generacionActual++;
@@ -171,18 +179,18 @@ public class AlgoritmoGenetico {
 
     private void evaluar() {
         double acc = 0;
-        mejorGeneracion = 0;
+        mejorGeneracion = poblacion[0];
         int mejG = 0;
         for (int i = 0; i < tamPoblacion; i++){
             double aux = poblacion[i].getFitness();
             fitness[i] = aux;
             acc += aux;
-            if(aux > fitness[mejorGeneracion] && maximizar || aux < fitness[mejorGeneracion] && !maximizar)
-                mejorGeneracion =i;
+            if(aux > mejorGeneracion.getFitness() && maximizar || aux < mejorGeneracion.getFitness() && !maximizar)
+                mejorGeneracion = poblacion[i];
         }
         fitnessMedio = acc / tamPoblacion;
-        if(fitness[mejorGeneracion] > mejorAbsoluto.getFitness() && maximizar || fitness[mejorGeneracion] < mejorAbsoluto.getFitness() && !maximizar)
-            mejorAbsoluto = (Individuo) poblacion[mejorGeneracion].clone();
+        if(mejorGeneracion.getFitness() > mejorAbsoluto.getFitness() && maximizar || mejorGeneracion.getFitness() < mejorAbsoluto.getFitness() && !maximizar)
+            mejorAbsoluto = (Individuo) mejorGeneracion.clone();
         double aux = 0;
         if(!maximizar){
             double max = Arrays.stream(fitness).max().getAsDouble();
@@ -205,16 +213,20 @@ public class AlgoritmoGenetico {
     private void guardarElite(int numElite){
         if(numElite == 0)
             return;
-        Arrays.sort(poblacion, Comparator.reverseOrder());
+
+        Individuo[] pobSort = poblacion.clone();
+        Arrays.sort(pobSort, Comparator.reverseOrder());
 
         for (int i = 0; i < numElite; i++) {
-            pobElite[i] = (Individuo) poblacion[i].clone();
+            pobElite[i] = (Individuo) pobSort[i].clone();
         }
     }
 
     private void devolverElite(){
         if(pobElite.length == 0)
             return;
+
+        Arrays.sort(poblacion, Comparator.reverseOrder());
 
         int tamPoblacion = poblacion.length - 1;
         for (int i = 0; i < pobElite.length; i++) {

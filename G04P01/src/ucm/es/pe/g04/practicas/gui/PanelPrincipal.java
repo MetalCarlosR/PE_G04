@@ -63,7 +63,7 @@ public class PanelPrincipal extends JFrame {
     }
 
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
-        String[] seleccion = new String[] {"Ruleta", "Estocastica_Universal", "Truncamiento", "Torneo", "Torneo_Probabilistico"};
+        String[] seleccion = new String[] {"Ruleta", "Estocastica_Universal", "Truncamiento", "Torneo", "Torneo_Probabilistico", "Restos"};
         String[] cruce = new String[] {"Monopunto", "Uniforme"};
         String[] mutacion = new String[] {"Basica"};
 
@@ -96,6 +96,11 @@ public class PanelPrincipal extends JFrame {
                         "Precision", 					 // etiqueta
                         "valor de error para la discretización del intervalo",           // tooltip
                         "precision",                     // campo
+                        0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
+                .addOption(new DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
+                        "Elitismo", 					 // etiqueta
+                        "valor de error para la discretización del intervalo",           // tooltip
+                        "elitismo",                     // campo
                         0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new ChoiceOption<AlgoritmoGenetico>(	 // -- eleccion de objeto no-configurable
                         "seleccion",							 // etiqueta

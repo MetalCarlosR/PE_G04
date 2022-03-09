@@ -1,9 +1,6 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.Factorias;
 
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.Seleccion;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionEstocasticaUniversal;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionTruncamiento;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.*;
 
 public class FactoriaSeleccion {
     public static Seleccion getAlgoritmoSeleccion(String algoritmo, int participantes, double truncamiento){
@@ -14,10 +11,12 @@ public class FactoriaSeleccion {
                 return new SeleccionEstocasticaUniversal();
             case "Truncamiento":
                 return new SeleccionTruncamiento(truncamiento);
-//            case "Torneo":
-//                return new SeleccionTorneo(participantes);
-//            case "Torneo_Probabilistico":
-//                return new SeleccionTorneoProb(participantes);
+            case "Torneo":
+                return new SeleccionTorneoDet(participantes);
+            case "Torneo_Probabilistico":
+                return new SeleccionTorneoProb(participantes);
+            case "Restos":
+                return new SeleccionRestos();
             default:
                 return new SeleccionRuleta();
         }
