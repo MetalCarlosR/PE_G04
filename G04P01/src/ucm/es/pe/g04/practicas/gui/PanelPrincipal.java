@@ -139,6 +139,17 @@ public class PanelPrincipal extends JFrame {
                             0, Integer.MAX_VALUE))
                     .endInner()
                 .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                        "torneo probabilístico",
+                        "opciones del torneo",
+                        "seleccion",
+                        SeleccionTorneoProb.class))
+                .addInner(new IntegerOption<Seleccion>(
+                        "numero de participantes",
+                        "cantidad de participantes por torneo",
+                        "participantes",
+                        0, Integer.MAX_VALUE))
+                .endInner()
+                .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
                         "truncamiento",
                         "opciones de truncamiento",
                         "seleccion",
@@ -182,6 +193,17 @@ public class PanelPrincipal extends JFrame {
                                 "_truncamiento",
                                 0, 100,
                                 100))
+                        .endInner()
+                        .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                                "torneo probabilístico",
+                                "opciones del torneo",
+                                "seleccionExtra",
+                                SeleccionTorneoProb.class))
+                        .addInner(new IntegerOption<Seleccion>(
+                                "numero de participantes",
+                                "cantidad de participantes por torneo",
+                                "participantes",
+                                0, Integer.MAX_VALUE))
                         .endInner()
                     .endInner()
                 .addOption(new StrategyOption<AlgoritmoGenetico>(

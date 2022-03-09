@@ -7,6 +7,14 @@ import java.util.Comparator;
 
 public class SeleccionTorneoProb extends Seleccion{
 
+    public int getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(int participantes) {
+        this.participantes = participantes;
+    }
+
     private int participantes = 2;
 
     public  SeleccionTorneoProb() {}
