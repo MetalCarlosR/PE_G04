@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Cruce {
+public abstract class Cruce implements Cloneable{
 
     Random r;
 

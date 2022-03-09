@@ -8,8 +8,17 @@ import java.util.Comparator;
 
 public class SeleccionTruncamiento extends Seleccion{
 
-    double _truncamiento;
+    public double get_truncamiento() {
+        return _truncamiento;
+    }
 
+    public void set_truncamiento(double _truncamiento) {
+        this._truncamiento = _truncamiento;
+    }
+
+    double _truncamiento = 0.5;
+
+    public SeleccionTruncamiento() {}
     public SeleccionTruncamiento(double truncamiento){
         _truncamiento = truncamiento;
     }
@@ -35,5 +44,9 @@ public class SeleccionTruncamiento extends Seleccion{
         }
 
         return selPoblacion;
+    }
+
+    public String toString() {
+        return "Seleccion truncamiento";
     }
 }

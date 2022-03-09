@@ -18,4 +18,8 @@ public class SeleccionRuleta extends Seleccion {
         }
         return selPoblacion;
     }
+
+    public String toString() {
+        return "Seleccion ruleta";
+    }
 }

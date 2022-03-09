@@ -14,14 +14,17 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.Seleccion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionEstocasticaUniversal;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionTorneoDet;
 import ucm.es.pe.g04.practicas.gui.Graficas;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class AlgoritmoGenetico {
-    public AlgoritmoGenetico(Graficas g){
-        grafica = g;
+    public AlgoritmoGenetico(){
+        seleccion = new SeleccionRuleta();
+        cruce = new CruceMonopunto();
+        mutacion = new MutacionBasica();
     }
 
     public int getTamPoblacion() {
@@ -88,28 +91,29 @@ public class AlgoritmoGenetico {
         this.elitismo = elitismo;
     }
 
-    public String getSeleccionFact() {
-        return seleccionFact;
+
+    public Seleccion getSeleccion() {
+        return seleccion;
     }
 
-    public void setSeleccionFact(String seleccionFact) {
-        this.seleccionFact = seleccionFact;
+    public void setSeleccion(Seleccion seleccion) {
+        this.seleccion = seleccion;
     }
 
-    public String getCruceFact() {
-        return cruceFact;
+    public Cruce getCruce() {
+        return cruce;
     }
 
-    public void setCruceFact(String cruceFact) {
-        this.cruceFact = cruceFact;
+    public void setCruce(Cruce cruce) {
+        this.cruce = cruce;
     }
 
-    public String getMutacionFact() {
-        return mutacionFact;
+    public Mutacion getMutacion() {
+        return mutacion;
     }
 
-    public void setMutacionFact(String mutacionFact) {
-        this.mutacionFact = mutacionFact;
+    public void setMutacion(Mutacion mutacion) {
+        this.mutacion = mutacion;
     }
 
     private int tamPoblacion = 100;
@@ -131,6 +135,8 @@ public class AlgoritmoGenetico {
     private String seleccionFact = "Ruleta";
     private String cruceFact = "Monopunto";
     private String mutacionFact = "Basica";
+
+
     private Seleccion seleccion;
     private Cruce cruce;
     private Mutacion mutacion;
@@ -145,9 +151,11 @@ public class AlgoritmoGenetico {
         mejorAbsoluto = (Individuo) poblacion[0].clone();
 
         //TODO hacer generico
-        seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
-        cruce = FactoriaCruce.getAlgoritmoCruce(cruceFact);
-        mutacion = FactoriaMutacion.getAlgoritmoMutacion(mutacionFact);
+        //seleccion = FactoriaSeleccion.getAlgoritmoSeleccion(seleccionFact,tamTorneo, truncamiento);
+        //cruce = FactoriaCruce.getAlgoritmoCruce(cruceFact);
+        //mutacion = FactoriaMutacion.getAlgoritmoMutacion(mutacionFact);
+
+        grafica = new Graficas();
 
         evaluar();
         while(generacionActual < this.maxGeneraciones) {

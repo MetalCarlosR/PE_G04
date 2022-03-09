@@ -17,4 +17,8 @@ public class CruceUniforme extends Cruce{
         }
 
     }
+
+    public String toString() {
+        return "Cruce Uniforme";
+    }
 }

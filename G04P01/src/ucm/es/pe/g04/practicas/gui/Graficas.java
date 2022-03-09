@@ -15,8 +15,12 @@ public class Graficas {
 
     JFrame _frame;
 
-    public Graficas(JFrame f) {
-        _frame = f;
+    public Graficas() {
+        _frame = new JFrame("a plot panel");
+        _frame.setSize(600, 600);
+        _frame.setVisible(true);
+        _frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
 
     public void generarGrafica(double mejorAbsoluto, double mejorGeneracion, double media) {

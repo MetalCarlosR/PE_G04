@@ -21,4 +21,8 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
         }
         return sel_super;
     }
+
+    public String toString() {
+        return "Seleccion estocastica universal";
+    }
 }

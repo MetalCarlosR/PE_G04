@@ -8,6 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.Cruce;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceMonopunto;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceUniforme;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.*;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.ChoiceOption;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.ConfigListener;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.DoubleOption;
@@ -24,9 +30,8 @@ public class PanelPrincipal extends JFrame {
         JPanel panelCentral = new JPanel(new GridLayout(3, 2, 4, 4));
         add(panelCentral, BorderLayout.EAST);
 
-        Graficas graficas = new Graficas(this);
 
-        AlgoritmoGenetico genetico = new AlgoritmoGenetico(graficas);
+        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
 
         final ConfigPanel<AlgoritmoGenetico> panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
@@ -63,9 +68,10 @@ public class PanelPrincipal extends JFrame {
     }
 
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
-        String[] seleccion = new String[] {"Ruleta", "Estocastica_Universal", "Truncamiento", "Torneo", "Torneo_Probabilistico", "Restos"};
+        Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos()};
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
+        Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme()};
         String[] cruce = new String[] {"Monopunto", "Uniforme"};
-        String[] mutacion = new String[] {"Basica"};
 
         ConfigPanel<AlgoritmoGenetico> config = new ConfigPanel<AlgoritmoGenetico>();
 
@@ -102,21 +108,44 @@ public class PanelPrincipal extends JFrame {
                         "valor de error para la discretización del intervalo",           // tooltip
                         "elitismo",                     // campo
                         0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
-                .addOption(new ChoiceOption<AlgoritmoGenetico>(	 // -- eleccion de objeto no-configurable
-                        "seleccion",							 // etiqueta
-                        "tipo de seleccion", 					 // tooltip
-                        "seleccionFact",   							 // campo (debe haber un getColor y un setColor)
-                        seleccion))                            // elecciones posibles
-                .addOption(new ChoiceOption<AlgoritmoGenetico>(	 // -- eleccion de objeto no-configurable
-                        "cruce",							 // etiqueta
-                        "tipo de cruce", 					 // tooltip
-                        "cruceFact",   							 // campo (debe haber un getColor y un setColor)
-                        cruce))                            // elecciones posibles
-                .addOption(new ChoiceOption<AlgoritmoGenetico>(	 // -- eleccion de objeto no-configurable
-                        "mutacion",							 // etiqueta
-                        "tipo de mutacion", 					 // tooltip
-                        "mutacionFact",   							 // campo (debe haber un getColor y un setColor)
-                        mutacion))                            // elecciones posibles
+                .addOption(new StrategyOption<AlgoritmoGenetico>(
+                        "seleccion",
+                        "tipo de seleccion",
+                        "seleccion",
+                        selecciones))
+                .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                        "torneo determinista",
+                        "opciones del torneo",
+                        "seleccion",
+                        SeleccionTorneoDet.class))
+                    .addInner(new IntegerOption<Seleccion>(
+                            "numero de participantes",
+                            "cantidad de participantes por torneo",
+                            "participantes",
+                            0, Integer.MAX_VALUE))
+                    .endInner()
+                .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
+                        "truncamietno",
+                        "opciones de truncamiento",
+                        "seleccion",
+                        SeleccionTruncamiento.class))
+                .addInner(new DoubleOption<Seleccion>(
+                        "porcentaje de truncamiento",
+                        "porcentaje de individuos a elegir",
+                        "_truncamiento",
+                        0, 100,
+                        100))
+                    .endInner()
+                .addOption(new StrategyOption<AlgoritmoGenetico>(
+                        "cruce",
+                        "tipo de cruce",
+                        "cruce",
+                        cruces))
+                .addOption(new StrategyOption<AlgoritmoGenetico>(
+                        "mutacion",
+                        "tipo de mutacion",
+                        "mutacion",
+                        mutaciones))
                 // y ahora ya cerramos el formulario
                 .endOptions();
 

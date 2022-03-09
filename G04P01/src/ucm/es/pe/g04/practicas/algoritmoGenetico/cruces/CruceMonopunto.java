@@ -19,6 +19,9 @@ public class CruceMonopunto extends Cruce {
         for (int i = punto; i < individuo1.cromosoma.length; i++) {
             individuo1.cromosoma[i] = aux2[i];
         }
+    }
 
+    public String toString() {
+        return "Cruce Monopunto";
     }
 }

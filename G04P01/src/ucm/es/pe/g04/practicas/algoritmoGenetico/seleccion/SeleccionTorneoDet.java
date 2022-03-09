@@ -7,8 +7,17 @@ import java.util.Comparator;
 
 public class SeleccionTorneoDet extends Seleccion{
 
-    private final int participantes;
+    public int getParticipantes() {
+        return participantes;
+    }
 
+    public void setParticipantes(int participantes) {
+        this.participantes = participantes;
+    }
+
+    private int participantes = 2;
+
+    public SeleccionTorneoDet() {}
     public  SeleccionTorneoDet(int participates){
         this.participantes = participates;
     }
@@ -31,5 +40,9 @@ public class SeleccionTorneoDet extends Seleccion{
         }
 
         return selPoblacion;
+    }
+
+    public String toString() {
+        return "Seleccion torneo determinista";
     }
 }

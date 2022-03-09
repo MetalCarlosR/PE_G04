@@ -4,7 +4,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
 import java.util.Random;
 
-public abstract class Mutacion {
+public abstract class Mutacion implements Cloneable{
     protected Random r;
     public Mutacion(){
         r = new Random();

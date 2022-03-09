@@ -7,11 +7,13 @@ import java.util.Comparator;
 
 public class SeleccionTorneoProb extends Seleccion{
 
-    private final int participantes;
+    private int participantes = 2;
 
+    public  SeleccionTorneoProb() {}
     public  SeleccionTorneoProb(int participates){
         this.participantes = participates;
     }
+
 
     @Override
     public Individuo[] seleccionar(Individuo[] poblacion) {
@@ -33,5 +35,9 @@ public class SeleccionTorneoProb extends Seleccion{
         }
 
         return selPoblacion;
+    }
+
+    public String toString() {
+        return "Seleccion torneo probabilistico";
     }
 }

@@ -34,4 +34,8 @@ public class SeleccionRestos extends Seleccion{
 
         return selPoblacion;
     }
+
+    public String toString() {
+        return "Seleccion restos";
+    }
 }
