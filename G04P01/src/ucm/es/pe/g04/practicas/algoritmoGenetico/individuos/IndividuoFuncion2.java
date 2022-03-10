@@ -4,11 +4,10 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
 import java.util.Random;
 
-public class IndividuoFuncion2 extends Individuo<Boolean> {
+public class IndividuoFuncion2 extends IndividuoBool {
 
     @Override
-    public void init(double precision) {
-        this.precision = precision;
+    public void init() {
         this.tamGenes = new int[2];
         this.min = new double[2];
         this.max = new double[2];
@@ -16,8 +15,8 @@ public class IndividuoFuncion2 extends Individuo<Boolean> {
         this.min[1] = -10;
         this.max[0] = 10;
         this.max[1] = 10;
-        this.tamGenes[0] = this.tamGen(min[0], max[0]);
-        this.tamGenes[1] = this.tamGen(min[1], max[1]);
+        this.tamGenes[0] = this.tamGen(0);
+        this.tamGenes[1] = this.tamGen(1);
         int tamTotal = tamGenes[0] + tamGenes[1];
         this.cromosoma = new Boolean[tamTotal];
         for(int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
@@ -40,26 +39,6 @@ public class IndividuoFuncion2 extends Individuo<Boolean> {
         return getValor();
     }
 
-    @Override
-    public double getFenotipo(int n) {
-        int ini = 0;
-        String dec = "";
-        for (int i = 0; i < n; i++) ini += this.tamGenes[i];
-        for (int i = ini; i < ini + this.tamGenes[n]; i++) dec += cromosoma[i] ? '1' : '0';
-        int val = Integer.parseInt(dec, 2);
-
-        return min[n] + val * (max[n] - min[n]) / (Math.pow(2, this.tamGenes[n]) - 1);
-    }
-
-    @Override
-    public void mutar(int i) {
-        this.cromosoma[i] = !this.cromosoma[i];
-    }
-
-    @Override
-    public String stringResult() {
-        return "F: " + getFitness() + " x1: " + getFenotipo(0) + " x2: " + getFenotipo(1);
-    }
 
     public String toString() {
         return "Funcion 2";

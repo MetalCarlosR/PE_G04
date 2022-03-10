@@ -36,7 +36,7 @@ public class SeleccionTorneoDet extends Seleccion{
             }
             Arrays.sort(selTorneo, Comparator.reverseOrder());
 
-            selPoblacion[i] = selTorneo[0];
+            selPoblacion[i] = (Individuo) selTorneo[0].clone();
         }
 
         return selPoblacion;

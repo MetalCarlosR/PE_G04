@@ -7,17 +7,11 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
     public T[] cromosoma;
     protected int[] tamGenes;
 
-    protected double[] min;
-    protected double[] max;
-    protected double precision;
-
     protected Random rand = new Random();
 
-    public int tamGen(double min, double max) {
-        return (int) (Math.log10(((max - min) / precision) + 1) / Math.log10(2));
-    }
+    public abstract int tamGen(int n);
 
-    public abstract void init(double precision);
+    public abstract void init();
 
     public abstract double getValor();
 
@@ -27,7 +21,13 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
 
     public abstract void mutar(int i);
 
-    public abstract String stringResult();
+    public String stringResult() {
+        String s = "Fitness: " + getFitness();
+        for (int i = 0; i < tamGenes.length; i++) {
+            s += " Gen " + i + ": " + getFenotipo(i);
+        }
+        return s;
+    }
 
     public Object clone() {
         try {

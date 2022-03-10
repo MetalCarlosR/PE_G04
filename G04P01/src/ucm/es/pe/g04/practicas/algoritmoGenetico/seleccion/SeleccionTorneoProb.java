@@ -58,7 +58,7 @@ public class SeleccionTorneoProb extends Seleccion{
 
             double threshold = r.nextDouble()%(maxThreshold - minThreshold) + minThreshold;
             double rand = r.nextDouble();
-            selPoblacion[i] = rand > threshold ? selTorneo[0] : selTorneo[participantes - 1] ;
+            selPoblacion[i] = rand > threshold ? (Individuo) selTorneo[0].clone() : (Individuo) selTorneo[participantes - 1].clone();
         }
 
         return selPoblacion;

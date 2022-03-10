@@ -1,6 +1,6 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
-public class IndividuoFuncion4Real  extends Individuo<Double>{
+public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
 
     public int getN() {
         return n;
@@ -12,28 +12,30 @@ public class IndividuoFuncion4Real  extends Individuo<Double>{
 
     int n = 2;
 
-    //TODO: Que no sea copia de IndividuoFuncion1
     @Override
-    public void init(double precision) {
-        this.precision = precision;
-        this.tamGenes = new int[2];
-        this.min = new double[2];
-        this.max = new double[2];
-        this.min[0] = -3.000;
-        this.min[1] = 4.100;
-        this.max[0] = 12.100;
-        this.max[1] = 5.800;
-        this.tamGenes[0] = this.tamGen(min[0], max[0]);
-        this.tamGenes[1] = this.tamGen(min[1], max[1]);
-        int tamTotal = tamGenes[0] + tamGenes[1];
+    public void init() {
+        this.tamGenes = new int[n];
+        this.min = new double[n];
+        this.max = new double[n];
+        for (int i = 0; i < n; i++){
+            this.min[i] = 0;
+            this.max[i] = Math.PI;
+            this.tamGenes[i] = this.tamGen(i);
+        }
+        int tamTotal = tamGenes[0]*n;
         this.cromosoma = new Double[tamTotal];
-        for(int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextDouble();
+        for(int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextDouble(this.max[i]);
     }
 
     @Override
     public double getValor() {
-        double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
-        return (21.5 + x1 * Math.sin(4 * Math.PI * x1) + x2 * Math.sin(20 * Math.PI * x2));
+        double valor = 0;
+        for (int i = 1; i <= n; i++) {
+            double x = this.getFenotipo(i-1);
+            valor += Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
+        }
+        valor = -valor;
+        return valor;
     }
 
     @Override
@@ -43,12 +45,17 @@ public class IndividuoFuncion4Real  extends Individuo<Double>{
 
     @Override
     public double getFenotipo(int n) {
-        return 0;
+        return cromosoma[n];
     }
 
     @Override
     public void mutar(int i) {
+        cromosoma[i] = this.rand.nextDouble(this.max[i]);
+    }
 
+    @Override
+    public int tamGen(int n) {
+        return 1;
     }
 
     @Override

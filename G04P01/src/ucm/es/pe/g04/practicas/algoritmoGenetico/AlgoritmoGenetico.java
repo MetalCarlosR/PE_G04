@@ -232,13 +232,13 @@ public class AlgoritmoGenetico {
     private void iniciarPoblacion() {
         poblacion = new Individuo[tamPoblacion];
 
-        original.init(precision);
+        original.init();
         poblacion[0] = original;
 
 
         for (int i = 1; i < tamPoblacion; i++) {
             poblacion[i] = (Individuo) original.clone();
-            poblacion[i].init(precision);
+            poblacion[i].init();
         }
         //poblacion = FactoriaIndividuos.getPoblacionInicial(seleccionPob,tamPoblacion,precision);
         fitness = new double[tamPoblacion];
