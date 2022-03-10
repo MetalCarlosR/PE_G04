@@ -23,8 +23,8 @@ public class IndividuoFuncion4 extends Individuo<Boolean> {
         this.min = new double[n];
         this.max = new double[n];
         for (int i = 0; i < n; i++){
-            this.min[i] = -10;
-            this.max[i] = 10;
+            this.min[i] = 0;
+            this.max[i] = Math.PI;
             this.tamGenes[i] = this.tamGen(min[i], max[i]);
         }
         int tamTotal = tamGenes[0]*n;
@@ -34,8 +34,13 @@ public class IndividuoFuncion4 extends Individuo<Boolean> {
 
     @Override
     public double getValor() {
-        double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
-        return (21.5 + x1 * Math.sin(4 * Math.PI * x1) + x2 * Math.sin(20 * Math.PI * x2));
+        double valor = 0;
+        for (int i = 1; i <= n; i++) {
+            double x = this.getFenotipo(n-1);
+            valor += Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
+        }
+        valor = -valor;
+        return valor;
     }
 
     @Override
