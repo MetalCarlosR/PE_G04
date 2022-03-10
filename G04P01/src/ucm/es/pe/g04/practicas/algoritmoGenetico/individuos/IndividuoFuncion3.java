@@ -8,10 +8,10 @@ public class IndividuoFuncion3  extends Individuo<Boolean>{
         this.tamGenes = new int[2];
         this.min = new double[2];
         this.max = new double[2];
-        this.min[0] = -3.000;
-        this.min[1] = 4.100;
-        this.max[0] = 12.100;
-        this.max[1] = 5.800;
+        this.min[0] = -512.000;
+        this.min[1] = -512.000;
+        this.max[0] = 512.000;
+        this.max[1] = 512.000;
         this.tamGenes[0] = this.tamGen(min[0], max[0]);
         this.tamGenes[1] = this.tamGen(min[1], max[1]);
         int tamTotal = tamGenes[0] + tamGenes[1];
@@ -22,7 +22,7 @@ public class IndividuoFuncion3  extends Individuo<Boolean>{
     @Override
     public double getValor() {
         double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
-        return (21.5 + x1 * Math.sin(4 * Math.PI * x1) + x2 * Math.sin(20 * Math.PI * x2));
+        return -(x2 + 47)*Math.sin(Math.sqrt(Math.abs(x2 + x1/2 + 47))) - x1 * Math.sin(Math.sqrt(Math.abs(x1 - (x2 + 47))));
     }
 
     @Override

@@ -14,13 +14,17 @@ public class Graficas {
     int _generacion = 1;
 
     JFrame _frame;
+    Plot2DPanel plot;
 
     public Graficas() {
-        _frame = new JFrame("a plot panel");
+        _frame = new JFrame("grafica");
         _frame.setSize(600, 600);
         _frame.setVisible(true);
         _frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        plot = new Plot2DPanel();
+        plot.addLegend("SOUTH");
+        _frame.setContentPane(plot);
     }
 
     public void generarGrafica(double mejorAbsoluto, double mejorGeneracion, double media) {
@@ -29,16 +33,13 @@ public class Graficas {
         _media.add(media);
         _generaciones.add((double) _generacion++);
 
-
-        Plot2DPanel plot = new Plot2DPanel();
+        plot.removeAllPlots();
 // define the legend position
-        plot.addLegend("SOUTH");
 // add a line plot to the PlotPanel
         plot.addLinePlot("MEJOR ABSOLUTO", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorAbsoluto.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEJOR GENERACIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEDIA", _generaciones.stream().mapToDouble(d -> d).toArray(), _media.stream().mapToDouble(d -> d).toArray());
 // put the PlotPanel in a JFrame like a JPanel
-        _frame.setContentPane(plot);
     }
 
 
