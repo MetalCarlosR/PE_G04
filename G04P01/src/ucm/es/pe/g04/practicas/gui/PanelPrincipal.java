@@ -170,6 +170,16 @@ public class PanelPrincipal extends JFrame {
                         "cantidad de participantes por torneo",
                         "participantes",
                         0, Integer.MAX_VALUE))
+                .addInner(new DoubleOption<Seleccion>(
+                        "% victoria minimo del peor",
+                        "probablildad minima de que gane el peor",
+                        "minThreshold",
+                        0, 1.0))
+                .addInner(new DoubleOption<Seleccion>(
+                        "% victoria maximo del peor",
+                        "probablildad maxima de que gane el peor",
+                        "maxThreshold",
+                        0, 1.0))
                 .endInner()
                 .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
                         "truncamiento",
@@ -226,6 +236,16 @@ public class PanelPrincipal extends JFrame {
                                 "cantidad de participantes por torneo",
                                 "participantes",
                                 0, Integer.MAX_VALUE))
+                        .addInner(new DoubleOption<Seleccion>(
+                                "% victoria minimo del peor",
+                                "probablildad minima de que gane el peor",
+                                "minThreshold",
+                                0, 1.0))
+                        .addInner(new DoubleOption<Seleccion>(
+                                "% victoria maximo del peor",
+                                "probablildad maxima de que gane el peor",
+                                "maxThreshold",
+                                0, 1.0))
                         .endInner()
                     .endInner()
                 .addOption(new StrategyOption<AlgoritmoGenetico>(

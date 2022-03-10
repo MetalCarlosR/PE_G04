@@ -17,6 +17,25 @@ public class SeleccionTorneoProb extends Seleccion{
 
     private int participantes = 2;
 
+    public double getMaxThreshold() {
+        return maxThreshold;
+    }
+
+    public void setMaxThreshold(double maxThreshold) {
+        this.maxThreshold = maxThreshold;
+    }
+
+    public double getMinThreshold() {
+        return minThreshold;
+    }
+
+    public void setMinThreshold(double minThreshold) {
+        this.minThreshold = minThreshold;
+    }
+
+    private double maxThreshold = 1.0;
+    private double minThreshold = 0.5;
+
     public  SeleccionTorneoProb() {}
     public  SeleccionTorneoProb(int participates){
         this.participantes = participates;
@@ -37,7 +56,7 @@ public class SeleccionTorneoProb extends Seleccion{
             }
             Arrays.sort(selTorneo, Comparator.reverseOrder());
 
-            double threshold = r.nextDouble()/2 + 0.5;
+            double threshold = r.nextDouble()%(maxThreshold - minThreshold) + minThreshold;
             double rand = r.nextDouble();
             selPoblacion[i] = rand > threshold ? selTorneo[0] : selTorneo[participantes - 1] ;
         }
