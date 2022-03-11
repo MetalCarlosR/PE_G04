@@ -8,9 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.Cruce;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceMonopunto;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceUniforme;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.*;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.*;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
@@ -71,7 +69,7 @@ public class PanelPrincipal extends JFrame {
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos()};
         Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
-        Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme()};
+        Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme(), new CruceAritmetico(), new CruceBLXa()};
         Individuo[] individuos = new Individuo[] {new IndividuoFuncion1(), new IndividuoFuncion2(), new IndividuoFuncion3(), new IndividuoFuncion4(), new IndividuoFuncion4Real()};
 
         Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
@@ -122,7 +120,7 @@ public class PanelPrincipal extends JFrame {
                             "opciones de la función 4",
                             "original",
                             IndividuoFuncion4.class))
-                    .addInner(new IntegerOption<Seleccion>(
+                    .addInner(new IntegerOption<Individuo>(
                             "n",
                             "número de variables x",
                             "n",
@@ -133,7 +131,7 @@ public class PanelPrincipal extends JFrame {
                         "opciones de la función 4",
                         "original",
                         IndividuoFuncion4Real.class))
-                .addInner(new IntegerOption<Seleccion>(
+                .addInner(new IntegerOption<Individuo>(
                         "n",
                         "número de variables x",
                         "n",
@@ -253,6 +251,17 @@ public class PanelPrincipal extends JFrame {
                         "tipo de cruce",
                         "cruce",
                         cruces))
+                .beginInner(new InnerOption<AlgoritmoGenetico, Cruce>(
+                        "Cruce aritmético",
+                        "opciones del cruce aritmético",
+                        "cruce",
+                        CruceAritmetico.class))
+                .addInner(new DoubleOption<Cruce>(
+                        "Alpha",
+                        "alpha a usar en el cruce",
+                        "alpha",
+                        0, 1.0))
+                .endInner()
                 .addOption(new StrategyOption<AlgoritmoGenetico>(
                         "Mutacion",
                         "tipo de mutacion",
