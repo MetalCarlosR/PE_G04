@@ -24,7 +24,7 @@ public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
         }
         int tamTotal = tamGenes[0]*n;
         this.cromosoma = new Double[tamTotal];
-        for(int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextDouble(this.max[i]);
+        for(int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextDouble() * this.max[i];
     }
 
     @Override
@@ -46,7 +46,7 @@ public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
 
     @Override
     public void mutar(int i) {
-        cromosoma[i] = this.rand.nextDouble(this.max[i]);
+        cromosoma[i] = this.rand.nextDouble() * this.max[i];
     }
 
     @Override

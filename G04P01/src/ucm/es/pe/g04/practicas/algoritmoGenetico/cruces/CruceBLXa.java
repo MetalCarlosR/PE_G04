@@ -24,8 +24,8 @@ public class CruceBLXa extends Cruce {
             double rMin = cMin - I * a;
             double rMax = cMax + I * a;
 
-            individuo1.cromosoma[i] = r.nextDouble(rMin, rMax);
-            individuo2.cromosoma[i] = r.nextDouble(rMin, rMax);
+            individuo1.cromosoma[i] = r.nextDouble() * (rMax-rMin) + rMin;
+            individuo2.cromosoma[i] = r.nextDouble() * (rMax-rMin) + rMin;
         }
     }
 
