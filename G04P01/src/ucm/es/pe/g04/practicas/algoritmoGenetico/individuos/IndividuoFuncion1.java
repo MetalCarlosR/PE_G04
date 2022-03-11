@@ -28,6 +28,7 @@ public class IndividuoFuncion1 extends IndividuoBool {
         return (21.5 + x1 * Math.sin(4 * Math.PI * x1) + x2 * Math.sin(20 * Math.PI * x2));
     }
 
+
     public String toString() {
         return "Funcion 1";
     }

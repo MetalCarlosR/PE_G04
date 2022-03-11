@@ -24,14 +24,6 @@ public class CruceAritmetico extends Cruce{
         var aux2 = (Double[])individuo2.cromosoma.clone();
 
 
-//        for (int i = 0; i < individuo1.cromosoma.length ; i++) {
-//            if(r.nextDouble() > 0.5){
-//                double a1 = r.nextDouble();
-//                double a2 = r.nextDouble();
-//                individuo1.cromosoma[i] = a1 * aux1[i] + a2 * aux2[i];
-//                individuo2.cromosoma[i] = a1 * aux2[i] + a2 * aux1[i];
-//            }
-//        }
         for (int i = 0; i < aux1.length; i++) {
             individuo1.cromosoma[i] = alpha * aux1[i] + (1.0 - alpha) * aux2[i];
             individuo2.cromosoma[i] = alpha * aux2[i] + (1.0 - alpha) * aux1[i];

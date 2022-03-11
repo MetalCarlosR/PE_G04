@@ -34,7 +34,6 @@ public class IndividuoFuncion2 extends IndividuoBool {
         return izq*dcha;
     }
 
-
     public String toString() {
         return "Funcion 2";
     }
