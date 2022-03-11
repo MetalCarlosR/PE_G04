@@ -37,18 +37,6 @@ public class PanelPrincipal extends JFrame {
         panel.initialize();
         add(panel, BorderLayout.WEST);
 
-        // crea una etiqueta que dice si todo es valido
-        final String textoTodoValido = "Todos los campos OK";
-        final String textoHayErrores = "Hay errores en algunos campos";
-        final JLabel valido = new JLabel(textoHayErrores);
-        // este evento se lanza cada vez que la validez cambia
-        panel.addConfigListener(new ConfigListener() {
-            @Override
-            public void configChanged(boolean isConfigValid) {
-                valido.setText(isConfigValid ? textoTodoValido: textoHayErrores);
-            }
-        });
-        add(valido, BorderLayout.SOUTH);
 
         // usado por todos los botones
         JButton boton;
@@ -102,12 +90,12 @@ public class PanelPrincipal extends JFrame {
                         100))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
                         "Precision", 					 // etiqueta
-                        "valor de error para la discretización del intervalo",           // tooltip
+                        "valor de error para la discretizacion del intervalo",           // tooltip
                         "precision",                     // campo
                         0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
                         "Elitismo", 					 // etiqueta
-                        "valor de error para la discretización del intervalo",           // tooltip
+                        "valor de error para la discretizacion del intervalo",           // tooltip
                         "elitismo",                     // campo
                         0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new StrategyOption<AlgoritmoGenetico>(
@@ -116,24 +104,24 @@ public class PanelPrincipal extends JFrame {
                         "original",
                         individuos))
                     .beginInner(new InnerOption<AlgoritmoGenetico, Individuo>(
-                            "Función 4",
-                            "opciones de la función 4",
+                            "Funcion 4",
+                            "opciones de la funcion 4",
                             "original",
                             IndividuoFuncion4.class))
                     .addInner(new IntegerOption<Individuo>(
                             "n",
-                            "número de variables x",
+                            "numero de variables x",
                             "n",
                             0, Integer.MAX_VALUE))
                     .endInner()
                 .beginInner(new InnerOption<AlgoritmoGenetico, Individuo>(
-                        "Función 4",
-                        "opciones de la función 4",
+                        "Funcion 4",
+                        "opciones de la funcion 4",
                         "original",
                         IndividuoFuncion4Real.class))
                 .addInner(new IntegerOption<Individuo>(
                         "n",
-                        "número de variables x",
+                        "numero de variables x",
                         "n",
                         0, Integer.MAX_VALUE))
                 .endInner()
@@ -159,7 +147,7 @@ public class PanelPrincipal extends JFrame {
                             0, Integer.MAX_VALUE))
                     .endInner()
                 .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
-                        "torneo probabilístico",
+                        "torneo probabilistico",
                         "opciones del torneo",
                         "seleccion",
                         SeleccionTorneoProb.class))
@@ -225,7 +213,7 @@ public class PanelPrincipal extends JFrame {
                                 100))
                         .endInner()
                         .beginInner(new InnerOption<AlgoritmoGenetico, Seleccion>(
-                                "torneo probabilístico",
+                                "torneo probabilistico",
                                 "opciones del torneo",
                                 "seleccionExtra",
                                 SeleccionTorneoProb.class))
@@ -252,8 +240,8 @@ public class PanelPrincipal extends JFrame {
                         "cruce",
                         cruces))
                 .beginInner(new InnerOption<AlgoritmoGenetico, Cruce>(
-                        "Cruce aritmético",
-                        "opciones del cruce aritmético",
+                        "Cruce aritmetico",
+                        "opciones del cruce aritmetico",
                         "cruce",
                         CruceAritmetico.class))
                 .addInner(new DoubleOption<Cruce>(

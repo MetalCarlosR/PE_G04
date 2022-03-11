@@ -23,6 +23,6 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
     }
 
     public String toString() {
-        return "Estocástica universal";
+        return "Estocastica universal";
     }
 }

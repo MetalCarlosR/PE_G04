@@ -32,6 +32,6 @@ public class CruceAritmetico extends Cruce{
     }
 
     public String toString() {
-        return "Aritmético";
+        return "Aritmetico";
     }
 }

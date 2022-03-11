@@ -65,6 +65,6 @@ public class SeleccionTorneoProb extends Seleccion{
     }
 
     public String toString() {
-        return "Torneo probabilístico";
+        return "Torneo probabilistico";
     }
 }
