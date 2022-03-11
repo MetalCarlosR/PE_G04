@@ -2,7 +2,7 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.cruces;
 
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
-public class CruceAritmetico extends Cruce<Double>{
+public class CruceAritmetico extends Cruce{
 
     public double getAlpha() {
         return alpha;
@@ -14,14 +14,14 @@ public class CruceAritmetico extends Cruce<Double>{
 
     private double alpha = 0.6;
     @Override
-    protected void cruzar(Individuo<Double> individuo1, Individuo<Double> individuo2) {
+    protected void cruzar(Individuo individuo1, Individuo individuo2) {
         if(!(individuo1.cromosoma[0] instanceof Double) || !(individuo2.cromosoma[0] instanceof Double)){
             System.out.println("Cuidado, llamastes al cruce aritmético con cromosomas no Double");
             return;
         }
 
-        var aux1 = individuo1.cromosoma.clone();
-        var aux2 = individuo2.cromosoma.clone();
+        var aux1 = (Double[])individuo1.cromosoma.clone();
+        var aux2 = (Double[])individuo2.cromosoma.clone();
 
 
 //        for (int i = 0; i < individuo1.cromosoma.length ; i++) {

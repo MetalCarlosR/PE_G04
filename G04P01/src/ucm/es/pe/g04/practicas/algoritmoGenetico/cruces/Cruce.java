@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Cruce<T> implements Cloneable{
+public abstract class Cruce implements Cloneable{
 
     Random r;
 
@@ -14,7 +14,7 @@ public abstract class Cruce<T> implements Cloneable{
         r = new Random();
     }
 
-    public void reproduccion(Individuo<T>[] poblacion, double probCruce){
+    public void reproduccion(Individuo[] poblacion, double probCruce){
         int tamPoblacion = poblacion.length;
         List<Integer> sel_cruce = new ArrayList<>();
         r = new Random();
@@ -32,5 +32,5 @@ public abstract class Cruce<T> implements Cloneable{
         }
     }
 
-    protected abstract void cruzar(Individuo<T> individuo1, Individuo<T> individuo2);
+    protected abstract void cruzar(Individuo individuo1, Individuo individuo2);
 }
