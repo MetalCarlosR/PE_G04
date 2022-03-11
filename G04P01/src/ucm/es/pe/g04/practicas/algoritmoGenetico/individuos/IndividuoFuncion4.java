@@ -42,11 +42,6 @@ public class IndividuoFuncion4 extends IndividuoBool {
         return valor;
     }
 
-    @Override
-    public double getFitness() {
-        return getValor();
-    }
-
     public String toString() {
         return "Funcion 4";
     }

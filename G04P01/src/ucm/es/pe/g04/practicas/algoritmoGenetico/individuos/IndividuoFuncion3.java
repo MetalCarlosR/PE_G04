@@ -23,11 +23,6 @@ public class IndividuoFuncion3  extends IndividuoBool{
         return -(x2 + 47)*Math.sin(Math.sqrt(Math.abs(x2 + x1/2 + 47))) - x1 * Math.sin(Math.sqrt(Math.abs(x1 - (x2 + 47))));
     }
 
-    @Override
-    public double getFitness() {
-        return getValor();
-    }
-
     public String toString() {
         return "Funcion 3";
     }

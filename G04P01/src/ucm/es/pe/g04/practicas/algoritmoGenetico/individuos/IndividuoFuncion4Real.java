@@ -38,10 +38,6 @@ public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
         return valor;
     }
 
-    @Override
-    public double getFitness() {
-        return getValor();
-    }
 
     @Override
     public double getFenotipo(int n) {
@@ -56,11 +52,6 @@ public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
     @Override
     public int tamGen(int n) {
         return 1;
-    }
-
-    @Override
-    public String stringResult() {
-        return "F: " + getFitness() + " x1: " + getFenotipo(0) + " x2: " + getFenotipo(1);
     }
 
     public String toString() {

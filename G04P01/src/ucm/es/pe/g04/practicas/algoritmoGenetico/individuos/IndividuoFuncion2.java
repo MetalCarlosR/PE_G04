@@ -34,11 +34,6 @@ public class IndividuoFuncion2 extends IndividuoBool {
         return izq*dcha;
     }
 
-    @Override
-    public double getFitness() {
-        return getValor();
-    }
-
 
     public String toString() {
         return "Funcion 2";
