@@ -9,8 +9,6 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
 
     protected Random rand = new Random();
 
-    public abstract int tamGen(int n);
-
     public abstract void init();
 
     public abstract double getValor();
@@ -20,6 +18,8 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
     public abstract double getFenotipo(int n);
 
     public abstract void mutar(int i);
+
+    public abstract int tamGen(int n);
 
     public String stringResult() {
         String s = "Fitness: " + getFitness();
