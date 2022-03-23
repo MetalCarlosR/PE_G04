@@ -14,6 +14,6 @@ public class Practica {
         IndividuoAvionesData.Init();
         IndividuoAviones i = new IndividuoAviones();
         i.init();
-
+        i.getFitness();
     }
 }

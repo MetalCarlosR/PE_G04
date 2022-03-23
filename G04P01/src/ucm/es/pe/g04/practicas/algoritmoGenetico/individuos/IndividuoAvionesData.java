@@ -8,7 +8,7 @@ import java.io.IOException;
 public class IndividuoAvionesData {
 
     public static class Avion{
-        // Tipo de avión ( 1-Pesado, 2-Grande, 3-Pequeño)
+        // Tipo de avión ( 0-Pesado, 1-Grande, 2-Pequeño)
         int tipo;
         // Lista de tiempo estimado de llegada para n pistas
         double[] tel;
