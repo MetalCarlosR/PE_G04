@@ -8,7 +8,7 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
     @Override
     public Individuo[] seleccionar(Individuo[] poblacion) {
         int tamPoblacion = poblacion.length;
-        Individuo sel_super[] = new Individuo[tamPoblacion];//seleccionados para sobrevivir
+        Individuo[] sel_super = new Individuo[tamPoblacion];//seleccionados para sobrevivir
         double offset = 1d/tamPoblacion;
         double point = r.nextDouble() * offset;
         for(int i = 0; i < tamPoblacion; i++)

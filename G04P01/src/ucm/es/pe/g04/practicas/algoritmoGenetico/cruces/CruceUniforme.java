@@ -15,7 +15,6 @@ public class CruceUniforme extends Cruce{
                 individuo2.cromosoma[i] = aux1[i];
             }
         }
-
     }
 
     public String toString() {
