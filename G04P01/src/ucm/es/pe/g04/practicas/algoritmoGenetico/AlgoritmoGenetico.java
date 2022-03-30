@@ -122,15 +122,15 @@ public class AlgoritmoGenetico {
     private Individuo[] pobElite;
     private double precision = 0.001;
 
-    public boolean isMaximizar() {
+    public static boolean isMaximizar() {
         return maximizar;
     }
 
-    public void setMaximizar(boolean maximizar) {
-        this.maximizar = maximizar;
+    public static void setMaximizar(boolean max) {
+        maximizar = max;
     }
 
-    private boolean maximizar = false;
+    private static boolean maximizar = false;
 
     public Individuo getOriginal() {
         return original;
