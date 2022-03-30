@@ -7,9 +7,7 @@ import java.util.Arrays;
 import org.math.plot.utils.Array;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoAvionesData.Avion;
 
-public class IndividuoAviones extends Individuo<Integer>{
-
-
+public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
 
     @Override
     public void init() {
@@ -77,15 +75,4 @@ public class IndividuoAviones extends Individuo<Integer>{
     public double getFenotipo(int n) {
         return cromosoma[n];
     }
-
-    @Override
-    public void mutar(int i) {
-
-    }
-
-    @Override
-    public int tamGen(int n) {
-        return tamGenes[n];
-    }
-
 }
