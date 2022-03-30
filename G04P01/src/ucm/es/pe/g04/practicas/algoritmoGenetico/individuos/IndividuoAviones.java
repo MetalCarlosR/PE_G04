@@ -15,6 +15,8 @@ public class IndividuoAviones extends Individuo<Integer>{
     public void init() {
         tamGenes = new int[IndividuoAvionesData.numAviones];
         cromosoma = new Integer[]{7, 8, 9, 10, 11, 6, 5, 4, 3, 2, 1, 0};
+//        cromosoma = new Integer[]{7, 11, 10, 3, 2, 9, 4, 5, 6, 8, 0, 1};
+
 //        cromosoma = new Integer[IndividuoAvionesData.numAviones];
 //        for (int i = 0; i < IndividuoAvionesData.numAviones; i++) {
 //            cromosoma[i] = i;
@@ -64,8 +66,8 @@ public class IndividuoAviones extends Individuo<Integer>{
             }
             lastAvionPista[pista] = a.tipo;
             lastTime[pista] = tiempo;
-//            acc += Math.pow(tiempo - a.tel[pista], 2);
-            acc += Math.pow(tiempo - Array.min(a.tel), 2);
+            acc += Math.pow(tiempo - a.tel[pista], 2);
+//            acc += Math.pow(tiempo - Array.min(a.tel), 2);
         }
 
         return acc;
