@@ -27,12 +27,14 @@ public class Graficas {
         _frame.setContentPane(plot);
     }
 
-    public void generarGrafica(double mejorAbsoluto, double mejorGeneracion, double media) {
+    public void siguienteGeneracion(double mejorAbsoluto, double mejorGeneracion, double media){
         _mejorAbsoluto.add(mejorAbsoluto);
         _mejorGeneracion.add(mejorGeneracion);
         _media.add(media);
         _generaciones.add((double) _generacion++);
+    }
 
+    public void generarGrafica() {
         plot.removeAllPlots();
 // define the legend position
 // add a line plot to the PlotPanel
@@ -41,6 +43,4 @@ public class Graficas {
         plot.addLinePlot("MEDIA", _generaciones.stream().mapToDouble(d -> d).toArray(), _media.stream().mapToDouble(d -> d).toArray());
 // put the PlotPanel in a JFrame like a JPanel
     }
-
-
 }

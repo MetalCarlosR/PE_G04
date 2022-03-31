@@ -16,7 +16,10 @@ public class AlgoritmoGenetico {
         cruce = new CruceMonopunto();
         mutacion = new MutacionBasica();
         original = new IndividuoFuncion1();
+        _instance = this;
     }
+
+    public static AlgoritmoGenetico _instance;
 
     public int getTamPoblacion() {
         return tamPoblacion;
@@ -122,15 +125,15 @@ public class AlgoritmoGenetico {
     private Individuo[] pobElite;
     private double precision = 0.001;
 
-    public static boolean isMaximizar() {
+    public boolean getMaximizar() {
         return maximizar;
     }
 
-    public static void setMaximizar(boolean max) {
+    public void setMaximizar(boolean max) {
         maximizar = max;
     }
 
-    private static boolean maximizar = false;
+    private boolean maximizar = false;
 
     public Individuo getOriginal() {
         return original;
@@ -176,12 +179,13 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-            grafica.generarGrafica(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
+            grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
             //Siguiente generacion
             generacionActual++;
         }
 
+        grafica.generarGrafica();
         System.out.println("Mejor:" + mejorAbsoluto.stringResult());
     }
 
