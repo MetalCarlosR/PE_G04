@@ -29,10 +29,25 @@ public class PanelPrincipalP2 extends PanelPrincipal{
         Mutacion[] mutaciones = new Mutacion[] { new MutacionInsercion(), new MutacionIntercambio(), new MutacionInversion(), new MutacionHeuristica()};
         Cruce[] cruces = new Cruce[] {new CrucePMX(), new CruceOX(), new CruceOX_OP(), new CruceOX_PP(), new CruceCX(), new CruceCO()};
         Individuo[] individuos = new Individuo[] {new IndividuoAviones()};
+        String[] casosPrueba = new String[]{"EjemploPractica", "CasoPrueba1", "CasoPrueba2"};
 
         Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
 
         Boolean[] maximizar = new Boolean[] {true, false};
+
+        ConfigPanel<AvionesData> configPanel = new ConfigPanel<AvionesData>();
+
+        configPanel.addOption(new ConfigPanel.ChoiceOption<AvionesData>(
+                "Caso de Prueba",
+                "caso de prueba a usar",
+                        "casoPrueba",
+                casosPrueba
+        ));
+
+        configPanel.setTarget(AvionesData.instace);
+
+        add(configPanel, BorderLayout.NORTH);
+
         ConfigPanel<AlgoritmoGenetico> config = new ConfigPanel<AlgoritmoGenetico>();
 
         // se pueden añadir las opciones de forma independiente, o "de seguido"; el resultado es el mismo.
@@ -73,11 +88,6 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                         "tipo de individuo",
                         "original",
                         individuos))
-//                .addOption(new ConfigPanel.IntegerOption<AvionesData>(
-//                        "CasoPrueba",
-//                        "caso de prueba",
-//                        "casoPrueba",
-//                        0,2))
                 .addOption(new ConfigPanel.ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",
                         "busca maximo o minimo",

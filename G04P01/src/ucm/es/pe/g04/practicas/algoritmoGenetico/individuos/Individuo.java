@@ -22,9 +22,15 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
     public abstract int tamGen(int n);
 
     public String stringResult() {
-        String s = "Fitness: " + getFitness();
+        String s = "Fitness: " + getFitness() + "\n" + "Cromosomas: ";
+        for (int i = 0; i < cromosoma.length; i++) {
+            s += cromosoma[i] + " - ";
+        }
+        s = s.substring(0,s.length() - 3);
+        s += "\n" + "Fenotipo: ";
         for (int i = 0; i < tamGenes.length; i++) {
             s += " Gen " + i + ": " + getFenotipo(i);
+            s += getFenotipo(i) + "  ";
         }
         return s;
     }
