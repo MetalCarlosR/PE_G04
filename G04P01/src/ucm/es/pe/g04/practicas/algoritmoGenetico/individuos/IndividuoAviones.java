@@ -1,22 +1,21 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 
-import java.io.*;
 import java.util.Arrays;
 
-import org.math.plot.utils.Array;
-import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoAvionesData.Avion;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.AvionesData.Avion;
 
 public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
 
     @Override
     public void init() {
-        tamGenes = new int[IndividuoAvionesData.numAviones];
+        tamGenes = new int[AvionesData.instace.numAviones];
 //        cromosoma = new Integer[]{7, 8, 9, 10, 11, 6, 5, 4, 3, 2, 1, 0};
 //        cromosoma = new Integer[]{7, 11, 10, 3, 2, 9, 4, 5, 6, 8, 0, 1};
+//        cromosoma = new Integer[]{7, 11, 10, 3, 2, 9, 6, 5, 4, 8, 0, 1};
 
-        cromosoma = new Integer[IndividuoAvionesData.numAviones];
-        for (int i = 0; i < IndividuoAvionesData.numAviones; i++) {
+        cromosoma = new Integer[AvionesData.instace.numAviones];
+        for (int i = 0; i < AvionesData.instace.numAviones; i++) {
             cromosoma[i] = i;
             tamGenes[i] = 1;
         }
@@ -41,20 +40,20 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
     public double getFitness() {
         double acc = 0;
 
-        double[] lastTime = new double[IndividuoAvionesData.numPistas];
-        int[] lastAvionPista = new int[IndividuoAvionesData.numPistas];
+        double[] lastTime = new double[AvionesData.instace.numPistas];
+        int[] lastAvionPista = new int[AvionesData.instace.numPistas];
         Arrays.fill(lastTime, 0);
         Arrays.fill(lastAvionPista, -1);
 
-        for (int i = 0; i < IndividuoAvionesData.numAviones; i++) {
-            Avion a = IndividuoAvionesData.aviones[cromosoma[i]];
+        for (int i = 0; i < AvionesData.instace.numAviones; i++) {
+            Avion a = AvionesData.instace.aviones[cromosoma[i]];
             int pista = -1;
             double tiempo = Double.MAX_VALUE;
-            for (int j = 0; j < IndividuoAvionesData.numPistas; j++){
+            for (int j = 0; j < AvionesData.instace.numPistas; j++){
                 //Calcula el tiempo del ultimo avion + el delay que pide
 
                 double t = lastTime[j];
-                if (lastAvionPista[j] != -1) t += IndividuoAvionesData.delay[a.tipo + lastAvionPista[j] * 3];
+                if (lastAvionPista[j] != -1) t += AvionesData.instace.delay[a.tipo + lastAvionPista[j] * 3];
                 //Lo compara con su propio tel y se lo queda si es el menor
 
                 if (Math.max(t, a.tel[j]) < tiempo){

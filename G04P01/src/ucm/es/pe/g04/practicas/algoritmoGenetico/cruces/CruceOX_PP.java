@@ -7,4 +7,8 @@ public class CruceOX_PP extends Cruce{
     protected void cruzar(Individuo individuo1, Individuo individuo2) {
 
     }
+
+    public String toString() {
+        return "OX_PP";
+    }
 }

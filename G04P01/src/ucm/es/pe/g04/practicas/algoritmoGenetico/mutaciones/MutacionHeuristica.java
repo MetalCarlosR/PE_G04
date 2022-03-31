@@ -4,7 +4,6 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.AlgoritmoGenetico;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MutacionHeuristica extends Mutacion{
@@ -36,10 +35,8 @@ public class MutacionHeuristica extends Mutacion{
                     lista.remove(index);
                     numeros++;
                 }
-
-                Individuo best = (Individuo) i.clone();
-                permute(posiciones, posiciones.clone(), 0, i, best);
-                i = best;
+                i = permute(posiciones, posiciones.clone(), 0, i, (Individuo) i.clone());
+                ;
             }
         }
     }
@@ -48,13 +45,13 @@ public class MutacionHeuristica extends Mutacion{
         return "Heuristica";
     }
 
-    private void permute(int[] posiciones, int[] originales, int k, Individuo individuo, Individuo individuoBest){
+    private Individuo permute(int[] posiciones, int[] originales, int k, Individuo individuo, Individuo individuoBest){
         for(int i = k; i < posiciones.length; i++){
             //Swap
             int aux = posiciones[i];
             posiciones[i] = posiciones[k];
             posiciones[k] = aux;
-            permute(posiciones, originales, k+1, individuo, individuoBest);
+            individuoBest = permute(posiciones, originales, k+1, individuo, individuoBest);
             //Swap back
             aux = posiciones[i];
             posiciones[i] = posiciones[k];
@@ -67,10 +64,11 @@ public class MutacionHeuristica extends Mutacion{
              }
             double fitness = aux.getFitness();
             double bestFitness = individuoBest.getFitness();
-            if(fitness > bestFitness && AlgoritmoGenetico._instance.getMaximizar() || fitness < bestFitness && !AlgoritmoGenetico._instance.getMaximizar())
+            if(fitness > bestFitness && AlgoritmoGenetico.instance.getMaximizar() || fitness < bestFitness && !AlgoritmoGenetico.instance.getMaximizar())
             {
                 individuoBest = (Individuo) aux.clone();
             }
         }
+        return individuoBest;
     }
 }

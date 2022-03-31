@@ -23,6 +23,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
         genetico.setSeleccion(new SeleccionRuleta());
         genetico.setMutacion(new MutacionInsercion());
         genetico.setOriginal(new IndividuoAviones());
+        AvionesData data = AvionesData.Init();
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
         Mutacion[] mutaciones = new Mutacion[] { new MutacionInsercion(), new MutacionIntercambio(), new MutacionInversion(), new MutacionHeuristica()};
@@ -261,7 +262,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Lanza el algoritmo genetico");
-                IndividuoAvionesData.Init();
+                data.init();
                 genetico.run();
             }
         });

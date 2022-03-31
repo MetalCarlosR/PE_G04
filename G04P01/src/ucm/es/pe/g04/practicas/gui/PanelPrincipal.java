@@ -18,15 +18,12 @@ public abstract class PanelPrincipal extends JFrame {
         add(panelCentral, BorderLayout.EAST);
 
 
-        genetico = new AlgoritmoGenetico();
+        genetico = AlgoritmoGenetico.Init();
 
         final ConfigPanel<AlgoritmoGenetico> panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
         panel.initialize();
         add(panel, BorderLayout.WEST);
-
-
-
 
 
     }

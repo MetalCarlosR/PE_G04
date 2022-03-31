@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class IndividuoAvionesData {
+public class AvionesData {
 
     public static class Avion{
         // Tipo de avión ( 0-Pesado, 1-Grande, 2-Pequeño)
@@ -27,14 +27,20 @@ public class IndividuoAvionesData {
         }
     }
 
+    public static AvionesData instace;
 
-    public static String fileName = "EjemploPractica";
-    public static int numPistas;
-    public static int numAviones;
-    public static Avion[] aviones;
-    public static double[] delay = new double[9];
+    public String fileName = "EjemploPractica";
+    public int numPistas;
+    public int numAviones;
+    public Avion[] aviones;
+    public double[] delay = new double[9];
 
-    public static void Init() {
+    public static AvionesData Init() {
+        instace = new AvionesData();
+        return instace;
+    }
+
+    public void init(){
         try {
             BufferedReader file = new BufferedReader(new FileReader("input/P2/" + fileName + ".txt" ));
             numPistas = Integer.parseInt(file.readLine());

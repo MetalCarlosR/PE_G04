@@ -10,16 +10,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class AlgoritmoGenetico {
-    public AlgoritmoGenetico(){
-        //Opciones predeterminadas
-//        seleccion = new SeleccionRuleta();
-//        cruce = new CrucePMX();
-//        mutacion = new MutacionInsercion();
-//        original = new IndividuoFuncion1();
-        _instance = this;
+    public static AlgoritmoGenetico Init(){
+        instance = new AlgoritmoGenetico();
+        return instance;
     }
 
-    public static AlgoritmoGenetico _instance;
+    public static AlgoritmoGenetico instance;
 
     public int getTamPoblacion() {
         return tamPoblacion;

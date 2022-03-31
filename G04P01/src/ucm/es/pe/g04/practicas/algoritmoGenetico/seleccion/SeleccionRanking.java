@@ -39,4 +39,8 @@ public class SeleccionRanking extends Seleccion{
             poblacion[i].puntuacion = probOfIth;
         }
     }
+
+    public String toString() {
+        return "Ranking";
+    }
 }
