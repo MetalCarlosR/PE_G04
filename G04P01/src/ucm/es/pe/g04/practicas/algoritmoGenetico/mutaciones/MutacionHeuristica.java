@@ -16,7 +16,7 @@ public class MutacionHeuristica extends Mutacion{
         this._heuristica = _inserciones;
     }
 
-    private int _heuristica = 2;
+    private int _heuristica = 3;
     private int[] posiciones;
 
     @Override
@@ -26,7 +26,7 @@ public class MutacionHeuristica extends Mutacion{
             {
                 posiciones = new int[_heuristica];
                 ArrayList<Integer> lista = new ArrayList<Integer>(i.cromosoma.length);
-                for(int j = 0; j < lista.size(); j++) {
+                for(int j = 0; j < i.cromosoma.length; j++) {
                     lista.add(j);
                 }
                 int numeros = 0;
@@ -48,7 +48,7 @@ public class MutacionHeuristica extends Mutacion{
         return "Heuristica";
     }
 
-    private static void permute(int[] posiciones, int[] originales, int k, Individuo individuo, Individuo individuoBest){
+    private void permute(int[] posiciones, int[] originales, int k, Individuo individuo, Individuo individuoBest){
         for(int i = k; i < posiciones.length; i++){
             //Swap
             int aux = posiciones[i];
@@ -69,7 +69,7 @@ public class MutacionHeuristica extends Mutacion{
             double bestFitness = individuoBest.getFitness();
             if(fitness > bestFitness && AlgoritmoGenetico._instance.getMaximizar() || fitness < bestFitness && !AlgoritmoGenetico._instance.getMaximizar())
             {
-                individuoBest = aux;
+                individuoBest = (Individuo) aux.clone();
             }
         }
     }

@@ -5,6 +5,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.*;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.*;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.Mutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionBasica;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionInsercion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.*;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.ChoiceOption;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.ConfigListener;
@@ -12,6 +13,11 @@ import ucm.es.pe.g04.practicas.gui.ConfigPanel.DoubleOption;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.InnerOption;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.IntegerOption;
 import ucm.es.pe.g04.practicas.gui.ConfigPanel.StrategyOption;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class PanelPrincipalP1 extends PanelPrincipal{
@@ -22,6 +28,12 @@ public class PanelPrincipalP1 extends PanelPrincipal{
 
     @Override
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
+        genetico.setCruce(new CruceMonopunto());
+        genetico.setSeleccion(new SeleccionRuleta());
+        genetico.setMutacion(new MutacionBasica());
+        genetico.setOriginal(new IndividuoFuncion1());
+
+
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos()};
         Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
         Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme(), new CruceAritmetico(), new CruceBLXa()};
@@ -224,6 +236,19 @@ public class PanelPrincipalP1 extends PanelPrincipal{
                         mutaciones))
                 // y ahora ya cerramos el formulario
                 .endOptions();
+
+        // usado por todos los botones
+        JButton boton;
+        // crea botones para mostrar el estado de las figuras por consola
+        boton = new JButton("Ejecutar");
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Lanza el algoritmo genetico");
+                genetico.run();
+            }
+        });
+        add(boton, BorderLayout.SOUTH);
 
         return config;
     }

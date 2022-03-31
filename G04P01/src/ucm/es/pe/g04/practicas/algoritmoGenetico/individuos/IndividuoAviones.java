@@ -75,4 +75,9 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
     public double getFenotipo(int n) {
         return cromosoma[n];
     }
+
+    public String toString() {
+        return "Aviones";
+    }
+
 }

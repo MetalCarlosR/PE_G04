@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class PanelPrincipal extends JFrame {
+    protected AlgoritmoGenetico genetico;
 
     public PanelPrincipal(String practica){
         super(practica);
@@ -17,7 +18,7 @@ public abstract class PanelPrincipal extends JFrame {
         add(panelCentral, BorderLayout.EAST);
 
 
-        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+        genetico = new AlgoritmoGenetico();
 
         final ConfigPanel<AlgoritmoGenetico> panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
@@ -25,19 +26,8 @@ public abstract class PanelPrincipal extends JFrame {
         add(panel, BorderLayout.WEST);
 
 
-        // usado por todos los botones
-        JButton boton;
 
-        // crea botones para mostrar el estado de las figuras por consola
-        boton = new JButton("Ejecutar");
-        boton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Lanza el algoritmo genetico");
-                genetico.run();
-            }
-        });
-        add(boton, BorderLayout.SOUTH);
+
 
     }
 

@@ -12,7 +12,16 @@ public class SeleccionRanking extends Seleccion{
     }
 
     Seleccion seleccionExtra;
-    static private final double _beta = 1.5;
+
+    public double get_beta() {
+        return _beta;
+    }
+
+    public void set_beta(double _beta) {
+        this._beta = _beta;
+    }
+
+    private double _beta = 1.5;
     public SeleccionRanking(){ seleccionExtra = new SeleccionRuleta();}
     @Override
     public Individuo[] seleccionar(Individuo[] poblacion) {
