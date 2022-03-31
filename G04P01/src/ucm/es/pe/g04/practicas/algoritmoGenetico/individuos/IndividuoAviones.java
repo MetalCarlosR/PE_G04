@@ -14,6 +14,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
 //        cromosoma = new Integer[]{7, 11, 10, 3, 2, 9, 4, 5, 6, 8, 0, 1};
 //        cromosoma = new Integer[]{7, 11, 10, 3, 2, 9, 6, 5, 4, 8, 0, 1};
 
+
         cromosoma = new Integer[AvionesData.instace.numAviones];
         for (int i = 0; i < AvionesData.instace.numAviones; i++) {
             cromosoma[i] = i;
