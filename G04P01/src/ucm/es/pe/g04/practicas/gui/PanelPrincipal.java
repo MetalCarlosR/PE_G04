@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public abstract class PanelPrincipal extends JFrame {
     protected AlgoritmoGenetico genetico;
+    protected ConfigPanel<AlgoritmoGenetico> panel;
 
     public PanelPrincipal(String practica){
         super(practica);
@@ -20,7 +21,7 @@ public abstract class PanelPrincipal extends JFrame {
 
         genetico = AlgoritmoGenetico.Init();
 
-        final ConfigPanel<AlgoritmoGenetico> panel = creaPanelConfiguracion();
+        panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
         panel.initialize();
         add(panel, BorderLayout.WEST);

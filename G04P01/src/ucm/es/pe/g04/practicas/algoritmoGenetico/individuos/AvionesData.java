@@ -29,7 +29,16 @@ public class AvionesData {
 
     public static AvionesData instace;
 
-    public String fileName = "EjemploPractica";
+    public int getCasoPrueba() {
+        return casoPrueba;
+    }
+
+    public void setCasoPrueba(int casoPrueba) {
+        this.casoPrueba = casoPrueba;
+    }
+
+    private String[] casosPrueba = new String[]{"EjemploPractica"};
+    public int casoPrueba = 0;
     public int numPistas;
     public int numAviones;
     public Avion[] aviones;
@@ -42,7 +51,7 @@ public class AvionesData {
 
     public void init(){
         try {
-            BufferedReader file = new BufferedReader(new FileReader("input/P2/" + fileName + ".txt" ));
+            BufferedReader file = new BufferedReader(new FileReader("input/P2/" + casosPrueba[casoPrueba] + ".txt" ));
             numPistas = Integer.parseInt(file.readLine());
             numAviones = Integer.parseInt(file.readLine());
             aviones = new Avion[numAviones];

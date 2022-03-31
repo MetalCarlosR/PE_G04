@@ -20,7 +20,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
     @Override
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
         genetico.setCruce(new CrucePMX());
-        genetico.setSeleccion(new SeleccionRuleta());
+        genetico.setSeleccion(new SeleccionRanking());
         genetico.setMutacion(new MutacionInsercion());
         genetico.setOriginal(new IndividuoAviones());
         AvionesData data = AvionesData.Init();
@@ -73,6 +73,11 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                         "tipo de individuo",
                         "original",
                         individuos))
+//                .addOption(new ConfigPanel.IntegerOption<AvionesData>(
+//                        "CasoPrueba",
+//                        "caso de prueba",
+//                        "casoPrueba",
+//                        0,2))
                 .addOption(new ConfigPanel.ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",
                         "busca maximo o minimo",
@@ -181,6 +186,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                         "maxThreshold",
                         0, 1.0))
                 .endInner()
+                .endInner()
                 .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Seleccion>(
                         "ranking",
                         "opciones de ranking",
@@ -251,6 +257,28 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                         "tipo de mutacion",
                         "mutacion",
                         mutaciones))
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Mutacion>(
+                        "mutacion insercion",
+                        "opciones de la mutacion",
+                        "mutacion",
+                        MutacionInsercion.class))
+                .addInner(new ConfigPanel.IntegerOption<Mutacion>(
+                        "numero de inserciones",
+                        "cantidad de inserciones a realizar",
+                        "_inserciones",
+                        0,Integer.MAX_VALUE ))
+                .endInner()
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Mutacion>(
+                        "mutacion heuristica",
+                        "opciones de la mutacion",
+                        "mutacion",
+                        MutacionHeuristica.class))
+                .addInner(new ConfigPanel.IntegerOption<Mutacion>(
+                        "heuristica",
+                        "cantidad de permutaciones",
+                        "_heuristica",
+                        0, Integer.MAX_VALUE))
+                .endInner()
                 // y ahora ya cerramos el formulario
                 .endOptions();
 
