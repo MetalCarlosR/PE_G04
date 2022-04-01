@@ -12,14 +12,6 @@ public class CrucePMX extends Cruce{
         var aux1 = individuo1.cromosoma.clone();
         var aux2 = individuo2.cromosoma.clone();
 
-        for (int i = 0; i < individuo1.cromosoma.length; i++) {
-            if(!Arrays.stream(individuo1.cromosoma).toList().contains(i) || !Arrays.stream(individuo1.cromosoma).toList().contains(i)){
-                System.out.println("FUCK");
-            }
-        }
-
-        var check =Arrays.stream(aux1).toList();
-
         int p1 = r.nextInt(individuo1.cromosoma.length), p2 = r.nextInt(individuo1.cromosoma.length);
 
         if(p1 > p2){
@@ -34,10 +26,20 @@ public class CrucePMX extends Cruce{
 
         for (int i = 0; i < individuo1.cromosoma.length; i++) {
             if(i < p1 || i > p2){
-                if(subAux1.contains(aux2[i]))
-                    individuo2.cromosoma[i] = subAux2.get(subAux1.indexOf(aux2[i]));
-                if(subAux2.contains(aux1[i]))
-                    individuo1.cromosoma[i] = subAux1.get(subAux2.indexOf(aux1[i]));
+                if(subAux1.contains(aux2[i])){
+                    int index = subAux1.indexOf(aux2[i]);
+                    while (subAux1.contains(subAux2.get(index))){
+                        index = subAux1.indexOf(subAux2.get(index));
+                    }
+                    individuo2.cromosoma[i] = subAux2.get(index);
+                }
+                if(subAux2.contains(aux1[i])){
+                    int index = subAux2.indexOf(aux1[i]);
+                    while (subAux2.contains(subAux1.get(index))){
+                        index = subAux2.indexOf(subAux1.get(index));
+                    }
+                    individuo1.cromosoma[i] = subAux1.get(index);
+                }
             }
             else {
                 individuo1.cromosoma[i] = subAux2.get(i - p1);
