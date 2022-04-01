@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -21,20 +22,20 @@ public class Tabla extends JPanel {
                 "Last Name",
                 "Sport"};
 
-//        Object[][] data = {
-//                {"Kathy", "Smith",
-//                        "Snowboarding", new Integer(5), new Boolean(false)},
-//                {"John", "Doe",
-//                        "Rowing", new Integer(3), new Boolean(true)},
-//                {"Sue", "Black",
-//                        "Knitting", new Integer(2), new Boolean(false)},
-//                {"Jane", "White",
-//                        "Speed reading", new Integer(20), new Boolean(true)},
-//                {"Joe", "Brown",
-//                        "Pool", new Integer(10), new Boolean(false)}
-//        };
+        Object [] [] data2 = {
+                {"Kathy", "Smith",
+                        "Snowboarding"},
+                {"John", "Doe",
+                        "Rowing"},
+                {"Sue", "Black",
+                        "Knitting"},
+                {"Jane", "White",
+                        "Speed reading"},
+                {"Joe", "Brown",
+                        "Pool"}
+        };
 
-        final JTable table = new JTable(data, columnNames);
+        final JTable table = new JTable(data2, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
 

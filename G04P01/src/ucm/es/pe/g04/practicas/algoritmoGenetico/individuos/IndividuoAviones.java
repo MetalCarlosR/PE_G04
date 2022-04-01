@@ -102,7 +102,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
             }
             lastAvionPista[pista] = a.tipo;
             lastTime[pista] = tiempo;
-            ret[pista].add(cromosoma[i]);
+            ret[pista].add(cromosoma[i] + ": " + tiempo);
         }
 
         int maxSize = 0;
@@ -114,7 +114,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
         for (ArrayList<Object> l:
              ret) {
             for (int i = 0; i < maxSize - l.size(); i++) {
-                l.add("-");
+                l.add(null);
             }
         }
 
