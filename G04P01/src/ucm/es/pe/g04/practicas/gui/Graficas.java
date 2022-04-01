@@ -43,6 +43,7 @@ public class Graficas {
         _mejorAbsoluto.clear();
         _mejorGeneracion.clear();
         _media.clear();
+        _generacion = 0;
 // put the PlotPanel in a JFrame like a JPanel
     }
 }
