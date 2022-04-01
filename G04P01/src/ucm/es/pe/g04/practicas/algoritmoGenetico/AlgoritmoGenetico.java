@@ -117,7 +117,13 @@ public class AlgoritmoGenetico {
     private double probMutacion = 0.05;
     private int tamTorneo = 2;
     private double truncamiento = 0.5;
+
+    public Individuo getMejorAbsoluto() {
+        return mejorAbsoluto;
+    }
+
     private Individuo mejorAbsoluto;
+
     private Individuo mejorGeneracion;
     private double elitismo = 0.05;
     private Individuo[] pobElite;

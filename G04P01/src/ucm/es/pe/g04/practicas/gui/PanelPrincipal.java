@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 public abstract class PanelPrincipal extends JFrame {
     protected AlgoritmoGenetico genetico;
     protected ConfigPanel<AlgoritmoGenetico> panel;
+    protected Tabla t;
+    protected JPanel mainPanel;
 
     public PanelPrincipal(String practica){
         super(practica);
@@ -18,9 +20,9 @@ public abstract class PanelPrincipal extends JFrame {
         JPanel panelCentral = new JPanel(new GridLayout(3, 2, 4, 4));
         add(panelCentral, BorderLayout.EAST);
 
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        Tabla t = new Tabla(mainPanel);
+        t = new Tabla();
         Graficas g = new Graficas(mainPanel);
         genetico = AlgoritmoGenetico.Init(g);
 
@@ -29,9 +31,6 @@ public abstract class PanelPrincipal extends JFrame {
         panel.initialize();
         add(panel, BorderLayout.WEST);
         add(mainPanel, BorderLayout.EAST);
-
-
-
     }
 
     public abstract ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion();

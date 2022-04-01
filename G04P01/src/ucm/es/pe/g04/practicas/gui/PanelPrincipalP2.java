@@ -302,6 +302,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                 System.out.println("Lanza el algoritmo genetico");
                 data.init();
                 genetico.run();
+                t.init(mainPanel, ((IndividuoAviones)genetico.getMejorAbsoluto()).getMatriz());
             }
         });
         add(boton, BorderLayout.SOUTH);
