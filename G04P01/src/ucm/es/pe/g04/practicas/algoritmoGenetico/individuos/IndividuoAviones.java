@@ -105,6 +105,19 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
             ret[pista].add(cromosoma[i]);
         }
 
+        int maxSize = 0;
+        for (int i = 0; i < AvionesData.instace.numPistas; i++) {
+            if(ret[i].size() > maxSize)
+                maxSize = ret[i].size();
+        }
+
+        for (ArrayList<Object> l:
+             ret) {
+            for (int i = 0; i < maxSize - l.size(); i++) {
+                l.add("-");
+            }
+        }
+
         Object[][] realRet = new Object[AvionesData.instace.numPistas][];
 
         for (int i = 0; i < AvionesData.instace.numPistas; i++) {
