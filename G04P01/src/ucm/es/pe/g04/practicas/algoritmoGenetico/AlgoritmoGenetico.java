@@ -10,8 +10,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class AlgoritmoGenetico {
-    public static AlgoritmoGenetico Init(){
-        instance = new AlgoritmoGenetico();
+    public AlgoritmoGenetico(Graficas g) { grafica = g;}
+    public AlgoritmoGenetico() {}
+    public static AlgoritmoGenetico Init(Graficas g){
+        instance = new AlgoritmoGenetico(g);
         return instance;
     }
 
@@ -155,7 +157,7 @@ public class AlgoritmoGenetico {
         pobElite = new Individuo[numElite];
         mejorAbsoluto = (Individuo) poblacion[0].clone();
 
-        grafica = new Graficas();
+        //grafica = new Graficas();
 
         evaluar();
         while(generacionActual < this.maxGeneraciones) {

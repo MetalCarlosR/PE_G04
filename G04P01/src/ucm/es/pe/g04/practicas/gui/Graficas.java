@@ -16,11 +16,8 @@ public class Graficas {
     JFrame _frame;
     Plot2DPanel plot;
 
-    public Graficas() {
-        _frame = new JFrame("grafica");
-        _frame.setSize(600, 600);
-        _frame.setVisible(true);
-        _frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    public Graficas(JFrame frame) {
+        _frame = frame;
 
         plot = new Plot2DPanel();
         plot.addLegend("SOUTH");
@@ -34,6 +31,7 @@ public class Graficas {
         _generaciones.add((double) _generacion++);
     }
 
+
     public void generarGrafica() {
         plot.removeAllPlots();
 // define the legend position
@@ -41,6 +39,10 @@ public class Graficas {
         plot.addLinePlot("MEJOR ABSOLUTO", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorAbsoluto.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEJOR GENERACIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEDIA", _generaciones.stream().mapToDouble(d -> d).toArray(), _media.stream().mapToDouble(d -> d).toArray());
+        _generaciones.clear();
+        _mejorAbsoluto.clear();
+        _mejorGeneracion.clear();
+        _media.clear();
 // put the PlotPanel in a JFrame like a JPanel
     }
 }

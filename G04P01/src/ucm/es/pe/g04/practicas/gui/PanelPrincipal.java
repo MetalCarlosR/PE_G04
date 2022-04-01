@@ -18,8 +18,8 @@ public abstract class PanelPrincipal extends JFrame {
         JPanel panelCentral = new JPanel(new GridLayout(3, 2, 4, 4));
         add(panelCentral, BorderLayout.EAST);
 
-
-        genetico = AlgoritmoGenetico.Init();
+        Graficas g = new Graficas(this);
+        genetico = AlgoritmoGenetico.Init(g);
 
         panel = creaPanelConfiguracion();
         panel.setTarget(genetico);

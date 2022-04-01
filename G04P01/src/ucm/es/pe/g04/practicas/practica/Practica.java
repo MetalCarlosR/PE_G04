@@ -7,7 +7,7 @@ public class Practica {
 
     public static void main(String[] args) {
         PanelPrincipal panel = new PanelPrincipalP2();
-        panel.setSize(600, 600);
+        panel.setSize(1000, 600);
         panel.setVisible(true);
     }
 }
