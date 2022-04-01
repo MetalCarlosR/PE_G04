@@ -18,13 +18,18 @@ public abstract class PanelPrincipal extends JFrame {
         JPanel panelCentral = new JPanel(new GridLayout(3, 2, 4, 4));
         add(panelCentral, BorderLayout.EAST);
 
-        Graficas g = new Graficas(this);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        Tabla t = new Tabla(mainPanel);
+        Graficas g = new Graficas(mainPanel);
         genetico = AlgoritmoGenetico.Init(g);
 
         panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
         panel.initialize();
         add(panel, BorderLayout.WEST);
+        add(mainPanel, BorderLayout.EAST);
+
 
 
     }

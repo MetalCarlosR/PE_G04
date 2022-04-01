@@ -3,6 +3,8 @@ package ucm.es.pe.g04.practicas.gui;
 import org.math.plot.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +15,22 @@ public class Graficas {
     List<Double> _generaciones = new ArrayList<>();
     int _generacion = 1;
 
-    JFrame _frame;
+    //JFrame _frame;
+
+    public Plot2DPanel getPlot() {
+        return plot;
+    }
+
     Plot2DPanel plot;
 
-    public Graficas(JFrame frame) {
-        _frame = frame;
+    public Graficas(JPanel frame) {
+       // _frame = frame;
 
         plot = new Plot2DPanel();
         plot.addLegend("SOUTH");
-        _frame.setContentPane(plot);
+        //_frame.setContentPane(plot);
+        plot.setPreferredSize(new Dimension(600, 600));
+        frame.add(plot, BorderLayout.SOUTH);
     }
 
     public void siguienteGeneracion(double mejorAbsoluto, double mejorGeneracion, double media){
@@ -43,6 +52,7 @@ public class Graficas {
         _mejorAbsoluto.clear();
         _mejorGeneracion.clear();
         _media.clear();
+        _generacion = 0;
 // put the PlotPanel in a JFrame like a JPanel
     }
 }
