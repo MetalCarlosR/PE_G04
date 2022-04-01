@@ -213,6 +213,14 @@ public class AlgoritmoGenetico {
             }
         }
         else {
+
+            if(Arrays.stream(fitness).min().getAsDouble() < 0){
+                double min = Arrays.stream(fitness).min().getAsDouble();
+                for (int i = 0; i < tamPoblacion ; i++) {
+                    fitness[i] -= min;
+                }
+            }
+
             double a = fitnessMedio/(fitnessMedio - Arrays.stream(fitness).min().getAsDouble());
             double b = (1 - a) * fitnessMedio;
             double aux;

@@ -30,11 +30,6 @@ public abstract class Cruce implements Cloneable{
 
         for (int i = 0; i < num_sel_cruce; i+= 2){
             cruzar(poblacion[sel_cruce.get(i)], poblacion[sel_cruce.get(i+1)]);
-            for (int j = 0; i < poblacion[sel_cruce.get(j)].cromosoma.length; i++) {
-                if(!Arrays.stream(poblacion[sel_cruce.get(j)].cromosoma).toList().contains(i) || !Arrays.stream(poblacion[sel_cruce.get(j + 1)].cromosoma).toList().contains(i)){
-                    System.out.println("FUCK");
-                }
-            }
         }
     }
 

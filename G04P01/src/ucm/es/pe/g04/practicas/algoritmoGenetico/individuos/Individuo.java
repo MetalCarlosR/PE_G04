@@ -29,7 +29,6 @@ public abstract class Individuo<T> implements Cloneable , Comparable<Individuo<T
         s = s.substring(0,s.length() - 3);
         s += "\n" + "Fenotipo: ";
         for (int i = 0; i < tamGenes.length; i++) {
-            s += " Gen " + i + ": " + getFenotipo(i);
             s += getFenotipo(i) + "  ";
         }
         return s;
