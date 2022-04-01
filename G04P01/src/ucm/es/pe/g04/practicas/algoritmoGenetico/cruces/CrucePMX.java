@@ -46,7 +46,6 @@ public class CrucePMX extends Cruce{
                 individuo2.cromosoma[i] = subAux1.get(i - p1);
             }
         }
-
     }
 
     public String toString() {
