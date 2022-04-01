@@ -73,11 +73,13 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
     }
 
     public Object[][] getMatriz(){
+
         ArrayList<Object>[] ret = new ArrayList[AvionesData.instace.numPistas];
 
         for (int i = 0; i < AvionesData.instace.numPistas; i++) {
                 ret[i] = new ArrayList<>();
         }
+
 
         double[] lastTime = new double[AvionesData.instace.numPistas];
         int[] lastAvionPista = new int[AvionesData.instace.numPistas];
