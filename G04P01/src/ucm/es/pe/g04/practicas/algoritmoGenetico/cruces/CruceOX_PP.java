@@ -3,6 +3,7 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.cruces;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CruceOX_PP extends Cruce{
     private int _numCruce = 3;
@@ -11,6 +12,7 @@ public class CruceOX_PP extends Cruce{
         int length = individuo1.cromosoma.length;
         var aux1 = individuo1.cromosoma.clone();
         var aux2 = individuo2.cromosoma.clone();
+
 
         ArrayList<Object> elems1 = new ArrayList<Object>(_numCruce);
         ArrayList<Object> elems2 = new ArrayList<Object>(_numCruce);
@@ -40,7 +42,7 @@ public class CruceOX_PP extends Cruce{
                     i2++;
 //                    i2 %= length;
                 }
-                individuo2.cromosoma[i] = aux2[i1];
+                individuo2.cromosoma[i] = aux2[i2];
 
                 i1++; i2++;
             }

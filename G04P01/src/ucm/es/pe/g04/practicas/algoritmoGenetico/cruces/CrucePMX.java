@@ -47,11 +47,6 @@ public class CrucePMX extends Cruce{
             }
         }
 
-        for (int i = 0; i < individuo1.cromosoma.length; i++) {
-            if(!Arrays.stream(individuo1.cromosoma).toList().contains(i) || !Arrays.stream(individuo1.cromosoma).toList().contains(i)){
-                System.out.println("FUCK");
-            }
-        }
     }
 
     public String toString() {

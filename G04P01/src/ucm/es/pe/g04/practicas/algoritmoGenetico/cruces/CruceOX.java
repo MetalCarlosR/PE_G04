@@ -3,6 +3,7 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.cruces;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CruceOX extends Cruce{
     @Override
@@ -17,17 +18,17 @@ public class CruceOX extends Cruce{
             p1 = p2;
             p2 = aux;
         }
-        if (p1 == p2) return;
+        //if (p1 == p2) return;
         ArrayList<Object> a1 = new ArrayList<Object>(), a2 = new ArrayList<Object>();
-        for (int i = p1; i < p2; i++) {
+        for (int i = p1; i <= p2; i++) {
             a1.add(aux2[i]);
             a2.add(aux1[i]);
             individuo1.cromosoma[i] = aux2[i];
             individuo2.cromosoma[i] = aux1[i];
         }
-        int i = p2, i1 = p2, i2 = p2;
-
-        while (i1 < p1 + length || i2 < p2 + length){
+        int i = (p2 + 1) % length, i1 = i, i2 = i;
+        if (i > p1) p1 += length;
+        while (i1 < p1 || i2 < p1){
             if (!a1.contains(aux1[i])){
                 individuo1.cromosoma[i1 % length] = aux1[i];
                 i1++;
