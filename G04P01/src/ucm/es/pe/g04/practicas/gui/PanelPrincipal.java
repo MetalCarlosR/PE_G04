@@ -11,6 +11,7 @@ public abstract class PanelPrincipal extends JFrame {
     protected AlgoritmoGenetico genetico;
     protected ConfigPanel<AlgoritmoGenetico> panel;
     protected Tabla t;
+    protected JLabel result;
     protected JPanel mainPanel;
 
     public PanelPrincipal(String practica){
@@ -23,12 +24,14 @@ public abstract class PanelPrincipal extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         t = new Tabla();
+        result = new JLabel("Result");
         Graficas g = new Graficas(mainPanel);
         genetico = AlgoritmoGenetico.Init(g);
 
         panel = creaPanelConfiguracion();
         panel.setTarget(genetico);
         panel.initialize();
+        mainPanel.add(result, BorderLayout.SOUTH);
         add(panel, BorderLayout.WEST);
         add(mainPanel, BorderLayout.EAST);
     }

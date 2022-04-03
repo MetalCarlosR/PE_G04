@@ -314,6 +314,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                 data.init();
                 genetico.run();
                 t.removeAll();
+                result.setText(genetico.getMejorAbsoluto().stringResult());
                 t.init(mainPanel, ((IndividuoAviones)genetico.getMejorAbsoluto()).getMatriz());
             }
         });
