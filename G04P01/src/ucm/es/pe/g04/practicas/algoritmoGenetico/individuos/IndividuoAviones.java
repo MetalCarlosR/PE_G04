@@ -4,9 +4,21 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.math.plot.utils.Array;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.AvionesData.Avion;
 
 public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
+
+    public boolean getMinTel() {
+        return minTel;
+    }
+
+    public void setMinTel(boolean minTel) {
+        this.minTel = minTel;
+    }
+
+    private boolean minTel = false;
+
 
     @Override
     public void init() {
@@ -65,8 +77,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
             }
             lastAvionPista[pista] = a.tipo;
             lastTime[pista] = tiempo;
-            acc += Math.pow(tiempo - a.tel[pista], 2);
-//            acc += Math.pow(tiempo - Array.min(a.tel), 2);
+            acc += minTel ? Math.pow(tiempo - Array.min(a.tel), 2) : Math.pow(tiempo - a.tel[pista], 2);
         }
 
         return acc;

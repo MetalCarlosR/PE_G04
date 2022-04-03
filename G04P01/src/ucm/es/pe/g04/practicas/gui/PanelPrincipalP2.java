@@ -33,7 +33,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
 
         Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
 
-        Boolean[] maximizar = new Boolean[] {true, false};
+        Boolean[] booleans = new Boolean[] {true, false};
 
         ConfigPanel<AvionesData> configPanel = new ConfigPanel<AvionesData>();
 
@@ -88,11 +88,22 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                         "tipo de individuo",
                         "original",
                         individuos))
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Individuo>(
+                        "Aviones",
+                        "opciones de la funcion de aviones",
+                        "original",
+                        IndividuoAviones.class))
+                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
+                        "minTel",
+                        "usar el tiempo estimado de llegada minimo",
+                        "minTel",
+                        booleans))
+                .endInner()
                 .addOption(new ConfigPanel.ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",
                         "busca maximo o minimo",
                         "maximizar",
-                        maximizar))
+                        booleans))
                 .addOption(new ConfigPanel.StrategyOption<AlgoritmoGenetico>(
                         "Seleccion",
                         "tipo de seleccion",
@@ -302,6 +313,7 @@ public class PanelPrincipalP2 extends PanelPrincipal{
                 System.out.println("Lanza el algoritmo genetico");
                 data.init();
                 genetico.run();
+                t.removeAll();
                 t.init(mainPanel, ((IndividuoAviones)genetico.getMejorAbsoluto()).getMatriz());
             }
         });
