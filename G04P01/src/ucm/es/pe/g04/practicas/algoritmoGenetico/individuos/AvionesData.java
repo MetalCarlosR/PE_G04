@@ -60,7 +60,7 @@ public class AvionesData {
                 String[] split = line.split(" ");
                 Avion avion = new Avion(Integer.parseInt(split[0]), numPistas );
 
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < numPistas; j++) {
                     avion.setTel(j, Double.parseDouble(split[1 + j]));
                 }
                 aviones[i] = avion;
