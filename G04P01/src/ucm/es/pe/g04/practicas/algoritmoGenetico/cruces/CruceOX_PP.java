@@ -45,7 +45,7 @@ public class CruceOX_PP extends Cruce{
                 individuo2.cromosoma[i] = aux2[i2];
 
                 i1++; i2++;
-            }
+                }
         }
     }
 
