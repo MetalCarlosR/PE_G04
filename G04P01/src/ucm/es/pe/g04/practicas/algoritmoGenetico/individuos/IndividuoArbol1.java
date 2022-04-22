@@ -1,7 +1,10 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
+enum Tipo{
+    
+}
 
-public class IndividuoArbol extends Individuo<Arbol<Tipo>>{
+public class IndividuoArbol1 extends Individuo<Arbol<Tipo>>{
 
 
     @Override
