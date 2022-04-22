@@ -1,11 +1,10 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
-enum Tipo{
-    
-}
 
-public class IndividuoArbol1 extends Individuo<Arbol<Tipo>>{
-
+public class IndividuoArbol1 extends Individuo<Arbol>{
+    public static final String terminales[] = { "A0", "A1", "D0", "D1", "D2", "D3" };
+    public static final String funciones[] = { "AND", "OR", "NOT", "IF" };
+    public static final int elemsPorFuncion[] = { 2, 2, 1, 3 };
 
     @Override
     public void init() {
