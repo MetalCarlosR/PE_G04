@@ -38,8 +38,8 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     @Override
     public double getFitness() {
         double d = 0;
-        for (int i = 0; i < Data.instance.casos.length; i++) {
-            int[] aux = Data.instance.casos[i];
+        for (int i = 0; i < ArbolesData.instance.casos.length; i++) {
+            int[] aux = ArbolesData.instance.casos[i];
             if (ejecutaArbol(getArbol(), aux) == aux[aux.length - 1])
                 d++;
         }

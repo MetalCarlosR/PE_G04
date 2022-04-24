@@ -6,17 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Data {
-    public static Data instance;
+public class ArbolesData {
+    public static ArbolesData instance;
     public int casos [][];
     private String casoPrueba = "EjemploPractica";
 
 
-    public static Data Init() {
-        instance = new Data();
+    public static ArbolesData Init() {
+        instance = new ArbolesData();
         return instance;
     }
 

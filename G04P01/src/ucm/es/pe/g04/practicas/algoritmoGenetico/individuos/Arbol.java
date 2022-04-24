@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Arbol {
     private String valor;
+    private Arbol padre = null;
     private ArrayList<Arbol> hijos;
     private int numHijos;
     private int numNodos;
@@ -21,6 +22,10 @@ public class Arbol {
     
     public ArrayList<Arbol> getHijos() {
         return hijos;
+    }
+
+    public Arbol getPadre(){
+        return padre;
     }
 
     public int getNumHijos() {
@@ -42,10 +47,10 @@ public class Arbol {
     private Random rand;
 
     public Arbol(String v) {
+        this();
         valor = v;
-        rand = new Random();
     }
-    public Arbol(int prof, boolean IF) { max_prof = prof; useIF = IF; rand = new Random(); }
+    public Arbol(int prof, boolean IF) {this(); max_prof = prof; useIF = IF;}
     public Arbol() {
         rand = new Random();
     }
@@ -71,11 +76,35 @@ public class Arbol {
 
     // Insertar un arbol en otro arbol.
     public void insert(Arbol a, int index) {
+        if(this.hijos.contains(a))
+            return;
         if (index == -1) {
             hijos.add(a);
             numHijos = hijos.size();
-        } else
+        } else{
+            if(hijos.get(index) != null){
+                hijos.get(index).padre = null;
+            }
             hijos.set(index, a);
+        }
+
+        if(a.padre != null)
+            a.padre.remove(a);
+        a.padre = this;
+    }
+
+    public void remove(int index){
+        if(index >= numHijos)
+            return;
+        remove(hijos.get(index));
+    }
+
+    public void remove(Arbol a){
+        if(hijos.contains(a)){
+            hijos.remove(a);
+            numHijos = hijos.size();
+            a.padre = null;
+        }
     }
 
     public Arbol at(int index) {
@@ -170,14 +199,21 @@ public class Arbol {
         return n;
     }
 
-    public Arbol getRandomHijo(Arbol a, double probInterno, boolean root) {
+    public Arbol getRandomHijo(double probInterno){
+        Arbol ret = getRandomHijo(this,probInterno);
+        return ret == null ? this : ret;
+    }
+
+    private Arbol getRandomHijo(Arbol a, double probInterno) {
         double r = rand.nextDouble();
-        boolean check = (!root) && (((r < probInterno) && (a.esRaiz)) || ((r < 1 - probInterno) && (a.esHoja)));
+        boolean check = (a.padre != null) && (((r < probInterno) && (a.esRaiz)) || ((r < 1 - probInterno) && (a.esHoja)));
         if(check)
             return a;
         Arbol ret = null;
-        for (Arbol hijo: a.getHijos()) {
-            if(ret == null) ret = getRandomHijo(hijo,probInterno,false);
+        if(!a.esHoja){
+            for (Arbol hijo: a.getHijos()) {
+                if(ret == null) ret = getRandomHijo(hijo,probInterno);
+            }
         }
         return ret;
     }
