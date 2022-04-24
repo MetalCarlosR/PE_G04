@@ -89,7 +89,7 @@ public class Arbol {
     }
 
     public int inicializacionCompleta(int p) {
-        int n = 0;
+        int n = 1;
         if (p < max_prof) {
             setProfundidad(p);
             Random rnd = new Random();
@@ -109,15 +109,54 @@ public class Arbol {
                 this.insert(a, -1);
             }
 
-            this.numNodos = n;
         }
         else{
-            n = 1;
             Random rnd = new Random();
             int term = rnd.nextInt(IndividuoArbol1.terminales.length);
             this.valor = IndividuoArbol1.terminales[term];
             this.setEsHoja(true);
         }
+        this.numNodos = n;
+        return n;
+    }
+
+    public int inicializacionCreciente(int p) {
+        int n = 1;
+        if (p < max_prof) {
+            Random rnd = new Random();
+            int func = 0;
+            if (rnd.nextInt() % 2 == 0)
+            {
+                setProfundidad(p);
+                if (useIF) {
+                    func = rnd.nextInt(IndividuoArbol1.funciones.length);
+                } else {
+                    func = rnd.nextInt(IndividuoArbol1.funciones.length - 1);
+                }
+
+                this.valor = IndividuoArbol1.funciones[func];
+                this.setEsRaiz(true);
+
+                this.hijos = new ArrayList<>();
+                for (int i = 0; i < IndividuoArbol1.elemsPorFuncion[func]; i++) {
+                    Arbol a = new Arbol();
+                    n += a.inicializacionCreciente(p+1);
+                    this.insert(a, -1);
+                }
+            }
+            else {
+                func = rnd.nextInt(IndividuoArbol1.terminales.length);
+                this.valor = IndividuoArbol1.terminales[func];
+                this.setEsHoja(true);
+            }
+        }
+        else{
+            Random rnd = new Random();
+            int term = rnd.nextInt(IndividuoArbol1.terminales.length);
+            this.valor = IndividuoArbol1.terminales[term];
+            this.setEsHoja(true);
+        }
+        this.numNodos = n;
         return n;
     }
 }
