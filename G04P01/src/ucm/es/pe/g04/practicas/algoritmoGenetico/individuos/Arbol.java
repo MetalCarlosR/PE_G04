@@ -37,6 +37,7 @@ public class Arbol {
 
 
     public Arbol(String v) { valor = v; }
+    public Arbol(int prof, boolean IF) { max_prof = prof; useIF = IF; }
     public Arbol() {}
 
 
