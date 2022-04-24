@@ -46,6 +46,30 @@ public class IndividuoArbol1 extends Individuo<Arbol>{
         return 0;
     }
 
+    public boolean ejecutaArbol(Arbol A){
+        switch(A.getValor()){
+            case("AND"):
+                return ejecutaArbol(A.getHijos().get(0)) && ejecutaArbol(A.getHijos().get(1));
+            case("OR"):
+                return ejecutaArbol(A.getHijos().get(0)) || ejecutaArbol(A.getHijos().get(1));
+            case("IF"):
+                if (ejecutaArbol(A.getHijos().get(0)))
+                    return ejecutaArbol(A.getHijos().get(1));
+                else
+                    return ejecutaArbol(A.getHijos().get(2));
+            case("NOT"):
+                return !ejecutaArbol(A.getHijos().get(0));
+            case("D0"):
+            case("D1"):
+            case("D2"):
+            case("D3"):
+            case("A0"):
+            case("A1"):
+            default:
+                return true;
+        }
+    }
+
     @Override
     public void mutar(int i) {
 

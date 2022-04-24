@@ -15,7 +15,10 @@ public class Arbol {
     private boolean esHoja;
     private boolean esRaiz;
 
-
+    public String getValor() {
+        return valor;
+    }
+    
     public ArrayList<Arbol> getHijos() {
         return hijos;
     }
