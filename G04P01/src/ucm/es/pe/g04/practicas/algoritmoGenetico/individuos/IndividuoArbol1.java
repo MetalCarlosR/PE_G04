@@ -1,6 +1,7 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class IndividuoArbol1 extends IndividuoArbol{
@@ -19,7 +20,13 @@ public class IndividuoArbol1 extends IndividuoArbol{
 
     @Override
     public double getFitness() {
-        return 0;
+        double d = 0;
+        for (int i = 0; i < Data.instance.casos.length; i++) {
+            int[] aux = Data.instance.casos[i];
+            if (ejecutaArbol(getArbol(), aux) != aux[aux.length - 1])
+                d++;
+        }
+        return d;
     }
 
     @Override
@@ -27,27 +34,27 @@ public class IndividuoArbol1 extends IndividuoArbol{
         return 0;
     }
 
-    public boolean ejecutaArbol(Arbol A){
+    public int ejecutaArbol(Arbol A, int[] caso){
         switch(A.getValor()){
             case("AND"):
-                return ejecutaArbol(A.getHijos().get(0)) && ejecutaArbol(A.getHijos().get(1));
+                return ejecutaArbol(A.getHijos().get(0), caso) & ejecutaArbol(A.getHijos().get(1), caso);
             case("OR"):
-                return ejecutaArbol(A.getHijos().get(0)) || ejecutaArbol(A.getHijos().get(1));
+                return ejecutaArbol(A.getHijos().get(0), caso) | ejecutaArbol(A.getHijos().get(1), caso);
             case("IF"):
-                if (ejecutaArbol(A.getHijos().get(0)))
-                    return ejecutaArbol(A.getHijos().get(1));
+                if (ejecutaArbol(A.getHijos().get(0), caso) == 1)
+                    return ejecutaArbol(A.getHijos().get(1), caso);
                 else
-                    return ejecutaArbol(A.getHijos().get(2));
+                    return ejecutaArbol(A.getHijos().get(2), caso);
             case("NOT"):
-                return !ejecutaArbol(A.getHijos().get(0));
-            case("D0"):
-            case("D1"):
-            case("D2"):
-            case("D3"):
-            case("A0"):
-            case("A1"):
+                return ejecutaArbol(A.getHijos().get(0), caso) == 1 ? 0 : 1;
+//            case("D0"):
+//            case("D1"):
+//            case("D2"):
+//            case("D3"):
+//            case("A0"):
+//            case("A1"):
             default:
-                return true;
+                return caso[Arrays.stream(terminales).toList().indexOf(A.getValor())];
         }
     }
 
