@@ -26,6 +26,7 @@ public class Arbol {
     public int getNumHijos() {
         return numHijos;
     }
+
     public void setEsRaiz(boolean esRaiz) {
         this.esRaiz = esRaiz;
     }
@@ -38,10 +39,16 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
+    private Random rand;
 
-    public Arbol(String v) { valor = v; }
-    public Arbol(int prof, boolean IF) { max_prof = prof; useIF = IF; }
-    public Arbol() {}
+    public Arbol(String v) {
+        valor = v;
+        rand = new Random();
+    }
+    public Arbol(int prof, boolean IF) { max_prof = prof; useIF = IF; rand = new Random(); }
+    public Arbol() {
+        rand = new Random();
+    }
 
 
     // Devuelve el arbol en forma de array
@@ -92,39 +99,38 @@ public class Arbol {
         }
     }
 
-    public int inicializacionCompleta(int p) {
+    public int inicializacionCompleta(int p, IndividuoArbol ind) {
         int n = 1;
         if (p < max_prof) {
             setProfundidad(p);
             Random rnd = new Random();
             int func = 0;
             if (useIF) {
-                func = rnd.nextInt(IndividuoArbol1.funciones.length);
+                func = rnd.nextInt(ind.getFunciones().length);
             } else {
-                func = rnd.nextInt(IndividuoArbol1.funciones.length - 1);
+                func = rnd.nextInt(ind.getFunciones().length - 1);
             }
-            this.valor = IndividuoArbol1.funciones[func];
+            this.valor = ind.getFunciones()[func];
             this.setEsRaiz(true);
 
             this.hijos = new ArrayList<>();
-            for (int i = 0; i < IndividuoArbol1.elemsPorFuncion[func]; i++) {
+            for (int i = 0; i < ind.getElemsPorFuncion()[func]; i++) {
                 Arbol a = new Arbol();
-                n += a.inicializacionCompleta(p+1);
+                n += a.inicializacionCompleta(p + 1, ind);
                 this.insert(a, -1);
             }
 
-        }
-        else{
+        } else {
             Random rnd = new Random();
-            int term = rnd.nextInt(IndividuoArbol1.terminales.length);
-            this.valor = IndividuoArbol1.terminales[term];
+            int term = rnd.nextInt(ind.getTerminales().length);
+            this.valor = ind.getTerminales()[term];
             this.setEsHoja(true);
         }
         this.numNodos = n;
         return n;
     }
 
-    public int inicializacionCreciente(int p) {
+    public int inicializacionCreciente(int p, IndividuoArbol ind) {
         int n = 1;
         if (p < max_prof) {
             Random rnd = new Random();
@@ -133,34 +139,46 @@ public class Arbol {
             {
                 setProfundidad(p);
                 if (useIF) {
-                    func = rnd.nextInt(IndividuoArbol1.funciones.length);
+                    func = rnd.nextInt(ind.getFunciones().length);
                 } else {
-                    func = rnd.nextInt(IndividuoArbol1.funciones.length - 1);
+                    func = rnd.nextInt(ind.getFunciones().length - 1);
                 }
 
-                this.valor = IndividuoArbol1.funciones[func];
+                this.valor = ind.getFunciones()[func];
                 this.setEsRaiz(true);
 
                 this.hijos = new ArrayList<>();
-                for (int i = 0; i < IndividuoArbol1.elemsPorFuncion[func]; i++) {
+                for (int i = 0; i < ind.getElemsPorFuncion()[func]; i++) {
                     Arbol a = new Arbol();
-                    n += a.inicializacionCreciente(p+1);
+                    n += a.inicializacionCreciente(p+1, ind);
                     this.insert(a, -1);
                 }
             }
             else {
-                func = rnd.nextInt(IndividuoArbol1.terminales.length);
-                this.valor = IndividuoArbol1.terminales[func];
+                func = rnd.nextInt(ind.getTerminales().length);
+                this.valor = ind.getTerminales()[func];
                 this.setEsHoja(true);
             }
         }
         else{
             Random rnd = new Random();
-            int term = rnd.nextInt(IndividuoArbol1.terminales.length);
-            this.valor = IndividuoArbol1.terminales[term];
+            int term = rnd.nextInt(ind.getTerminales().length);
+            this.valor = ind.getTerminales()[term];
             this.setEsHoja(true);
         }
         this.numNodos = n;
         return n;
+    }
+
+    public Arbol getRandomHijo(Arbol a, double probInterno, boolean root) {
+        double r = rand.nextDouble();
+        boolean check = (!root) && (((r < probInterno) && (a.esRaiz)) || ((r < 1 - probInterno) && (a.esHoja)));
+        if(check)
+            return a;
+        Arbol ret = null;
+        for (Arbol hijo: a.getHijos()) {
+            if(ret == null) ret = getRandomHijo(hijo,probInterno,false);
+        }
+        return ret;
     }
 }
