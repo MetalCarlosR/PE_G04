@@ -174,23 +174,24 @@ public class AlgoritmoGenetico {
             poblacion = seleccion.seleccionar(poblacion);
 
             //Cruce
-            cruce.reproduccion(poblacion, probCruce);
+            //cruce.reproduccion(poblacion, probCruce);
 
             //Mutacion
-            mutacion.mutar(poblacion, probMutacion);
+            //mutacion.mutar(poblacion, probMutacion);
 
             devolverElite();
 
             evaluar();
 
-            grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
+            //grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
             //Siguiente generacion
             generacionActual++;
         }
 
-        grafica.generarGrafica();
-        System.out.println("Mejor:" + mejorAbsoluto.stringResult());
+        //grafica.generarGrafica();
+        //System.out.println("Mejor:" + mejorAbsoluto.stringResult());
+        System.out.println("Mejor:" + mejorAbsoluto.getFitness());
     }
 
 

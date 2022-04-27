@@ -87,9 +87,9 @@ public class Arbol {
             }
             hijos.set(index, a);
         }
-
-        if(a.padre != null)
-            a.padre.remove(a);
+//
+//        if(a.padre != null)
+//            a.padre.remove(a);
         a.padre = this;
     }
 

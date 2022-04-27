@@ -10,7 +10,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
 
     boolean useIF = true;
     int profundidad = 4;
-    int tipoCreacion = 0;
+    int tipoCreacion = 1;
 
     @Override
     public void init() {
@@ -24,6 +24,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
                 getArbol().inicializacionCompleta(0,this);
                 break;
             case 2:
+                profundidad = rand.nextInt(2, profundidad + 1);
                 int ini = new Random().nextInt(2);
                 if(ini == 0) getArbol().inicializacionCreciente(0,this);
                 else getArbol().inicializacionCompleta(0,this);

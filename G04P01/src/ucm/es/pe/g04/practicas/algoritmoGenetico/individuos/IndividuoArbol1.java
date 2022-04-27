@@ -11,7 +11,7 @@ public class IndividuoArbol1 extends IndividuoArbol{
 
     boolean useIF = true;
     int profundidad = 4;
-    int tipoCreacion = 0;
+    int tipoCreacion = 1;
 
     @Override
     public double getValor() {

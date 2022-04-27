@@ -26,6 +26,7 @@ public class CruceArbol extends Cruce{
 
         Arbol a1 = ((IndividuoArbol) individuo1).getArbol().getRandomHijo(probInterno);
         Arbol a2 = ((IndividuoArbol) individuo2).getArbol().getRandomHijo(probInterno);
+
         Arbol padre1 = a1.getPadre();
         Arbol padre2 = a2.getPadre();
         int index1 = -1, index2 = -1;
@@ -47,6 +48,7 @@ public class CruceArbol extends Cruce{
         else {
             individuo2.cromosoma[0] = a1;
         }
+
 
     }
 }
