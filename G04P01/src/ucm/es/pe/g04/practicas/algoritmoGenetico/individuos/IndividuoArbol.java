@@ -10,7 +10,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
 
     boolean useIF = true;
     int profundidad = 4;
-    int tipoCreacion = 1;
+    int tipoCreacion = 0;
 
     @Override
     public void init() {

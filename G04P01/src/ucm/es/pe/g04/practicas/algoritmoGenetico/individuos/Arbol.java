@@ -3,7 +3,7 @@ package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Arbol {
+public class Arbol implements Cloneable{
     private String valor;
     private Arbol padre = null;
     private ArrayList<Arbol> hijos;
@@ -216,5 +216,22 @@ public class Arbol {
             }
         }
         return ret;
+    }
+
+
+    public Object clone() {
+        try {
+            Arbol newClone = (Arbol) super.clone();
+            newClone.hijos = null;
+            if(this.hijos != null){
+            newClone.hijos = (ArrayList<Arbol>) this.hijos.clone();
+                for (int i = 0; i < hijos.size(); i++) {
+                    newClone.hijos.set(i, (Arbol) this.hijos.get(i).clone());
+                }
+            }
+            return newClone;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }

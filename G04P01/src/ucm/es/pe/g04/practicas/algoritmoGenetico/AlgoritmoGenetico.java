@@ -112,7 +112,7 @@ public class AlgoritmoGenetico {
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;
-    private int maxGeneraciones = 100;
+    private int maxGeneraciones = 1000;
     private double probCruce = 0.6;
     private double probMutacion = 0.05;
     private int tamTorneo = 2;
@@ -174,7 +174,7 @@ public class AlgoritmoGenetico {
             poblacion = seleccion.seleccionar(poblacion);
 
             //Cruce
-            //cruce.reproduccion(poblacion, probCruce);
+            cruce.reproduccion(poblacion, probCruce);
 
             //Mutacion
             //mutacion.mutar(poblacion, probMutacion);

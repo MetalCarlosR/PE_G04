@@ -37,16 +37,16 @@ public class CruceArbol extends Cruce{
             index2 = padre2.getHijos().indexOf(a2);
 
         if(index1 != -1){
-            padre1.insert(a2,index1);
+            padre1.insert((Arbol) a2.clone(),index1);
         }
         else {
-            individuo1.cromosoma[0] = a2;
+            individuo1.cromosoma[0] = a2.clone();
         }
         if(index2 != -1){
-            padre2.insert(a1,index2);
+            padre2.insert((Arbol) a1.clone(),index2);
         }
         else {
-            individuo2.cromosoma[0] = a1;
+            individuo2.cromosoma[0] = a1.clone();
         }
 
 
