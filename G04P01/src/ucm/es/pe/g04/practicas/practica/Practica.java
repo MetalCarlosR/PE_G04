@@ -5,6 +5,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.cruces.CruceArbol;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.ArbolesData;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoArbol1;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionInsercion;
+import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionTerminal;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
 
 public class Practica {
@@ -15,7 +16,7 @@ public class Practica {
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
         genetico.setCruce(new CruceArbol());
         genetico.setSeleccion(new SeleccionRuleta());
-        genetico.setMutacion(new MutacionInsercion());
+        genetico.setMutacion(new MutacionTerminal());
         genetico.setOriginal(new IndividuoArbol1());
         genetico.run();
 //        IndividuoArbol1 a = new IndividuoArbol1();

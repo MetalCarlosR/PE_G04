@@ -108,7 +108,7 @@ public class AlgoritmoGenetico {
         this.mutacion = mutacion;
     }
 
-    private int tamPoblacion = 100;
+    private int tamPoblacion = 1;
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;
@@ -177,7 +177,7 @@ public class AlgoritmoGenetico {
             cruce.reproduccion(poblacion, probCruce);
 
             //Mutacion
-            //mutacion.mutar(poblacion, probMutacion);
+            mutacion.mutar(poblacion, probMutacion);
 
             devolverElite();
 

@@ -16,6 +16,10 @@ public class Arbol implements Cloneable{
     private boolean esHoja;
     private boolean esRaiz;
 
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
     public String getValor() {
         return valor;
     }
@@ -223,8 +227,8 @@ public class Arbol implements Cloneable{
         try {
             Arbol newClone = (Arbol) super.clone();
             newClone.hijos = null;
-            if(this.hijos != null){
-            newClone.hijos = (ArrayList<Arbol>) this.hijos.clone();
+            if (this.hijos != null) {
+                newClone.hijos = (ArrayList<Arbol>) this.hijos.clone();
                 for (int i = 0; i < hijos.size(); i++) {
                     newClone.hijos.set(i, (Arbol) this.hijos.get(i).clone());
                 }
@@ -232,6 +236,21 @@ public class Arbol implements Cloneable{
             return newClone;
         } catch (CloneNotSupportedException e) {
             return null;
+        }
+    }
+    
+    public Arbol getRandomTerminal(){
+        ArrayList<Arbol> terminales = new ArrayList<>();
+        getAllTerminals(terminales);
+        return terminales.get(rand.nextInt(terminales.size()));
+    }
+    public void getAllTerminals(ArrayList<Arbol> lista)
+    {
+        if (esHoja) lista.add(this);
+        else{
+            for (Arbol a: hijos) {
+                a.getAllTerminals(lista);
+            }
         }
     }
 }
