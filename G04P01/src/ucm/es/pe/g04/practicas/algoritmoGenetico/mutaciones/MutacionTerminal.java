@@ -10,7 +10,7 @@ public class MutacionTerminal extends Mutacion {
     @Override
     public void mutar(Individuo[] poblacion, double probMutacion) {
         if (!(poblacion[0].cromosoma[0] instanceof Arbol)) {
-            System.out.println("Cuidado, llamastes al cruce aritmético con cromosomas no Double");
+            System.out.println("Cuidado, llamaste a la mutacion terminal con individuos no arbol");
             return;
         }
         Random rand = new Random();

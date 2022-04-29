@@ -253,4 +253,19 @@ public class Arbol implements Cloneable{
             }
         }
     }
+
+    public Arbol getRandomFuncion(){
+        ArrayList<Arbol> funciones = new ArrayList<>();
+        getAllFunctions(funciones);
+        return funciones.get(rand.nextInt(funciones.size()));
+    }
+    public void getAllFunctions(ArrayList<Arbol> lista)
+    {
+        if (esRaiz){
+            lista.add(this);
+            for (Arbol a: hijos) {
+                a.getAllFunctions(lista);
+            }
+        }
+    }
 }
