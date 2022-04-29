@@ -8,6 +8,11 @@ public class Arbol implements Cloneable{
     private Arbol padre = null;
     private ArrayList<Arbol> hijos;
     private int numHijos;
+
+    public int getNumNodos() {
+        return numNodos;
+    }
+
     private int numNodos;
     private int max_prof = 4;
     private int profundidad;
@@ -97,6 +102,7 @@ public class Arbol implements Cloneable{
 //        if(a.padre != null)
 //            a.padre.remove(a);
         a.padre = this;
+        actualizaNumNodos();
     }
 
     public void remove(int index){
@@ -272,5 +278,21 @@ public class Arbol implements Cloneable{
                 a.getAllFunctions(lista);
             }
         }
+    }
+
+    public void actualizaNumNodos()
+    {
+        if (esHoja) numNodos = 1;
+        else{
+            numNodos = 0;
+            for (int i = 0; i < numHijos; i++) {
+                numNodos += hijos.get(i).numNodos;
+            }
+        }
+        if (padre != null) padre.actualizaNumNodos();
+    }
+
+    public int getProfundidad() {
+        return profundidad;
     }
 }

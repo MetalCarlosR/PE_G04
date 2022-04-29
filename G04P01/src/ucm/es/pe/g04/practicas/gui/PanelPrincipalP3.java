@@ -26,7 +26,7 @@ public class PanelPrincipalP3 extends PanelPrincipal{
         ArbolesData.instance.init();
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
-        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist()};
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionSubarbol()};
         Cruce[] cruces = new Cruce[] {new CruceArbol()};
         Individuo[] individuos = new Individuo[] {new IndividuoArbol1()};
         String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
