@@ -7,7 +7,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoArbol;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MutacionFuncional extends Mutacion {
+public class MutacionPermutacion extends Mutacion {
     @Override
     public void mutar(Individuo[] poblacion, double probMutacion) {
         if (!(poblacion[0].cromosoma[0] instanceof Arbol)) {
@@ -22,15 +22,13 @@ public class MutacionFuncional extends Mutacion {
                 Arbol arbol = a.getArbol().getRandomFuncion();
                 if (arbol == null) continue;
 
-                ArrayList<String> lista = new ArrayList();
-                String[] funciones = a.getFunciones();
-                int[] elemsPorFuncion = a.getElemsPorFuncion();
-                for (int j = 0; j < funciones.length; j++) {
-                    if (elemsPorFuncion[j] == arbol.getNumHijos() && funciones[j] != arbol.getValor()){
-                        lista.add(funciones[j]);
-                    }
+                for (int j = 0; j < arbol.getNumHijos(); j++) {
+                    int k = rand.nextInt(arbol.getNumHijos());
+                    if (k == j) continue;
+                    Arbol aux = (Arbol) arbol.getHijos().get(k).clone();
+                    arbol.insert((Arbol)arbol.getHijos().get(j).clone(), k);
+                    arbol.insert(aux, j);
                 }
-                arbol.setValor(lista.get(rand.nextInt(lista.size())));
             }
         }
     }
