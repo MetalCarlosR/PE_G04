@@ -32,6 +32,8 @@ public class Arbol implements Cloneable{
         return padre;
     }
 
+    public void clearPadre(){ padre = null;}
+
     public int getNumHijos() {
         return numHijos;
     }

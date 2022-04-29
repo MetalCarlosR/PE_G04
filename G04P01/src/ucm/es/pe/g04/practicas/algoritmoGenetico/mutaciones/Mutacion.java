@@ -11,4 +11,6 @@ public abstract class Mutacion implements Cloneable{
     }
 
     public abstract void mutar(Individuo[] poblacion, double probMutacion);
+
+    public abstract String toString();
 }

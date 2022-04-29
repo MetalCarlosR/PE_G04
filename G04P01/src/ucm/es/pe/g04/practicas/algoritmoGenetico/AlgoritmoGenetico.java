@@ -108,7 +108,7 @@ public class AlgoritmoGenetico {
         this.mutacion = mutacion;
     }
 
-    private int tamPoblacion = 1;
+    private int tamPoblacion = 100;
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;

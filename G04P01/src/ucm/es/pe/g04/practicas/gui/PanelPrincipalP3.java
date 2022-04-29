@@ -26,7 +26,7 @@ public class PanelPrincipalP3 extends PanelPrincipal{
         ArbolesData.instance.init();
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
-        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal()};
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist()};
         Cruce[] cruces = new Cruce[] {new CruceArbol()};
         Individuo[] individuos = new Individuo[] {new IndividuoArbol1()};
         String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
@@ -265,6 +265,17 @@ public class PanelPrincipalP3 extends PanelPrincipal{
                         "tipo de cruce",
                         "cruce",
                         cruces))
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Seleccion>(
+                        "Intercambio Subarboles",
+                        "opciones del cruce de arboles",
+                        "cruce",
+                        CruceArbol.class))
+                .addInner(new ConfigPanel.DoubleOption<Seleccion>(
+                        "Prob Seleccion interno",
+                        "probablildad de selccionar un nodo interno",
+                        "probInterno",
+                        0, 1.0))
+                .endInner()
                 .addOption(new ConfigPanel.StrategyOption<AlgoritmoGenetico>(
                         "Mutacion",
                         "tipo de mutacion",

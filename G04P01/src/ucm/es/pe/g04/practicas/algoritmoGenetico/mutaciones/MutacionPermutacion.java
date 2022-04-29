@@ -11,7 +11,7 @@ public class MutacionPermutacion extends Mutacion {
     @Override
     public void mutar(Individuo[] poblacion, double probMutacion) {
         if (!(poblacion[0].cromosoma[0] instanceof Arbol)) {
-            System.out.println("Cuidado, llamaste a la mutacion funcional con individuos no arbol");
+            System.out.println("Cuidado, necesito un Individuo<Arbol> para funcionar");
             return;
         }
         Random rand = new Random();
@@ -34,6 +34,6 @@ public class MutacionPermutacion extends Mutacion {
     }
 
     public String toString() {
-        return "Funcional";
+        return "Permutacion";
     }
 }

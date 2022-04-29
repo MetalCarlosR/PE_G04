@@ -4,10 +4,9 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Arbol;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.Individuo;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoArbol;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-public class MutacionFuncional extends Mutacion {
+public class MutacionHoist extends Mutacion{
     @Override
     public void mutar(Individuo[] poblacion, double probMutacion) {
         if (!(poblacion[0].cromosoma[0] instanceof Arbol)) {
@@ -19,24 +18,15 @@ public class MutacionFuncional extends Mutacion {
             if(r.nextDouble() < probMutacion)
             {
                 IndividuoArbol a = (IndividuoArbol) i;
-                Arbol arbol = a.getArbol().getRandomFuncion();
-                if (arbol == null) continue;
-
-                ArrayList<String> lista = new ArrayList();
-                String[] funciones = a.getFunciones();
-                int[] elemsPorFuncion = a.getElemsPorFuncion();
-                for (int j = 0; j < funciones.length; j++) {
-                    if (elemsPorFuncion[j] == arbol.getNumHijos() && funciones[j] != arbol.getValor()){
-                        lista.add(funciones[j]);
-                    }
-                }
-                if(lista.size() > 0)
-                    arbol.setValor(lista.get(rand.nextInt(lista.size())));
+                Arbol arbol = a.getArbol().getRandomHijo(0.5);
+                arbol.clearPadre();
+                i.cromosoma[0] = arbol;
             }
         }
     }
 
+    @Override
     public String toString() {
-        return "Funcional";
+        return "Hoist";
     }
 }
