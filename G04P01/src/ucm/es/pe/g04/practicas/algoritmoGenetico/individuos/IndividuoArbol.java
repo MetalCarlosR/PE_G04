@@ -8,26 +8,54 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     protected static String funciones[];
     protected static int elemsPorFuncion[];
 
-    boolean useIF = true;
-    int profundidad = 4;
-    int tipoCreacion = 0;
+    protected boolean useIF = true;
+    protected int profundidad = 4;
+    protected String tipoCreacion = "Completa";
+
+    public boolean isUseIF() {
+        return useIF;
+    }
+
+    public void setUseIF(boolean useIF) {
+        this.useIF = useIF;
+    }
+
+    public int getProfundidad() {
+        return profundidad;
+    }
+
+    public void setProfundidad(int profundidad) {
+        this.profundidad = profundidad;
+    }
+
+    public String getTipoCreacion() {
+        return tipoCreacion;
+    }
+
+    public void setTipoCreacion(String tipoCreacion) {
+        this.tipoCreacion = tipoCreacion;
+    }
 
     @Override
     public void init() {
         this.cromosoma = new Arbol[1];
         cromosoma[0] = new Arbol(profundidad, useIF);
         switch(tipoCreacion){
-            case 0:
+            case "Creciente":
                 getArbol().inicializacionCreciente(0,this);
                 break;
-            case 1:
+            case "Completa":
                 getArbol().inicializacionCompleta(0,this);
                 break;
-            case 2:
+            case "RampedAndHalf":
                 profundidad = rand.nextInt(2, profundidad + 1);
                 int ini = new Random().nextInt(2);
                 if(ini == 0) getArbol().inicializacionCreciente(0,this);
                 else getArbol().inicializacionCompleta(0,this);
+                break;
+            default:
+                System.out.println("Error, tipo de creación no encontrado");
+                getArbol().inicializacionCompleta(0,this);
                 break;
         }
     }

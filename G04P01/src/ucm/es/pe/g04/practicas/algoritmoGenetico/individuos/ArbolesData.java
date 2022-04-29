@@ -16,6 +16,7 @@ public class ArbolesData {
 
     public static ArbolesData Init() {
         instance = new ArbolesData();
+        instance.init();
         return instance;
     }
 

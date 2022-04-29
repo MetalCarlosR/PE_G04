@@ -20,7 +20,7 @@ public class CruceArbol extends Cruce{
     @Override
     public void cruzar(Individuo individuo1, Individuo individuo2) {
         if (!(individuo1.cromosoma[0] instanceof Arbol) || !(individuo1.cromosoma[0] instanceof Arbol)) {
-            System.out.println("Cuidado, llamastes al cruce aritmético con cromosomas no Double");
+            System.out.println("Cuidado, necesito un Individuo<Arbol> para funcionar");
             return;
         }
 
@@ -48,7 +48,9 @@ public class CruceArbol extends Cruce{
         else {
             individuo2.cromosoma[0] = a1.clone();
         }
+    }
 
-
+    public String toString() {
+        return "Intercambio Subarboles";
     }
 }

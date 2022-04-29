@@ -9,10 +9,6 @@ public class IndividuoArbol1 extends IndividuoArbol{
     public static String funciones[] = { "AND", "OR", "NOT", "IF" };
     public static int elemsPorFuncion[] = { 2, 2, 1, 3 };
 
-    boolean useIF = true;
-    int profundidad = 4;
-    int tipoCreacion = 1;
-
     @Override
     public double getValor() {
         return 0;
@@ -49,5 +45,9 @@ public class IndividuoArbol1 extends IndividuoArbol{
     @Override
     public int[] getElemsPorFuncion() {
         return IndividuoArbol1.elemsPorFuncion;
+    }
+
+    public String toString() {
+        return "IndividuoArbol1";
     }
 }
