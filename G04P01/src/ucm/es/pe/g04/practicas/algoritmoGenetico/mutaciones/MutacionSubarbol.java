@@ -19,6 +19,7 @@ public class MutacionSubarbol extends Mutacion {
             {
                 IndividuoArbol a = (IndividuoArbol) i;
                 Arbol arbol = a.getArbol().getRandomHijo(0.5);
+                while (arbol.getNumHijos() > 0) arbol.remove(0);
 
                 switch(a.getTipoCreacion()) {
                     case "Creciente":
