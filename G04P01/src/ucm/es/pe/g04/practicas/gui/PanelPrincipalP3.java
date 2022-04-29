@@ -22,11 +22,13 @@ public class PanelPrincipalP3 extends PanelPrincipal{
         genetico.setSeleccion(new SeleccionRuleta());
         genetico.setMutacion(new MutacionTerminal());
         genetico.setOriginal(new IndividuoArbol1());
+        genetico.setMaximizar(true);
         ArbolesData.Init();
-        ArbolesData.instance.init();
+        genetico.preEvaluar = ArbolesData::CalcularMedia;
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
-        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionSubarbol()};
+
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
         Cruce[] cruces = new Cruce[] {new CruceArbol()};
         Individuo[] individuos = new Individuo[] {new IndividuoArbol1()};
         String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
@@ -90,6 +92,11 @@ public class PanelPrincipalP3 extends PanelPrincipal{
                         "Tipo de Creacion del Arbol",
                         "tipoCreacion",
                         tipoCreacion))
+                .addInner(new ConfigPanel.DoubleOption<Individuo>(
+                        "TarpeianProb",
+                        "Probabilidad de eliminar un arbol mas grande que la media",
+                        "tarpeianProb",
+                        0,1))
                 .endInner()
                 .addOption(new ConfigPanel.ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",

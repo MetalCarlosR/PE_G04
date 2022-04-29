@@ -6,7 +6,7 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.individuos.IndividuoArbol;
 
 import java.util.Random;
 
-public class MutacionSubarbol extends Mutacion {
+public class MutacionExpansion extends Mutacion{
     @Override
     public void mutar(Individuo[] poblacion, double probMutacion) {
         if (!(poblacion[0].cromosoma[0] instanceof Arbol)) {
@@ -17,10 +17,8 @@ public class MutacionSubarbol extends Mutacion {
         for (Individuo i : poblacion) {
             if(r.nextDouble() < probMutacion)
             {
-                IndividuoArbol a = (IndividuoArbol) i;
-                Arbol arbol = a.getArbol().getRandomHijo(0.5, false);
-                while (arbol.getNumHijos() > 0) arbol.remove(0);
-
+                IndividuoArbol a = (IndividuoArbol)i ;
+                Arbol arbol = a.getArbol().getRandomTerminal();
                 switch(a.getTipoCreacion()) {
                     case "Creciente":
                         arbol.inicializacionCreciente(0, a);
@@ -43,7 +41,8 @@ public class MutacionSubarbol extends Mutacion {
         }
     }
 
+    @Override
     public String toString() {
-        return "Subárbol";
+        return "Expansion";
     }
 }

@@ -12,6 +12,16 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     protected int profundidad = 4;
     protected String tipoCreacion = "Completa";
 
+    private double tarpeianProb = 0.5;
+
+    public double getTarpeianProb() {
+        return tarpeianProb;
+    }
+
+    public void setTarpeianProb(double tarpeianProb) {
+        this.tarpeianProb = tarpeianProb;
+    }
+
     public boolean isUseIF() {
         return useIF;
     }
@@ -66,9 +76,13 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
 
     @Override
     public double getFitness() {
+
+        if(getArbol().getNumNodos() > ArbolesData.getMedia() && rand.nextDouble() < tarpeianProb)
+            return  0;
+
         double d = 0;
-        for (int i = 0; i < ArbolesData.instance.casos.length; i++) {
-            int[] aux = ArbolesData.instance.casos[i];
+        for (int i = 0; i < ArbolesData.casos.length; i++) {
+            int[] aux = ArbolesData.casos[i];
             if (ejecutaArbol(getArbol(), aux) == aux[aux.length - 1])
                 d++;
         }

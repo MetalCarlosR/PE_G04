@@ -8,6 +8,7 @@ import ucm.es.pe.g04.practicas.gui.Graficas;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Consumer;
 
 public class AlgoritmoGenetico {
     public AlgoritmoGenetico(Graficas g) { grafica = g;}
@@ -109,14 +110,25 @@ public class AlgoritmoGenetico {
     }
 
     private int tamPoblacion = 100;
+
+    public Individuo[] getPoblacion() {
+        return poblacion;
+    }
+
     private Individuo[] poblacion;
     private double[] fitness;
     private double fitnessMedio;
-    private int maxGeneraciones = 1000;
+    private int maxGeneraciones = 100;
     private double probCruce = 0.6;
     private double probMutacion = 0.05;
     private int tamTorneo = 2;
     private double truncamiento = 0.5;
+
+
+    public Consumer<AlgoritmoGenetico> preFunction = null;
+    public Consumer<AlgoritmoGenetico> postFunction = null;
+
+    public Consumer<AlgoritmoGenetico> preEvaluar = null;
 
     public Individuo getMejorAbsoluto() {
         return mejorAbsoluto;
@@ -165,8 +177,16 @@ public class AlgoritmoGenetico {
 
         //grafica = new Graficas();
 
+
+
+        if(preEvaluar != null)
+            preEvaluar.accept(this);
+
         evaluar();
         while(generacionActual < this.maxGeneraciones) {
+
+            if(preFunction != null)
+                preFunction.accept(this);
             //Elitismo
             guardarElite(numElite);
 
@@ -181,7 +201,13 @@ public class AlgoritmoGenetico {
 
             devolverElite();
 
+            if(preEvaluar != null)
+                preEvaluar.accept(this);
+
             evaluar();
+
+            if(postFunction != null)
+                postFunction.accept(this);
 
             //grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 

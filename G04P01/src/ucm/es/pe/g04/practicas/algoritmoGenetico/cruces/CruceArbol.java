@@ -24,8 +24,8 @@ public class CruceArbol extends Cruce{
             return;
         }
 
-        Arbol a1 = ((IndividuoArbol) individuo1).getArbol().getRandomHijo(probInterno);
-        Arbol a2 = ((IndividuoArbol) individuo2).getArbol().getRandomHijo(probInterno);
+        Arbol a1 = ((IndividuoArbol) individuo1).getArbol().getRandomHijo(probInterno, false);
+        Arbol a2 = ((IndividuoArbol) individuo2).getArbol().getRandomHijo(probInterno, false);
 
         Arbol padre1 = a1.getPadre();
         Arbol padre2 = a2.getPadre();
