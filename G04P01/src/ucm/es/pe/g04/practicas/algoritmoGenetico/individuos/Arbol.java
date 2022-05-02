@@ -14,6 +14,9 @@ public class Arbol implements Cloneable{
     }
 
     private int numNodos;
+
+
+
     private int max_prof = 4;
     private int profundidad;
     private boolean useIF = true;
@@ -53,6 +56,13 @@ public class Arbol implements Cloneable{
 
     public void setProfundidad(int profundidad) {
         this.profundidad = profundidad;
+    }
+
+    public int getMaxProfundidad() {
+        return max_prof;
+    }
+    public void setMaxProfundidad(int max_profundidad) {
+        this.max_prof = max_profundidad;
     }
 
     private Random rand;

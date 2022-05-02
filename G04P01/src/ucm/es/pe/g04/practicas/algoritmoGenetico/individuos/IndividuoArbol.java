@@ -75,7 +75,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     }
 
     @Override
-    public double getFitness() {
+    public double calculaFitness() {
 
         if(getArbol().getNumNodos() > ArbolesData.getMedia() && rand.nextDouble() < tarpeianProb)
             return  0;
@@ -86,6 +86,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
             if (ejecutaArbol(getArbol(), aux) == aux[aux.length - 1])
                 d++;
         }
+        fitness = d;
         return d;
     }
 

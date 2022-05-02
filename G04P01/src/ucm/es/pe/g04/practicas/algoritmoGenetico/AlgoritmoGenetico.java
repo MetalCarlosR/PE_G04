@@ -209,13 +209,13 @@ public class AlgoritmoGenetico {
             if(postFunction != null)
                 postFunction.accept(this);
 
-            //grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
+            grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
             //Siguiente generacion
             generacionActual++;
         }
 
-        //grafica.generarGrafica();
+        grafica.generarGrafica();
         //System.out.println("Mejor:" + mejorAbsoluto.stringResult());
         System.out.println("Mejor:" + mejorAbsoluto.getFitness());
     }
@@ -225,11 +225,15 @@ public class AlgoritmoGenetico {
         double acc = 0;
         mejorGeneracion = poblacion[0];
         for (int i = 0; i < tamPoblacion; i++){
-            double aux = poblacion[i].getFitness();
+            double aux = poblacion[i].calculaFitness();
             fitness[i] = aux;
             acc += aux;
-            if(aux > mejorGeneracion.getFitness() && maximizar || aux < mejorGeneracion.getFitness() && !maximizar)
+            if((aux > mejorGeneracion.getFitness() && maximizar) || (aux < mejorGeneracion.getFitness() && !maximizar))
+            {
+                double aux2 = mejorGeneracion.getFitness();
                 mejorGeneracion = poblacion[i];
+            }
+
         }
         mejorGeneracion = (Individuo) mejorGeneracion.clone();
         fitnessMedio = acc / tamPoblacion;

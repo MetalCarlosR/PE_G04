@@ -29,7 +29,7 @@ public class MutacionSubarbol extends Mutacion {
                         arbol.inicializacionCompleta(0, a);
                         break;
                     case "RampedAndHalf":
-                        arbol.setProfundidad(rand.nextInt(2, arbol.getProfundidad() + 1));
+                        arbol.setMaxProfundidad(rand.nextInt(2, arbol.getMaxProfundidad() + 1));
                         int ini = new Random().nextInt(2);
                         if(ini == 0) arbol.inicializacionCreciente(0,a);
                         else arbol.inicializacionCompleta(0,a);
