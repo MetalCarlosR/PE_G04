@@ -42,6 +42,11 @@ public class IndividuoFuncion4 extends IndividuoBool {
         return valor;
     }
 
+    public double calculaFitness() {
+        fitness = getValor();
+        return  fitness;
+    }
+
     public String toString() {
         return "Funcion 4";
     }

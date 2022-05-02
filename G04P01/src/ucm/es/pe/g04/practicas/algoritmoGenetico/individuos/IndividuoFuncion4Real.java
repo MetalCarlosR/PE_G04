@@ -38,6 +38,11 @@ public class IndividuoFuncion4Real  extends IndividuoFuncion<Double>{
         return valor;
     }
 
+    public double calculaFitness() {
+        fitness = getValor();
+        return  fitness;
+    }
+
 
     @Override
     public double getFenotipo(int n) {

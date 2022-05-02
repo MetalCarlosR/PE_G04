@@ -119,4 +119,13 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     public abstract String[] getFunciones();
 
     public abstract int[] getElemsPorFuncion();
+
+
+    @Override
+    public Object clone() {
+        IndividuoArbol newClone = (IndividuoArbol) super.clone();
+        newClone.cromosoma = this.cromosoma.clone();
+        newClone.cromosoma[0] = (Arbol) this.cromosoma[0].clone();
+        return newClone;
+    }
 }

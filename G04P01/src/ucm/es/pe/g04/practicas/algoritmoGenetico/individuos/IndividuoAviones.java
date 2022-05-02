@@ -51,7 +51,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
     }
 
     @Override
-    public double getFitness() {
+    public double calculaFitness() {
         double acc = 0;
 
         double[] lastTime = new double[AvionesData.instace.numPistas];
@@ -80,6 +80,7 @@ public class IndividuoAviones extends IndividuoNoRepetible<Integer>{
             acc += minTel ? Math.pow(tiempo - Array.min(a.tel), 2) : Math.pow(tiempo - a.tel[pista], 2);
         }
 
+        fitness = acc;
         return acc;
     }
 
