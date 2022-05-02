@@ -11,15 +11,15 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ArbolesData {
-    public static int casos [][];
+    public static int casos[][];
 
-    private static int media = -1;
+    private static double k = Double.MIN_VALUE;
     private static String casoPrueba = "EjemploPractica";
 
 
     public static void Init() {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoPrueba + ".txt" ));
+            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoPrueba + ".txt"));
 
             List<String> lines = Files.readAllLines(Path.of("input/P3/" + casoPrueba + ".txt"));
             casos = new int[lines.size()][];
@@ -38,21 +38,63 @@ public class ArbolesData {
         }
     }
 
-    public static void CalcularMedia(AlgoritmoGenetico genetico){
+    public static void CalcularFactor(AlgoritmoGenetico genetico) {
         Individuo[] poblacion = genetico.getPoblacion();
+        int tamPoblacion = poblacion.length;
+        int[] nodos = new int[tamPoblacion];
+        double[] fitness = new double[tamPoblacion];
+        k = Double.MIN_VALUE;
 
-        media = 0;
+        double mediaFitness = 0;
+        double mediaTamaño = 0;
 
-        for (Individuo i: poblacion) {
-            IndividuoArbol a = (IndividuoArbol) i;
-            media += a.getArbol().getNumNodos();
+        for (int i = 0; i < tamPoblacion; i++) {
+            IndividuoArbol a = (IndividuoArbol) poblacion[i];
+            int numNodos = a.getArbol().getNumNodos();
+            double f = a.calculaFitness();
+            nodos[i] = numNodos;
+            fitness[i] = numNodos;
+            mediaTamaño += numNodos;
+            mediaFitness += f;
         }
 
-        media /= poblacion.length;
+        mediaTamaño /= tamPoblacion;
+        mediaFitness /= tamPoblacion;
+
+        double varianza = 0;
+        double covarianza = 0;
+        for (int i = 0; i < tamPoblacion; i++) {
+            IndividuoArbol a = (IndividuoArbol) poblacion[i];
+
+            varianza += Math.pow(nodos[i] - mediaTamaño, 2);
+            covarianza += (nodos[i] - mediaTamaño)*(fitness[i] - mediaFitness);
+        }
+
+        varianza /= tamPoblacion;
+        covarianza /= tamPoblacion;
+
+        k = covarianza/varianza;
+
+        genetico.getMejorAbsoluto().calculaFitness();
+    }
+
+    public static void DevolverValores(AlgoritmoGenetico genetico){
+        k = Double.MIN_VALUE;
+        Individuo[] poblacion = genetico.getPoblacion();
+
+        double newMedia = 0;
+
+        for (Individuo i: poblacion) {
+            newMedia += i.calculaFitness();
+        }
+
+        genetico.fitnessMedio = newMedia/poblacion.length;
+        genetico.mejorAbsoluto.calculaFitness();
+        genetico.mejorGeneracion.calculaFitness();
     }
 
 
-    public static int getMedia() {
-        return media;
+    public static double getK() {
+        return k == Double.MIN_VALUE ? 0 : k;
     }
 }

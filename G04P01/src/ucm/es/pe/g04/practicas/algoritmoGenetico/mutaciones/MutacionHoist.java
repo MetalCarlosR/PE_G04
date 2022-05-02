@@ -18,8 +18,9 @@ public class MutacionHoist extends Mutacion{
             if(r.nextDouble() < probMutacion)
             {
                 IndividuoArbol a = (IndividuoArbol) i;
-                Arbol arbol = a.getArbol().getRandomHijo(0.5, false);
+                Arbol arbol = (Arbol) a.getArbol().getRandomHijo(0.5, false).clone();
                 arbol.clearPadre();
+                arbol.propagarNodos();
                 i.cromosoma[0] = arbol;
             }
         }

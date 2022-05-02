@@ -24,7 +24,8 @@ public class PanelPrincipalP3 extends PanelPrincipal{
         genetico.setOriginal(new IndividuoArbol1());
         genetico.setMaximizar(true);
         ArbolesData.Init();
-        genetico.preEvaluar = ArbolesData::CalcularMedia;
+        genetico.preEvaluar = ArbolesData::CalcularFactor;
+        genetico.postEvaluar = ArbolesData::DevolverValores;
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 

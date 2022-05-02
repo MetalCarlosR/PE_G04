@@ -77,17 +77,14 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     @Override
     public double calculaFitness() {
 
-        if(getArbol().getNumNodos() > ArbolesData.getMedia() && rand.nextDouble() < tarpeianProb)
-            return  0;
-
         double d = 0;
         for (int i = 0; i < ArbolesData.casos.length; i++) {
             int[] aux = ArbolesData.casos[i];
             if (ejecutaArbol(getArbol(), aux) == aux[aux.length - 1])
                 d++;
         }
-        fitness = d;
-        return d;
+        fitness = d + ArbolesData.getK() * getArbol().getNumNodos();
+        return fitness;
     }
 
     public int ejecutaArbol(Arbol A, int[] caso){
@@ -119,6 +116,16 @@ public abstract class IndividuoArbol extends Individuo<Arbol>{
     public abstract String[] getFunciones();
 
     public abstract int[] getElemsPorFuncion();
+
+    @Override
+    public String stringResult() {
+        String s = "Fitness: " + getFitness() + "\n";
+
+        s += getArbol().toString();
+
+        return  s;
+    }
+
 
 
     @Override

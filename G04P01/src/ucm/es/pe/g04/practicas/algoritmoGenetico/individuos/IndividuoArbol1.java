@@ -14,8 +14,6 @@ public class IndividuoArbol1 extends IndividuoArbol{
         return 0;
     }
 
-
-
     @Override
     public double getFenotipo(int n) {
         return 0;

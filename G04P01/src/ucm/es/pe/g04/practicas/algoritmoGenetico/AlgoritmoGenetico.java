@@ -117,7 +117,7 @@ public class AlgoritmoGenetico {
 
     private Individuo[] poblacion;
     private double[] fitness;
-    private double fitnessMedio;
+    public double fitnessMedio;
     private int maxGeneraciones = 100;
     private double probCruce = 0.6;
     private double probMutacion = 0.05;
@@ -126,7 +126,7 @@ public class AlgoritmoGenetico {
 
 
     public Consumer<AlgoritmoGenetico> preFunction = null;
-    public Consumer<AlgoritmoGenetico> postFunction = null;
+    public Consumer<AlgoritmoGenetico> postEvaluar = null;
 
     public Consumer<AlgoritmoGenetico> preEvaluar = null;
 
@@ -134,9 +134,9 @@ public class AlgoritmoGenetico {
         return mejorAbsoluto;
     }
 
-    private Individuo mejorAbsoluto;
+    public Individuo mejorAbsoluto;
 
-    private Individuo mejorGeneracion;
+    public Individuo mejorGeneracion;
     private double elitismo = 0.05;
     private Individuo[] pobElite;
     private double precision = 0.001;
@@ -183,6 +183,9 @@ public class AlgoritmoGenetico {
             preEvaluar.accept(this);
 
         evaluar();
+
+        if(postEvaluar != null)
+            postEvaluar.accept(this);
         while(generacionActual < this.maxGeneraciones) {
 
             if(preFunction != null)
@@ -206,8 +209,8 @@ public class AlgoritmoGenetico {
 
             evaluar();
 
-            if(postFunction != null)
-                postFunction.accept(this);
+            if(postEvaluar != null)
+                postEvaluar.accept(this);
 
             grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
 
@@ -218,6 +221,7 @@ public class AlgoritmoGenetico {
         grafica.generarGrafica();
         //System.out.println("Mejor:" + mejorAbsoluto.stringResult());
         System.out.println("Mejor:" + mejorAbsoluto.getFitness());
+        System.out.println(mejorAbsoluto.stringResult());
     }
 
 
