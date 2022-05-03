@@ -30,6 +30,8 @@ public class Graficas {
         plot.addLegend("SOUTH");
         //_frame.setContentPane(plot);
         plot.setPreferredSize(new Dimension(600, 600));
+        plot.setFixedBounds(1, 0, 64);
+
         frame.add(plot, BorderLayout.SOUTH);
     }
 
@@ -43,6 +45,7 @@ public class Graficas {
 
     public void generarGrafica() {
         plot.removeAllPlots();
+
 // define the legend position
 // add a line plot to the PlotPanel
         plot.addLinePlot("MEJOR ABSOLUTO", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorAbsoluto.stream().mapToDouble(d -> d).toArray());
@@ -53,6 +56,8 @@ public class Graficas {
         _mejorGeneracion.clear();
         _media.clear();
         _generacion = 0;
+        plot.setFixedBounds(1, 0, 64);
+
 // put the PlotPanel in a JFrame like a JPanel
     }
 }

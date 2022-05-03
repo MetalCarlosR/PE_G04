@@ -18,20 +18,27 @@ public class PanelPrincipalP3 extends PanelPrincipal{
 
     @Override
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
-        genetico.setCruce(new CruceArbol());
+//        genetico.setCruce(new CruceArbol());
+//        genetico.setSeleccion(new SeleccionRuleta());
+//        genetico.setMutacion(new MutacionTerminal());
+//        genetico.setOriginal(new IndividuoArbol1());
+//        genetico.setMaximizar(true);
+//        ArbolesData.Init();
+        genetico.setCruce(new CruceMonopunto());
         genetico.setSeleccion(new SeleccionRuleta());
-        genetico.setMutacion(new MutacionTerminal());
-        genetico.setOriginal(new IndividuoArbol1());
+        genetico.setMutacion(new MutacionBasica());
+        genetico.setOriginal(new IndividuoGramatica());
         genetico.setMaximizar(true);
-        ArbolesData.Init();
-        genetico.preEvaluar = ArbolesData::CalcularFactor;
-        genetico.postEvaluar = ArbolesData::DevolverValores;
+        GramaticasData.Init();
+
+//        genetico.preEvaluar = ArbolesData::CalcularFactor;
+//        genetico.postEvaluar = ArbolesData::DevolverValores;
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 
-        Mutacion[] mutaciones = new Mutacion[] { new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
-        Cruce[] cruces = new Cruce[] {new CruceArbol()};
-        Individuo[] individuos = new Individuo[] {new IndividuoArbol1()};
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica(), new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
+        Cruce[] cruces = new Cruce[] {new CruceArbol(), new CruceMonopunto()};
+        Individuo[] individuos = new Individuo[] {new IndividuoArbol1(), new IndividuoGramatica()};
         String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
 
         Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
