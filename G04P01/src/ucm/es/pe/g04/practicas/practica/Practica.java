@@ -9,6 +9,8 @@ import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionPermutacion;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.mutaciones.MutacionTerminal;
 import ucm.es.pe.g04.practicas.algoritmoGenetico.seleccion.SeleccionRuleta;
 import ucm.es.pe.g04.practicas.gui.PanelPrincipal;
+import ucm.es.pe.g04.practicas.gui.PanelPrincipalP1;
+import ucm.es.pe.g04.practicas.gui.PanelPrincipalP2;
 import ucm.es.pe.g04.practicas.gui.PanelPrincipalP3;
 
 public class Practica {

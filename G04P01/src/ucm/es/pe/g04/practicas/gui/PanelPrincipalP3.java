@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipalP3 extends PanelPrincipal{
+public class PanelPrincipalP3 extends PanelPrincipal {
     public PanelPrincipalP3() {
         super("Practica 3");
     }
@@ -23,7 +23,6 @@ public class PanelPrincipalP3 extends PanelPrincipal{
         genetico.setMutacion(new MutacionTerminal());
         genetico.setOriginal(new IndividuoArbol1());
         genetico.setMaximizar(true);
-        ArbolesData.Init();
 //        genetico.setCruce(new CruceMonopunto());
 //        genetico.setSeleccion(new SeleccionRuleta());
 //        genetico.setMutacion(new MutacionBasica());
@@ -31,50 +30,50 @@ public class PanelPrincipalP3 extends PanelPrincipal{
 //        genetico.setMaximizar(true);
 //        GramaticasData.Init();
 
-        genetico.preEvaluar = ArbolesData::CalcularFactor;
-        genetico.postEvaluar = ArbolesData::DevolverValores;
+        Seleccion[] selecciones = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 
-        Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
-
-        Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica(), new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
-        Cruce[] cruces = new Cruce[] {new CruceArbol(), new CruceMonopunto()};
-        Individuo[] individuos = new Individuo[] {new IndividuoArbol1(), new IndividuoGramatica()};
+//        Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica(), new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
+//        Cruce[] cruces = new Cruce[] {new CruceArbol(), new CruceMonopunto()};
+//        Individuo[] individuos = new Individuo[] {new IndividuoArbol1(), new IndividuoGramatica()};
+        Mutacion[] mutaciones = new Mutacion[]{new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
+        Cruce[] cruces = new Cruce[]{new CruceArbol()};
+        Individuo[] individuos = new Individuo[]{new IndividuoArbol1(), new IndividuoArbol2()};
         String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
 
-        Seleccion[] seleccionesExtra = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
+        Seleccion[] seleccionesExtra = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
 
-        Boolean[] booleans = new Boolean[] {true, false};
+        Boolean[] booleans = new Boolean[]{true, false};
 
         ConfigPanel<AlgoritmoGenetico> config = new ConfigPanel<AlgoritmoGenetico>();
 
         // se pueden añadir las opciones de forma independiente, o "de seguido"; el resultado es el mismo.
         config.addOption(new ConfigPanel.IntegerOption<AlgoritmoGenetico>(  // -- entero
-                        "Tamaño de la poblacion", 					     // texto a usar como etiqueta del campo
+                        "Tamaño de la poblacion",                         // texto a usar como etiqueta del campo
                         "numero de individuos",       // texto a usar como 'tooltip' cuando pasas el puntero
-                        "tamPoblacion",  						     // campo (espera que haya un getGrosor y un setGrosor)
-                        1, 1000))							     // min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
+                        "tamPoblacion",                             // campo (espera que haya un getGrosor y un setGrosor)
+                        1, 1000))                                 // min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
                 .addOption(new ConfigPanel.IntegerOption<AlgoritmoGenetico>(  // -- entero
-                        "Numero de generaciones", 					     // texto a usar como etiqueta del campo
+                        "Numero de generaciones",                         // texto a usar como etiqueta del campo
                         "numero de generaciones",       // texto a usar como 'tooltip' cuando pasas el puntero
-                        "maxGeneraciones",  						     // campo (espera que haya un getGrosor y un setGrosor)
-                        1, 1000))							     // min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
+                        "maxGeneraciones",                             // campo (espera que haya un getGrosor y un setGrosor)
+                        1, 5000))                                 // min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
                 .addOption(new ConfigPanel.DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
-                        "% cruce", 					 // etiqueta
+                        "% cruce",                     // etiqueta
                         "probabilidad de que cruce de cada individuo",           // tooltip
                         "probCruce",                     // campo
-                        0, 100,							     // min y max, aplicando factor, si hay; vale usar Double.*_INFINITY)
-                        100))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
+                        0, 100,                                 // min y max, aplicando factor, si hay; vale usar Double.*_INFINITY)
+                        100))                                 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new ConfigPanel.DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
-                        "% mutacion", 					 // etiqueta
+                        "% mutacion",                     // etiqueta
                         "probabilidad de que haya mutacion",           // tooltip
                         "probMutacion",                     // campo
-                        0, 100,							     // min y max, aplicando factor, si hay; vale usar Double.*_INFINITY)
-                        100))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
+                        0, 100,                                 // min y max, aplicando factor, si hay; vale usar Double.*_INFINITY)
+                        100))                                 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new ConfigPanel.DoubleOption<AlgoritmoGenetico>(   // -- doble, parecido a entero
-                        "Elitismo", 					 // etiqueta
+                        "Elitismo",                     // etiqueta
                         "valor de error para la discretizacion del intervalo",           // tooltip
                         "elitismo",                     // campo
-                        0, 1))								 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
+                        0, 1))                                 // opcional: factor de multiplicacion != 1.0, para mostrar porcentajes
                 .addOption(new ConfigPanel.StrategyOption<AlgoritmoGenetico>(
                         "Individuo",
                         "tipo de individuo",
@@ -94,17 +93,43 @@ public class PanelPrincipalP3 extends PanelPrincipal{
                         "Profundidad",
                         "Profundidad del Arbol",
                         "profundidad",
-                        2,10))
+                        2, 10))
                 .addInner(new ConfigPanel.ChoiceOption<Individuo>(
                         "TipoCreacion",
                         "Tipo de Creacion del Arbol",
                         "tipoCreacion",
                         tipoCreacion))
-                .addInner(new ConfigPanel.DoubleOption<Individuo>(
-                        "TarpeianProb",
-                        "Probabilidad de eliminar un arbol mas grande que la media",
-                        "tarpeianProb",
-                        0,1))
+                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
+                        "Bloating",
+                        "Tener control de Bloating",
+                        "bloating",
+                        booleans))
+                .endInner()
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Individuo>(
+                        "IndividuoArbol2",
+                        "Config Arbol2",
+                        "original",
+                        IndividuoArbol2.class))
+                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
+                        "Use IF",
+                        "Usar IF",
+                        "useIF",
+                        booleans))
+                .addInner(new ConfigPanel.IntegerOption<Individuo>(
+                        "Profundidad",
+                        "Profundidad del Arbol",
+                        "profundidad",
+                        2, 10))
+                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
+                        "TipoCreacion",
+                        "Tipo de Creacion del Arbol",
+                        "tipoCreacion",
+                        tipoCreacion))
+                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
+                        "Bloating",
+                        "Tener control de Bloating",
+                        "bloating",
+                        booleans))
                 .endInner()
                 .addOption(new ConfigPanel.ChoiceOption<AlgoritmoGenetico>(
                         "Maximizar",
@@ -305,7 +330,7 @@ public class PanelPrincipalP3 extends PanelPrincipal{
                         "numero de inserciones",
                         "cantidad de inserciones a realizar",
                         "_inserciones",
-                        0,Integer.MAX_VALUE ))
+                        0, Integer.MAX_VALUE))
                 .endInner()
                 .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Mutacion>(
                         "mutacion heuristica",
@@ -329,6 +354,13 @@ public class PanelPrincipalP3 extends PanelPrincipal{
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Lanza el algoritmo genetico");
+                ArbolesData.Init((IndividuoArbol) genetico.getOriginal());
+                if (((IndividuoArbol) genetico.getOriginal()).getBloating()) {
+                    genetico.preEvaluar = ArbolesData::CalcularFactor;
+//                    genetico.postEvaluar = ArbolesData::DevolverValores;
+                }
+                genetico.extraDataFunction = ArbolesData::GraphicsData;
+                genetico.extraDataName = "Media tamaño";
                 genetico.run();
 //                t.removeAll();
                 result.setText(String.valueOf(genetico.getMejorAbsoluto().getFitness()));

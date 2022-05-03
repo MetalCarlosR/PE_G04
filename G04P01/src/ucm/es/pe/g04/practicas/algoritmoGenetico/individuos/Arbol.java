@@ -15,6 +15,8 @@ public class Arbol implements Cloneable {
 
     private int numNodos;
 
+    private int index = -1;
+
 
     private int max_prof = 4;
     private int profundidad;
@@ -41,6 +43,7 @@ public class Arbol implements Cloneable {
 
     public void clearPadre() {
         padre = null;
+        index = -1;
     }
 
     public int getNumHijos() {
@@ -98,8 +101,11 @@ public class Arbol implements Cloneable {
         if (index == -1) {
             hijos.add(a);
             numHijos = hijos.size();
-        } else
+            a.index = numHijos -1;
+        } else{
             hijos.set(index, a);
+            a.index = index;
+        }
         return a;
     }
 
@@ -110,15 +116,18 @@ public class Arbol implements Cloneable {
         if (index == -1) {
             hijos.add(a);
             numHijos = hijos.size();
+            a.index = numHijos -1;
         } else {
             if (hijos.get(index) != null) {
+                hijos.get(index).index = -1;
                 hijos.get(index).padre = null;
             }
             hijos.set(index, a);
+            a.index = index;
         }
 
         a.padre = this;
-        actualizaNumNodos();
+        propagarNodos();
     }
 
     public void remove(int index) {
@@ -132,7 +141,7 @@ public class Arbol implements Cloneable {
             hijos.remove(a);
             numHijos = hijos.size();
             a.padre = null;
-            actualizaNumNodos();
+            propagarNodos();
         }
     }
 
@@ -183,7 +192,7 @@ public class Arbol implements Cloneable {
             this.valor = ind.getTerminales()[term];
             this.setEsHoja(true);
         }
-        actualizaNumNodos();
+        propagarNodos();
     }
 
     public int inicializacionCreciente(int p, IndividuoArbol ind) {
@@ -226,7 +235,7 @@ public class Arbol implements Cloneable {
         if (recursive)
             ret = getRandomHijo(this, probInterno);
         else
-            ret = probInterno < rand.nextDouble() ? getRandomFuncion() : getRandomTerminal();
+            ret = rand.nextDouble() < probInterno ? getRandomFuncion() : getRandomTerminal();
         return ret == null ? this : ret;
     }
 
@@ -250,9 +259,9 @@ public class Arbol implements Cloneable {
             Arbol newClone = (Arbol) super.clone();
             newClone.hijos = null;
             if (this.hijos != null) {
-                newClone.hijos = (ArrayList<Arbol>) this.hijos.clone();
+                newClone.hijos = new ArrayList<>(this.numHijos);
                 for (int i = 0; i < hijos.size(); i++) {
-                    newClone.hijos.set(i, (Arbol) this.hijos.get(i).clone());
+                    newClone.hijos.add((Arbol) this.hijos.get(i).clone());
                 }
             }
             return newClone;
@@ -330,15 +339,6 @@ public class Arbol implements Cloneable {
         }
 
         return numNodos;
-
-        //        if (esHoja) numNodos = 1;
-//        else{
-//            numNodos = 0;
-//            for (int i = 0; i < numHijos; i++) {
-//                numNodos += hijos.get(i).numNodos;
-//            }
-//        }
-//        if (padre != null) padre.actualizaNumNodos();
     }
 
     public Arbol getRaiz() {
@@ -353,5 +353,9 @@ public class Arbol implements Cloneable {
 
     public int getProfundidad() {
         return profundidad;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

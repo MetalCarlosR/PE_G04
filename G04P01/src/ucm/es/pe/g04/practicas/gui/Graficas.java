@@ -13,6 +13,8 @@ public class Graficas {
     List<Double> _mejorGeneracion = new ArrayList<>();
     List<Double> _media = new ArrayList<>();
     List<Double> _generaciones = new ArrayList<>();
+
+    List<Double> _extraData = new ArrayList<>();
     int _generacion = 1;
 
     //JFrame _frame;
@@ -35,15 +37,17 @@ public class Graficas {
         frame.add(plot, BorderLayout.SOUTH);
     }
 
-    public void siguienteGeneracion(double mejorAbsoluto, double mejorGeneracion, double media){
+    public void siguienteGeneracion(double mejorAbsoluto, double mejorGeneracion, double media, double extraData){
         _mejorAbsoluto.add(mejorAbsoluto);
         _mejorGeneracion.add(mejorGeneracion);
         _media.add(media);
         _generaciones.add((double) _generacion++);
+        if(extraData != Double.MIN_VALUE)
+            _extraData.add(extraData);
     }
 
 
-    public void generarGrafica() {
+    public void generarGrafica(String extraDataName) {
         plot.removeAllPlots();
 
 // define the legend position
@@ -51,10 +55,14 @@ public class Graficas {
         plot.addLinePlot("MEJOR ABSOLUTO", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorAbsoluto.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEJOR GENERACIÓN", _generaciones.stream().mapToDouble(d -> d).toArray(), _mejorGeneracion.stream().mapToDouble(d -> d).toArray());
         plot.addLinePlot("MEDIA", _generaciones.stream().mapToDouble(d -> d).toArray(), _media.stream().mapToDouble(d -> d).toArray());
+
+        if(!_extraData.isEmpty())
+            plot.addLinePlot(extraDataName, Color.black ,_generaciones.stream().mapToDouble(d -> d).toArray(), _extraData.stream().mapToDouble(d -> d).toArray());
         _generaciones.clear();
         _mejorAbsoluto.clear();
         _mejorGeneracion.clear();
         _media.clear();
+        _extraData.clear();
         _generacion = 0;
         plot.setFixedBounds(1, 0, 64);
 

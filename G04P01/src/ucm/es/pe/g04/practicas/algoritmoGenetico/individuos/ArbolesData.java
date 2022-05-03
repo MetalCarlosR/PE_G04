@@ -16,12 +16,15 @@ public class ArbolesData {
     private static double k = Double.MIN_VALUE;
     private static String casoPrueba = "EjemploPractica";
 
+    public static double media = Double.MAX_VALUE;
 
-    public static void Init() {
+
+    public static void Init(IndividuoArbol original) {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoPrueba + ".txt"));
+            String filename = casoPrueba + (original instanceof IndividuoArbol1 ? "1" : "2");
+            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + filename + ".txt"));
 
-            List<String> lines = Files.readAllLines(Path.of("input/P3/" + casoPrueba + ".txt"));
+            List<String> lines = Files.readAllLines(Path.of("input/P3/" + filename + ".txt"));
             casos = new int[lines.size()][];
 
             for (int i = 0; i < lines.size(); i++) {
@@ -39,58 +42,39 @@ public class ArbolesData {
     }
 
     public static void CalcularFactor(AlgoritmoGenetico genetico) {
+
         Individuo[] poblacion = genetico.getPoblacion();
-        int tamPoblacion = poblacion.length;
-        int[] nodos = new int[tamPoblacion];
-        double[] fitness = new double[tamPoblacion];
-        k = Double.MIN_VALUE;
 
-        double mediaFitness = 0;
-        double mediaTamaño = 0;
+        media = 0;
 
-        for (int i = 0; i < tamPoblacion; i++) {
-            IndividuoArbol a = (IndividuoArbol) poblacion[i];
-            int numNodos = a.getArbol().getNumNodos();
-            double f = a.calculaFitness();
-            nodos[i] = numNodos;
-            fitness[i] = numNodos;
-            mediaTamaño += numNodos;
-            mediaFitness += f;
+        for (Individuo i: poblacion) {
+            IndividuoArbol a = (IndividuoArbol) i;
+            a.getArbol().propagarNodos();
+            media += a.getArbol().getNumNodos();
         }
 
-        mediaTamaño /= tamPoblacion;
-        mediaFitness /= tamPoblacion;
+        media /= poblacion.length;
+    }
 
-        double varianza = 0;
-        double covarianza = 0;
-        for (int i = 0; i < tamPoblacion; i++) {
-            IndividuoArbol a = (IndividuoArbol) poblacion[i];
-
-            varianza += Math.pow(nodos[i] - mediaTamaño, 2);
-            covarianza += (nodos[i] - mediaTamaño)*(fitness[i] - mediaFitness);
-        }
-
-        varianza /= tamPoblacion;
-        covarianza /= tamPoblacion;
-
-        k = covarianza/varianza;
-
-        genetico.getMejorAbsoluto().calculaFitness();
+    public static void GraphicsData(AlgoritmoGenetico genetico){
+        genetico.extraData = media;
     }
 
     public static void DevolverValores(AlgoritmoGenetico genetico){
         k = Double.MIN_VALUE;
+        media = Double.MAX_VALUE;
         Individuo[] poblacion = genetico.getPoblacion();
 
         double newMedia = 0;
 
         for (Individuo i: poblacion) {
-            newMedia += i.calculaFitness();
+            IndividuoArbol a = (IndividuoArbol) i;
+            newMedia += a.calculaFitness();
         }
 
         genetico.fitnessMedio = newMedia/poblacion.length;
-        genetico.mejorAbsoluto.calculaFitness();
-        genetico.mejorGeneracion.calculaFitness();
+        IndividuoArbol mG = (IndividuoArbol) genetico.mejorGeneracion;
+        mG.calculaFitness();
     }
 
 

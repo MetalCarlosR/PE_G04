@@ -13,15 +13,13 @@ public class MutacionHoist extends Mutacion{
             System.out.println("Cuidado, necesito un Individuo<Arbol> para funcionar");
             return;
         }
-        Random rand = new Random();
         for (Individuo i : poblacion) {
             if(r.nextDouble() < probMutacion)
             {
                 IndividuoArbol a = (IndividuoArbol) i;
-                Arbol arbol = (Arbol) a.getArbol().getRandomHijo(0.5, false).clone();
+                Arbol arbol = (Arbol) a.getArbol().getRandomHijo(0.9, false);
                 arbol.clearPadre();
-                arbol.propagarNodos();
-                i.cromosoma[0] = arbol;
+                i.cromosoma[0] = arbol.clone();
             }
         }
     }

@@ -124,11 +124,15 @@ public class AlgoritmoGenetico {
     private int tamTorneo = 2;
     private double truncamiento = 0.5;
 
+    public double extraData = Double.MIN_VALUE;
+
+    public String extraDataName = "Extra Data";
 
     public Consumer<AlgoritmoGenetico> preFunction = null;
     public Consumer<AlgoritmoGenetico> postEvaluar = null;
-
     public Consumer<AlgoritmoGenetico> preEvaluar = null;
+
+    public Consumer<AlgoritmoGenetico> extraDataFunction = null;
 
     public Individuo getMejorAbsoluto() {
         return mejorAbsoluto;
@@ -186,24 +190,25 @@ public class AlgoritmoGenetico {
 
         if(postEvaluar != null)
             postEvaluar.accept(this);
+
         while(generacionActual < this.maxGeneraciones) {
 
             if(preFunction != null)
                 preFunction.accept(this);
             //Elitismo
-            guardarElite(numElite);
-//
+//            guardarElite(numElite);
+
             //Seleccion
-            poblacion = seleccion.seleccionar(poblacion);
-//
+//            poblacion = seleccion.seleccionar(poblacion);
+
             //Cruce
             cruce.reproduccion(poblacion, probCruce);
 //
             //Mutacion
-            mutacion.mutar(poblacion, probMutacion);
-//
-            devolverElite();
-//
+//            mutacion.mutar(poblacion, probMutacion);
+
+//            devolverElite();
+
             if(preEvaluar != null)
                 preEvaluar.accept(this);
 
@@ -212,15 +217,19 @@ public class AlgoritmoGenetico {
             if(postEvaluar != null)
                 postEvaluar.accept(this);
 
-            grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio);
+            if(extraDataFunction != null)
+               extraDataFunction.accept(this);
+
+            grafica.siguienteGeneracion(mejorAbsoluto.getFitness(), mejorGeneracion.getFitness() ,fitnessMedio, extraData);
 
             //Siguiente generacion
             generacionActual++;
         }
 
-        grafica.generarGrafica();
+        grafica.generarGrafica(extraDataName);
         //System.out.println("Mejor:" + mejorAbsoluto.stringResult());
         System.out.println("Mejor:" + mejorAbsoluto.getFitness());
+        System.out.println(extraDataName +": " + extraData);
         System.out.println(mejorAbsoluto.stringResult());
     }
 

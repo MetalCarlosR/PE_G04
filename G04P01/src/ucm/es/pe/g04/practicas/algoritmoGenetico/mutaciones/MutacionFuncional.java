@@ -21,6 +21,9 @@ public class MutacionFuncional extends Mutacion {
                 IndividuoArbol a = (IndividuoArbol) i;
                 Arbol arbol = a.getArbol().getRandomFuncion();
                 if (arbol == null) continue;
+                int index = -1;
+                if(arbol.getPadre() != null)
+                    index = arbol.getPadre().getHijos().indexOf(arbol);
 
                 ArrayList<String> lista = new ArrayList();
                 String[] funciones = a.getFunciones();
@@ -30,8 +33,11 @@ public class MutacionFuncional extends Mutacion {
                         lista.add(funciones[j]);
                     }
                 }
-                if(lista.size() > 0)
+                if(lista.size() > 0){
                     arbol.setValor(lista.get(rand.nextInt(lista.size())));
+                    if(index != -1)
+                        arbol.getPadre().insert(arbol, index);
+                }
             }
         }
     }
