@@ -192,18 +192,18 @@ public class AlgoritmoGenetico {
                 preFunction.accept(this);
             //Elitismo
             guardarElite(numElite);
-
+//
             //Seleccion
             poblacion = seleccion.seleccionar(poblacion);
-
+//
             //Cruce
             cruce.reproduccion(poblacion, probCruce);
-
+//
             //Mutacion
             mutacion.mutar(poblacion, probMutacion);
-
+//
             devolverElite();
-
+//
             if(preEvaluar != null)
                 preEvaluar.accept(this);
 

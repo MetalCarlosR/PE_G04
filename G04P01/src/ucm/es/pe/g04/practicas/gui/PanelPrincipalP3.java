@@ -18,21 +18,21 @@ public class PanelPrincipalP3 extends PanelPrincipal{
 
     @Override
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
-//        genetico.setCruce(new CruceArbol());
-//        genetico.setSeleccion(new SeleccionRuleta());
-//        genetico.setMutacion(new MutacionTerminal());
-//        genetico.setOriginal(new IndividuoArbol1());
-//        genetico.setMaximizar(true);
-//        ArbolesData.Init();
-        genetico.setCruce(new CruceMonopunto());
+        genetico.setCruce(new CruceArbol());
         genetico.setSeleccion(new SeleccionRuleta());
-        genetico.setMutacion(new MutacionBasica());
-        genetico.setOriginal(new IndividuoGramatica());
+        genetico.setMutacion(new MutacionTerminal());
+        genetico.setOriginal(new IndividuoArbol1());
         genetico.setMaximizar(true);
-        GramaticasData.Init();
+        ArbolesData.Init();
+//        genetico.setCruce(new CruceMonopunto());
+//        genetico.setSeleccion(new SeleccionRuleta());
+//        genetico.setMutacion(new MutacionBasica());
+//        genetico.setOriginal(new IndividuoGramatica());
+//        genetico.setMaximizar(true);
+//        GramaticasData.Init();
 
-//        genetico.preEvaluar = ArbolesData::CalcularFactor;
-//        genetico.postEvaluar = ArbolesData::DevolverValores;
+        genetico.preEvaluar = ArbolesData::CalcularFactor;
+        genetico.postEvaluar = ArbolesData::DevolverValores;
 
         Seleccion[] selecciones = new Seleccion[] {new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 

@@ -14,7 +14,6 @@ import ucm.es.pe.g04.practicas.gui.PanelPrincipalP3;
 public class Practica {
 
     public static void main(String[] args) {
-        GramaticasData.Init();
         PanelPrincipal panel = new PanelPrincipalP3();
         panel.setSize(1250, 800);
         panel.setVisible(true);
