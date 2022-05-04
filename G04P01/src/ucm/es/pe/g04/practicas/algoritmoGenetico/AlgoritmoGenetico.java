@@ -195,8 +195,6 @@ public class AlgoritmoGenetico {
 
         while(generacionActual < this.maxGeneraciones) {
 
-            System.out.println("Generación " + generacionActual + " de " + maxGeneraciones);
-
             if(preFunction != null)
                 preFunction.accept(this);
             //Elitismo

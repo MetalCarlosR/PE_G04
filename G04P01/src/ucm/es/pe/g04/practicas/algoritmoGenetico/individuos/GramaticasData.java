@@ -21,10 +21,10 @@ public class GramaticasData {
 
     public static void Init() {
         try {
-            casoGramatica += (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
-            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoGramatica + ".txt"));
+            String filename = casoGramatica + (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
+            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + filename + ".txt"));
 
-            String s = Files.readString(Path.of("input/P3/" + casoGramatica + ".txt"));
+            String s = Files.readString(Path.of("input/P3/" + filename + ".txt"));
             gramatica = new HashMap<String, List<List<String>>>();
             reglas = new ArrayList<String>();
             //Separamos por líneas la gramatica
@@ -54,11 +54,11 @@ public class GramaticasData {
         }
 
         try {
-            casoPrueba += (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
+            String filename = casoPrueba + (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
 
-            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoPrueba + ".txt"));
+            BufferedReader file = new BufferedReader(new FileReader("input/P3/" + filename + ".txt"));
 
-            List<String> lines = Files.readAllLines(Path.of("input/P3/" + casoPrueba + ".txt"));
+            List<String> lines = Files.readAllLines(Path.of("input/P3/" + filename + ".txt"));
             casos = new int[lines.size()][];
 
             for (int i = 0; i < lines.size(); i++) {
