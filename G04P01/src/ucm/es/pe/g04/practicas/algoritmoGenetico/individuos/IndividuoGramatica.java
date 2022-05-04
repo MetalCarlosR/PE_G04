@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public abstract class IndividuoGramatica extends Individuo<Integer>{
+public abstract class IndividuoGramatica extends Individuo<Double>{
 
     public int getN() {
         return n;
@@ -31,8 +31,8 @@ public abstract class IndividuoGramatica extends Individuo<Integer>{
                 this.tamGenes[i] = 1;
             }
             int tamTotal = tamGenes[0] * n;
-            this.cromosoma = new Integer[tamTotal];
-            for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextInt(256);
+            this.cromosoma = new Double[tamTotal];
+            for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = Double.valueOf(this.rand.nextInt(256));
             expr(GramaticasData.casos[0]);
         } while (wraps > maxWraps);
         it = 0; wraps = 0;
@@ -51,7 +51,7 @@ public abstract class IndividuoGramatica extends Individuo<Integer>{
 
     @Override
     public void mutar(int i) {
-        cromosoma[i] = this.rand.nextInt(256);
+        cromosoma[i] = Double.valueOf(this.rand.nextInt(256));
     }
 
     @Override
@@ -81,7 +81,8 @@ public abstract class IndividuoGramatica extends Individuo<Integer>{
         }
         if(this.wraps > this.maxWraps)
             return it;
-        int instruc = cromosoma[it] % GramaticasData.gramatica.get("<expr>").size();
+        int instruc = cromosoma[it].intValue() % GramaticasData.gramatica.get("<expr>").size();
+        if (instruc < 0) instruc *= -1;
         switch (instruc) {
             case 0:
                 it++;
@@ -106,8 +107,6 @@ public abstract class IndividuoGramatica extends Individuo<Integer>{
                 it++;
                 String s = GramaticasData.gramatica.get("<expr>").get(instruc).get(0);
                 int index = Arrays.stream(getTerminales()).toList().indexOf(s);
-                if (index == -1)
-                    System.out.println("aaaaaaaaa");
                 return caso[index];
 
         }

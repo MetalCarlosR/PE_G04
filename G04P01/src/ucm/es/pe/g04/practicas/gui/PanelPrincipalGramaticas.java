@@ -27,13 +27,12 @@ public class PanelPrincipalGramaticas extends PanelPrincipal {
         Seleccion[] selecciones = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 
         Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
-        Cruce[] cruces = new Cruce[] {new CruceMonopunto()};
+        Cruce[] cruces = new Cruce[] {new CruceMonopunto(), new CruceUniforme(), new CruceAritmetico(), new CruceBLXa()};
         Individuo[] individuos = new Individuo[] {new IndividuoGramatica1(), new IndividuoGramatica2()};
 
 
         Seleccion[] seleccionesExtra = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
 
-        Boolean[] booleans = new Boolean[]{true, false};
 
 
 
