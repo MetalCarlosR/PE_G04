@@ -75,7 +75,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol> {
 
     public double calculaFitness() {
 
-        double bloatingFactor = bloating && getArbol().getNumNodos() > ArbolesData.media && rand.nextDouble()  < 0.5 ? 0.5: 1;
+        double bloatingFactor = bloating && getArbol().getNumNodos() > ArbolesData.media && rand.nextDouble()  < 0.6 ? 0.8: 1;
 
         double d = 0;
         for (int i = 0; i < ArbolesData.casos.length; i++) {

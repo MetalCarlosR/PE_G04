@@ -181,7 +181,9 @@ public class AlgoritmoGenetico {
 
         //grafica = new Graficas();
 
+        long startTime = System.nanoTime();
 
+        System.out.println("Start");
 
         if(preEvaluar != null)
             preEvaluar.accept(this);
@@ -192,6 +194,8 @@ public class AlgoritmoGenetico {
             postEvaluar.accept(this);
 
         while(generacionActual < this.maxGeneraciones) {
+
+            System.out.println("Generación " + generacionActual + " de " + maxGeneraciones);
 
             if(preFunction != null)
                 preFunction.accept(this);
@@ -228,6 +232,12 @@ public class AlgoritmoGenetico {
 
         grafica.generarGrafica(extraDataName);
         //System.out.println("Mejor:" + mejorAbsoluto.stringResult());
+
+        long endTime = System.nanoTime();
+
+        double duration = (endTime - startTime)/1e9;
+
+        System.out.println("Tiempo total: " + duration);
         System.out.println("Mejor:" + mejorAbsoluto.getFitness());
         System.out.println(extraDataName +": " + extraData);
         System.out.println(mejorAbsoluto.stringResult());

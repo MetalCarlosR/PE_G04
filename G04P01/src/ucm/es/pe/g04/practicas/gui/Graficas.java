@@ -64,7 +64,6 @@ public class Graficas {
         _media.clear();
         _extraData.clear();
         _generacion = 0;
-        plot.setFixedBounds(1, 0, 64);
 
 // put the PlotPanel in a JFrame like a JPanel
     }

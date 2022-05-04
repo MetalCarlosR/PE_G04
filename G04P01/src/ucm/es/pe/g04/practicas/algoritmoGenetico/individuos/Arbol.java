@@ -8,22 +8,18 @@ public class Arbol implements Cloneable {
     private Arbol padre = null;
     private ArrayList<Arbol> hijos;
     private int numHijos;
-
-    public int getNumNodos() {
-        return numNodos;
-    }
-
     private int numNodos;
-
     private int index = -1;
-
-
     private int max_prof = 4;
     private int profundidad;
     private boolean useIF = true;
 
     private boolean esHoja;
     private boolean esRaiz;
+
+    public int getNumNodos() {
+        return numNodos;
+    }
 
     public void setValor(String valor) {
         this.valor = valor;

@@ -11,8 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipalP3 extends PanelPrincipal {
-    public PanelPrincipalP3() {
+public class PanelPrincipalArbol extends PanelPrincipal {
+    public PanelPrincipalArbol() {
         super("Practica 3");
     }
 
