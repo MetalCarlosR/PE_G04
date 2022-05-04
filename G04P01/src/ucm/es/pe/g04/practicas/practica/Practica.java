@@ -8,7 +8,10 @@ import ucm.es.pe.g04.practicas.gui.PanelPrincipalP1;
 public class Practica {
 
     public static void main(String[] args) {
-        PanelPrincipal panel = new PanelPrincipalGramaticas();
+        //Panel Gramáticas
+        //PanelPrincipal panel = new PanelPrincipalGramaticas();
+        //Panel Arbol
+        PanelPrincipal panel = new PanelPrincipalArbol();
         panel.setSize(1250, 800);
         panel.setVisible(true);
     }
