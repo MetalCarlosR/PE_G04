@@ -356,7 +356,7 @@ public class PanelPrincipalP3 extends PanelPrincipal {
                 System.out.println("Lanza el algoritmo genetico");
                 ArbolesData.Init((IndividuoArbol) genetico.getOriginal());
                 if (((IndividuoArbol) genetico.getOriginal()).getBloating()) {
-                    genetico.preEvaluar = ArbolesData::CalcularFactor;
+                    genetico.preEvaluar = ArbolesData::CalcularMedia;
 //                    genetico.postEvaluar = ArbolesData::DevolverValores;
                 }
                 genetico.extraDataFunction = ArbolesData::GraphicsData;

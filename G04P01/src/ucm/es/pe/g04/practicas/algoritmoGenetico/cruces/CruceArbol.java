@@ -27,26 +27,24 @@ public class CruceArbol extends Cruce{
         Arbol a1 = ((IndividuoArbol) individuo1).getArbol().getRandomHijo(probInterno, false);
         Arbol a2 = ((IndividuoArbol) individuo2).getArbol().getRandomHijo(probInterno, false);
 
-        Arbol padre1 = a1.getPadre();
-        Arbol padre2 = a2.getPadre();
-        int index1 = -1, index2 = -1;
+        int index1 = a1.getIndex(), index2 = a2.getIndex();
 
-        if(padre1 != null)
-            index1 = padre1.getHijos().indexOf(a1);
-        if(padre2 != null)
-            index2 = padre2.getHijos().indexOf(a2);
+        Arbol newA1 = (Arbol) a1.clone();
+        Arbol newA2 = (Arbol) a2.clone();
 
         if(index1 != -1){
-            padre1.insert((Arbol) a2.clone(),index1);
+            a1.getPadre().insert(newA2,index1);
         }
         else {
-            individuo1.cromosoma[0] = a2.clone();
+            individuo1.cromosoma[0] = newA2;
+            newA2.clearPadre();
         }
         if(index2 != -1){
-            padre2.insert((Arbol) a1.clone(),index2);
+            a2.getPadre().insert(newA1,index2);
         }
         else {
-            individuo2.cromosoma[0] = a1.clone();
+            individuo2.cromosoma[0] = newA1;
+            newA1.clearPadre();
         }
     }
 

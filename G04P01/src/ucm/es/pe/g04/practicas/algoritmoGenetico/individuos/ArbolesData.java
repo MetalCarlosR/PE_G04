@@ -41,7 +41,7 @@ public class ArbolesData {
         }
     }
 
-    public static void CalcularFactor(AlgoritmoGenetico genetico) {
+    public static void CalcularMedia(AlgoritmoGenetico genetico) {
 
         Individuo[] poblacion = genetico.getPoblacion();
 

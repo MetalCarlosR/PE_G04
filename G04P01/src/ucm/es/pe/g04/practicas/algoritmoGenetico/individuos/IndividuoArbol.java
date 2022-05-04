@@ -75,10 +75,7 @@ public abstract class IndividuoArbol extends Individuo<Arbol> {
 
     public double calculaFitness() {
 
-        if(bloating && getArbol().getNumNodos() > ArbolesData.media && rand.nextDouble()  < 0.3){
-            fitness = 0;
-            return 0;
-        }
+        double bloatingFactor = bloating && getArbol().getNumNodos() > ArbolesData.media && rand.nextDouble()  < 0.5 ? 0.5: 1;
 
         double d = 0;
         for (int i = 0; i < ArbolesData.casos.length; i++) {
@@ -86,8 +83,8 @@ public abstract class IndividuoArbol extends Individuo<Arbol> {
             if (ejecutaArbol(getArbol(), aux) == aux[aux.length - 1])
                 d++;
         }
-//        + (bloating ? (ArbolesData.getK() * getArbol().getNumNodos()) : 0)
-        fitness = d ;
+        
+        fitness = d * bloatingFactor;
         return fitness;
     }
 
@@ -127,7 +124,6 @@ public abstract class IndividuoArbol extends Individuo<Arbol> {
     @Override
     public Object clone() {
         IndividuoArbol newClone = (IndividuoArbol) super.clone();
-        newClone.cromosoma = this.cromosoma.clone();
         newClone.cromosoma[0] = (Arbol) this.cromosoma[0].clone();
         return newClone;
     }
