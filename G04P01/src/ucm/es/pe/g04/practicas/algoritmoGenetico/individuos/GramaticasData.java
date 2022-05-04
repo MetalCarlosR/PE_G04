@@ -1,5 +1,7 @@
 package ucm.es.pe.g04.practicas.algoritmoGenetico.individuos;
 
+import ucm.es.pe.g04.practicas.algoritmoGenetico.AlgoritmoGenetico;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,11 +15,13 @@ public class GramaticasData {
 
     public static Map<String, List<List<String>>> gramatica;
     public static List<String> reglas;
-    private static String casoGramatica = "Gramatica1";
+    private static String casoGramatica = "Gramatica";
     private static String casoPrueba = "EjemploPractica";
+
 
     public static void Init() {
         try {
+            casoGramatica += (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
             BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoGramatica + ".txt"));
 
             String s = Files.readString(Path.of("input/P3/" + casoGramatica + ".txt"));
@@ -50,6 +54,8 @@ public class GramaticasData {
         }
 
         try {
+            casoPrueba += (AlgoritmoGenetico.instance.getOriginal() instanceof IndividuoGramatica1 ? "1" : "2");
+
             BufferedReader file = new BufferedReader(new FileReader("input/P3/" + casoPrueba + ".txt"));
 
             List<String> lines = Files.readAllLines(Path.of("input/P3/" + casoPrueba + ".txt"));

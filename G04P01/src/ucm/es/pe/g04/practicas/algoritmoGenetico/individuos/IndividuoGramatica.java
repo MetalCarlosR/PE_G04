@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class IndividuoGramatica extends Individuo<Integer>{
+public abstract class IndividuoGramatica extends Individuo<Integer>{
 
     public int getN() {
         return n;
@@ -14,6 +14,7 @@ public class IndividuoGramatica extends Individuo<Integer>{
         this.n = n;
     }
     public static String terminales[] = { "A0", "A1", "D0", "D1", "D2", "D3" };
+    public abstract String[] getTerminales();
 
 
     int n = 8;
@@ -104,7 +105,9 @@ public class IndividuoGramatica extends Individuo<Integer>{
             default:
                 it++;
                 String s = GramaticasData.gramatica.get("<expr>").get(instruc).get(0);
-                int index = Arrays.stream(terminales).toList().indexOf(s);
+                int index = Arrays.stream(getTerminales()).toList().indexOf(s);
+                if (index == -1)
+                    System.out.println("aaaaaaaaa");
                 return caso[index];
 
         }

@@ -2,11 +2,12 @@ package ucm.es.pe.g04.practicas.practica;
 
 import ucm.es.pe.g04.practicas.gui.PanelPrincipal;
 import ucm.es.pe.g04.practicas.gui.PanelPrincipalArbol;
+import ucm.es.pe.g04.practicas.gui.PanelPrincipalGramaticas;
 
 public class Practica {
 
     public static void main(String[] args) {
-        PanelPrincipal panel = new PanelPrincipalArbol();
+        PanelPrincipal panel = new PanelPrincipalGramaticas();
         panel.setSize(1250, 800);
         panel.setVisible(true);
     }

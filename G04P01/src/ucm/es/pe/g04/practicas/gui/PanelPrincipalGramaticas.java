@@ -11,29 +11,31 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipalArbol extends PanelPrincipal {
-    public PanelPrincipalArbol() {
+public class PanelPrincipalGramaticas extends PanelPrincipal {
+    public PanelPrincipalGramaticas() {
         super("Practica 3");
     }
 
     @Override
     public ConfigPanel<AlgoritmoGenetico> creaPanelConfiguracion() {
-        genetico.setCruce(new CruceArbol());
+        genetico.setCruce(new CruceMonopunto());
         genetico.setSeleccion(new SeleccionRuleta());
-        genetico.setMutacion(new MutacionTerminal());
-        genetico.setOriginal(new IndividuoArbol1());
+        genetico.setMutacion(new MutacionBasica());
+        genetico.setOriginal(new IndividuoGramatica1());
         genetico.setMaximizar(true);
 
         Seleccion[] selecciones = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb(), new SeleccionRestos(), new SeleccionRanking()};
 
-        Mutacion[] mutaciones = new Mutacion[]{new MutacionTerminal(), new MutacionFuncional(), new MutacionPermutacion(), new MutacionHoist(), new MutacionContraccion(), new MutacionSubarbol(), new MutacionExpansion()};
-        Cruce[] cruces = new Cruce[]{new CruceArbol()};
-        Individuo[] individuos = new Individuo[]{new IndividuoArbol1(), new IndividuoArbol2()};
-        String[] tipoCreacion = new String[]{"Completa", "Creciente", "RampedAndHalf"};
+        Mutacion[] mutaciones = new Mutacion[] { new MutacionBasica()};
+        Cruce[] cruces = new Cruce[] {new CruceMonopunto()};
+        Individuo[] individuos = new Individuo[] {new IndividuoGramatica1(), new IndividuoGramatica2()};
+
 
         Seleccion[] seleccionesExtra = new Seleccion[]{new SeleccionRuleta(), new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionTorneoDet(), new SeleccionTorneoProb()};
 
         Boolean[] booleans = new Boolean[]{true, false};
+
+
 
         ConfigPanel<AlgoritmoGenetico> config = new ConfigPanel<AlgoritmoGenetico>();
 
@@ -70,58 +72,6 @@ public class PanelPrincipalArbol extends PanelPrincipal {
                         "tipo de individuo",
                         "original",
                         individuos))
-                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Individuo>(
-                        "IndividuoArbol1",
-                        "Config Arbol1",
-                        "original",
-                        IndividuoArbol1.class))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "Use IF",
-                        "Usar IF",
-                        "useIF",
-                        booleans))
-                .addInner(new ConfigPanel.IntegerOption<Individuo>(
-                        "Profundidad",
-                        "Profundidad del Arbol",
-                        "profundidad",
-                        2, 10))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "TipoCreacion",
-                        "Tipo de Creacion del Arbol",
-                        "tipoCreacion",
-                        tipoCreacion))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "Bloating",
-                        "Tener control de Bloating",
-                        "bloating",
-                        booleans))
-                .endInner()
-                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Individuo>(
-                        "IndividuoArbol2",
-                        "Config Arbol2",
-                        "original",
-                        IndividuoArbol2.class))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "Use IF",
-                        "Usar IF",
-                        "useIF",
-                        booleans))
-                .addInner(new ConfigPanel.IntegerOption<Individuo>(
-                        "Profundidad",
-                        "Profundidad del Arbol",
-                        "profundidad",
-                        2, 10))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "TipoCreacion",
-                        "Tipo de Creacion del Arbol",
-                        "tipoCreacion",
-                        tipoCreacion))
-                .addInner(new ConfigPanel.ChoiceOption<Individuo>(
-                        "Bloating",
-                        "Tener control de Bloating",
-                        "bloating",
-                        booleans))
-                .endInner()
                 .addOption(new ConfigPanel.StrategyOption<AlgoritmoGenetico>(
                         "Seleccion",
                         "tipo de seleccion",
@@ -340,17 +290,9 @@ public class PanelPrincipalArbol extends PanelPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Lanza el algoritmo genetico");
-                ArbolesData.Init((IndividuoArbol) genetico.getOriginal());
-                if (((IndividuoArbol) genetico.getOriginal()).getBloating()) {
-                    genetico.preEvaluar = ArbolesData::CalcularMedia;
-//                    genetico.postEvaluar = ArbolesData::DevolverValores;
-                }
-                genetico.extraDataFunction = ArbolesData::GraphicsData;
-                genetico.extraDataName = "Media tamaño";
+                GramaticasData.Init();
                 genetico.run();
-//                t.removeAll();
                 result.setText(String.valueOf(genetico.getMejorAbsoluto().getFitness()));
-//                t.init(mainPanel, ((IndividuoAviones)genetico.getMejorAbsoluto()).getMatriz());
             }
         });
         add(boton, BorderLayout.SOUTH);
