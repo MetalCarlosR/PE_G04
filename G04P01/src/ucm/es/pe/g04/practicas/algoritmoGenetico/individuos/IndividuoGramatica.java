@@ -19,6 +19,15 @@ public abstract class IndividuoGramatica extends Individuo<Double>{
 
     int n = 8;
     int wraps = 0;
+
+    public int getMaxWraps() {
+        return maxWraps;
+    }
+
+    public void setMaxWraps(int maxWraps) {
+        this.maxWraps = maxWraps;
+    }
+
     int maxWraps = 2;
     int it = 0;
 

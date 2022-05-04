@@ -71,6 +71,22 @@ public class PanelPrincipalGramaticas extends PanelPrincipal {
                         "tipo de individuo",
                         "original",
                         individuos))
+                .beginInner(new ConfigPanel.InnerOption<AlgoritmoGenetico, Individuo>(
+                        "Gramaticas",
+                        "opciones de la gramatica",
+                        "original",
+                        IndividuoGramatica.class))
+                .addInner(new ConfigPanel.IntegerOption<Individuo>(
+                        "n",
+                        "numero de variables x",
+                        "n",
+                        0, Integer.MAX_VALUE))
+                .addInner(new ConfigPanel.IntegerOption<Individuo>(
+                        "wraps",
+                        "numero de wraps maximos",
+                        "maxWraps",
+                        0, Integer.MAX_VALUE))
+                .endInner()
                 .addOption(new ConfigPanel.StrategyOption<AlgoritmoGenetico>(
                         "Seleccion",
                         "tipo de seleccion",
